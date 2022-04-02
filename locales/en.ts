@@ -3,6 +3,7 @@ export default{
     home: 'Home',
     result: 'Result',
     detail: 'Detail',
-    barcode: 'Barcode'
+    barcode: 'Barcode',
+    lang: 'EN'
   }
 }

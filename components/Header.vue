@@ -20,6 +20,9 @@
               ><i class="iconfont iconpicixiangqing"></i
               >{{ $t('label.barcode') }}
             </el-breadcrumb-item>
+            <el-breadcrumb-item>
+              <el-button @click="changeLang">{{ $t(lang) }}</el-button>
+            </el-breadcrumb-item>
           </el-breadcrumb>
           <!-- logo区域 -->
           <el-link
@@ -46,6 +49,8 @@
 <script lang="ts">
 import { defineComponent, ref, reactive, computed, toRefs, inject } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+import { useI18nStore } from '~~/store/i18n'
 import {
   ElContainer,
   ElHeader,
@@ -53,6 +58,7 @@ import {
   ElBreadcrumbItem,
   ElLink,
   ElMessage,
+  ElButton,
 } from 'element-plus/dist/index.full'
 import { merge } from 'webpack-merge'
 
@@ -63,8 +69,12 @@ export default defineComponent({
     ElBreadcrumb,
     ElBreadcrumbItem,
     ElLink,
+    ElButton,
   },
   setup(context) {
+    const { locale } = useI18n()
+    const i18nStore = useI18nStore()
+    const lang = ref('label.lang')
     const { $http } = useNuxtApp()
     const keyWord = ref(null)
     const child = ref(null)
@@ -87,6 +97,11 @@ export default defineComponent({
         document.title = 'HSCode编码查询-首页'
         return router.push('/')
       }
+    }
+
+    const changeLang = () => {
+      i18nStore.changeLang()
+      locale.value = i18nStore.locale
     }
 
     const inputKeyUpEnter = () => {
@@ -140,8 +155,10 @@ export default defineComponent({
       drawer,
       dialogFormVisible,
       routePath,
+      lang,
       changeTitle,
       goHome,
+      changeLang,
       inputKeyUpEnter,
       getKey,
     }
