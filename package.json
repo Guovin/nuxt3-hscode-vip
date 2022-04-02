@@ -6,6 +6,7 @@
     "start": "node .output/server/index.mjs"
   },
   "devDependencies": {
+    "@pinia/nuxt": "^0.1.8",
     "@vueuse/nuxt": "^8.2.0",
     "axios": "^0.26.1",
     "core-js": "^3.21.1",
@@ -13,9 +14,12 @@
     "jsbarcode": "^3.11.5",
     "nprogress": "^0.2.0",
     "nuxt3": "latest",
+    "pinia": "^2.0.13",
     "typescript": "^4.6.3",
     "unplugin-icons": "^0.14.1",
     "unplugin-vue-components": "^0.18.5",
+    "vue-i18n": "^9.2.0-beta.33",
     "webpack-merge": "^5.8.0"
-  }
+  },
+  "dependencies": {}
 }

@@ -1,4 +1,5 @@
 import { defineNuxtConfig } from 'nuxt3'
+import { resolve } from 'pathe'
 import IconsResolver from 'unplugin-icons/resolver'
 import Components from 'unplugin-vue-components/vite'
 
@@ -42,6 +43,10 @@ export default defineNuxtConfig({
         src: 'https://cdn.staticfile.org/jsbarcode/3.11.5/JsBarcode.all.min.js',
       },
       { src: 'https://cdn.staticfile.org/Sortable/1.15.0/Sortable.min.js' },
+      {
+        src: 'https://cdn.staticfile.org/vue-i18n/9.2.0-beta.33/vue-i18n.global.prod.min.js',
+      },
+      { src: 'https://cdn.staticfile.org/pinia/2.0.12/pinia.iife.prod.min.js' },
     ],
   },
 
@@ -53,9 +58,7 @@ export default defineNuxtConfig({
     ssrHandlers: true,
   },
 
-  plugins: [
-    { src: '@/plugins/axios', ssr: true }
-  ],
+  buildModules: ['@pinia/nuxt'],
 
   vite: {
     plugins: [
