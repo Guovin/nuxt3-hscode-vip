@@ -312,10 +312,10 @@
   resolved "https://registry.npmjs.org/@floating-ui/core/-/core-0.6.1.tgz#aed861a1b6dbebadf14a9dd829ba67f4f3ae795c"
   integrity sha512-Y30eVMcZva8o84c0HcXAtDO4BEzPJMvF6+B7x7urL2xbAqVsGJhojOyHLaoQHQYjb6OkqRq5kO+zeySycQwKqg==
 
-"@floating-ui/dom@^0.4.1":
-  version "0.4.2"
-  resolved "https://registry.npmjs.org/@floating-ui/dom/-/dom-0.4.2.tgz#5c34a19f23a0d72af564e45e5af8000b45318e60"
-  integrity sha512-2/4vOhMAujkMmGqGX1Gut84phe5MNfk1kGeM+RSTJCpeR0SWR2/RR+/f1r1msOvTQa28wn7HEhxGe71CjYY/vw==
+"@floating-ui/dom@^0.4.2":
+  version "0.4.4"
+  resolved "https://registry.npmjs.org/@floating-ui/dom/-/dom-0.4.4.tgz#e0919d23e40bcc84ce2ebe1b9701b211f2d84b3c"
+  integrity sha512-0Ulu3B/dqQplUUSqnTx0foSrlYuMN+GTtlJWvNJwt6Fr7/PqmlR/Y08o6/+bxDWr6p3roBJRaQ51MDZsNmEhhw==
   dependencies:
     "@floating-ui/core" "^0.6.1"
 
@@ -902,13 +902,13 @@
     "@vueuse/shared" "8.2.0"
     vue-demi "*"
 
-"@vueuse/core@^8.1.2":
-  version "8.2.2"
-  resolved "https://registry.npmjs.org/@vueuse/core/-/core-8.2.2.tgz#30e8070eb28166da35d27edfa8b3363a37b230f1"
-  integrity sha512-ITbTxIlN/LIVwu1bpDc+m0LcXeFNstfJbA/DLGQicmWQdnfUQ+OJQB4KLi25MocD73rvK2rj3Lr9cQp3FL+IIA==
+"@vueuse/core@^8.2.3":
+  version "8.2.4"
+  resolved "https://registry.npmjs.org/@vueuse/core/-/core-8.2.4.tgz#04159d28267e56fd27488de116e465d0b12b48ac"
+  integrity sha512-K8DbVLErlHMnEOqy67BrRbDmWCd4Z9X0a1dL6fQdhABLXBydy69Tm7uF5ZUotAqib9sskItYFsAnLhvGSue6bg==
   dependencies:
-    "@vueuse/metadata" "8.2.2"
-    "@vueuse/shared" "8.2.2"
+    "@vueuse/metadata" "8.2.4"
+    "@vueuse/shared" "8.2.4"
     vue-demi "*"
 
 "@vueuse/head@^0.7.5":
@@ -921,10 +921,10 @@
   resolved "https://registry.npmjs.org/@vueuse/metadata/-/metadata-8.2.0.tgz"
   integrity sha512-cbaezEccNuxQC+OiudG9VjZNg9/RbAAHkyuhC6+8Gsgsc+MvDhfn1NrV6NNTaldLlZgJFgUiYOkrf3JGTTTGXQ==
 
-"@vueuse/metadata@8.2.2":
-  version "8.2.2"
-  resolved "https://registry.npmjs.org/@vueuse/metadata/-/metadata-8.2.2.tgz#ea52469c8f73ec09329358108cf51e7c10067cd1"
-  integrity sha512-R/HYA5k6IzGVB5qBwvIN4f0Hezx0sGrIK9mIL4a74u7Ta17v4XyjXS/5jV4keFC5bY1XTm79KvSWjh9ZXDos2Q==
+"@vueuse/metadata@8.2.4":
+  version "8.2.4"
+  resolved "https://registry.npmjs.org/@vueuse/metadata/-/metadata-8.2.4.tgz#a880aa1ba1e30850983a85de8e1a6295d798250e"
+  integrity sha512-mn4FLULZAHd6r6vo5hLz+99xzwlVDP9qeVtZGV2Ik40m0zETe2okUr3O1Yoz6FReUoc7KAPrf0/GFpWEXVDAnQ==
 
 "@vueuse/nuxt@^8.2.0":
   version "8.2.0"
@@ -944,10 +944,10 @@
   dependencies:
     vue-demi "*"
 
-"@vueuse/shared@8.2.2":
-  version "8.2.2"
-  resolved "https://registry.npmjs.org/@vueuse/shared/-/shared-8.2.2.tgz#fda8f86ead8c4f27acfd5f5bbe0c7a2ed24637e6"
-  integrity sha512-O0n219wXM11fUJ7j0/JVp8lePOhZLVQsdf0HvNbEsIyNSGCurAvEH+FVR4p5vAGiW+XPgK39c6cOnKQL5gWMZg==
+"@vueuse/shared@8.2.4":
+  version "8.2.4"
+  resolved "https://registry.npmjs.org/@vueuse/shared/-/shared-8.2.4.tgz#a5b3bb53596c802df2181a3a0095e9782383be32"
+  integrity sha512-sLkuZMEumsmEDYie3m6/nrk7SrLGlyUgtVn/0EJZ8Chaj1YfSmBQuLxNE0ruQ/6VZlqkx44jEZxcgbU7qPyAiw==
   dependencies:
     vue-demi "*"
 
@@ -1314,7 +1314,7 @@ chalk@^5.0.0, chalk@^5.0.1:
   resolved "https://registry.npmjs.org/chalk/-/chalk-5.0.1.tgz"
   integrity sha512-Fo07WOYGqMfCWHOzSXOt2CxDbC6skS/jO9ynEcmpANMoPrD+W1r1K6Vx7iNm+AQmETU1Xr2t+n8nzkV9t6xh3w==
 
-chokidar@^3.5.2, chokidar@^3.5.3:
+"chokidar@>=3.0.0 <4.0.0", chokidar@^3.5.2, chokidar@^3.5.3:
   version "3.5.3"
   resolved "https://registry.npmjs.org/chokidar/-/chokidar-3.5.3.tgz"
   integrity sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw==
@@ -1803,16 +1803,16 @@ electron-to-chromium@^1.4.84:
   resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.97.tgz"
   integrity sha512-vqSu7Qn6o5E1uAJQxmq2U69aBhBTxUAXMuT5Sm3jj8kEJciuUcKciktLuTPFSRlwSdNyeu9qah8Nzy9JyxefCw==
 
-element-plus@^2.1.7:
-  version "2.1.7"
-  resolved "https://registry.npmjs.org/element-plus/-/element-plus-2.1.7.tgz#329226c5de5f0407c60e732f447bd96a1052d1ec"
-  integrity sha512-jamE9F/a2rfAQJwf3kLaDfWXxhjXuAJAvrto76SLJsJfr3iIUAzC849RHdn6h7tNJy9Yanq8GlQAsdBe5lJmrA==
+element-plus@^2.1.8:
+  version "2.1.8"
+  resolved "https://registry.npmjs.org/element-plus/-/element-plus-2.1.8.tgz#4480e47ae6e7c86763cc0cf383e86f749f748526"
+  integrity sha512-hwFtzw0R5lKMhWf3oVvSU/ucfN8RiY8DRaRWo6LktX4RlWWA2QjKfDXtISBi5Rb303Ny4I0Sgz0CA1Fd4Z2GGg==
   dependencies:
     "@ctrl/tinycolor" "^3.4.0"
     "@element-plus/icons-vue" "^1.1.4"
-    "@floating-ui/dom" "^0.4.1"
+    "@floating-ui/dom" "^0.4.2"
     "@popperjs/core" "^2.11.4"
-    "@vueuse/core" "^8.1.2"
+    "@vueuse/core" "^8.2.3"
     async-validator "^4.0.7"
     dayjs "^1.11.0"
     escape-html "^1.0.3"
@@ -1820,7 +1820,7 @@ element-plus@^2.1.7:
     lodash-es "^4.17.21"
     lodash-unified "^1.0.2"
     memoize-one "^6.0.0"
-    normalize-wheel-es "^1.1.1"
+    normalize-wheel-es "^1.1.2"
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -2532,6 +2532,11 @@ ignore@^5.2.0:
   resolved "https://registry.npmjs.org/ignore/-/ignore-5.2.0.tgz"
   integrity sha512-CmxgYGiEPCLhfLnpPp1MoRmifwEIOgjcHXxOBjv7mY96c+eWScsOP9c112ZyLdWHi0FxHjI+4uVhKYp/gcdRmQ==
 
+immutable@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npmjs.org/immutable/-/immutable-4.0.0.tgz#b86f78de6adef3608395efb269a91462797e2c23"
+  integrity sha512-zIE9hX70qew5qTUjSS7wi1iwj/l7+m54KWU247nhM3v806UdGj1yDndXj+IOYxxtW9zyLI+xqFNZjTuDaLUqFw==
+
 inflight@^1.0.4:
   version "1.0.6"
   resolved "https://registry.npmjs.org/inflight/-/inflight-1.0.6.tgz"
@@ -2846,6 +2851,11 @@ kind-of@^6.0.2:
   version "6.0.3"
   resolved "https://registry.npmjs.org/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
+
+klona@^2.0.4:
+  version "2.0.5"
+  resolved "https://registry.npmjs.org/klona/-/klona-2.0.5.tgz#d166574d90076395d9963aa7a928fabb8d76afbc"
+  integrity sha512-pJiBpiXMbt7dkzXe8Ghj/u4FfXOOa98fPW+bihOJ4SjnoijweJrNThJfd3ifXpXhREjpoF2mZVH1GfS9LV3kHQ==
 
 knitwork@^0.1.1:
   version "0.1.1"
@@ -3191,6 +3201,11 @@ needle@^2.2.1:
     iconv-lite "^0.4.4"
     sax "^1.2.4"
 
+neo-async@^2.6.2:
+  version "2.6.2"
+  resolved "https://registry.npmjs.org/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
+  integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
+
 "nitropack@npm:nitropack-edge@latest":
   version "0.0.0-27456183.d13b842"
   resolved "https://registry.npmjs.org/nitropack-edge/-/nitropack-edge-0.0.0-27456183.d13b842.tgz"
@@ -3337,7 +3352,7 @@ normalize-url@^6.0.1:
   resolved "https://registry.npmjs.org/normalize-url/-/normalize-url-6.1.0.tgz"
   integrity sha512-DlL+XwOy3NxAQ8xuC0okPgK46iuVNAK01YN7RueYBqqFeGsBjV9XmCAzAdgt+667bCl5kPh9EqKKDwnaPG1I7A==
 
-normalize-wheel-es@^1.1.1:
+normalize-wheel-es@^1.1.2:
   version "1.1.2"
   resolved "https://registry.npmjs.org/normalize-wheel-es/-/normalize-wheel-es-1.1.2.tgz#285e43676a62d687bf145e33452ea6be435162d0"
   integrity sha512-scX83plWJXYH1J4+BhAuIHadROzxX0UBF3+HuZNY2Ks8BciE7tSTQ+5JhTsvzjaO0/EJdm4JBGrfObKxFf3Png==
@@ -4152,6 +4167,23 @@ safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   resolved "https://registry.npmjs.org/safer-buffer/-/safer-buffer-2.1.2.tgz"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
+sass-loader@^12.6.0:
+  version "12.6.0"
+  resolved "https://registry.npmjs.org/sass-loader/-/sass-loader-12.6.0.tgz#5148362c8e2cdd4b950f3c63ac5d16dbfed37bcb"
+  integrity sha512-oLTaH0YCtX4cfnJZxKSLAyglED0naiYfNG1iXfU5w1LNZ+ukoA5DtyDIN5zmKVZwYNJP4KRc5Y3hkWga+7tYfA==
+  dependencies:
+    klona "^2.0.4"
+    neo-async "^2.6.2"
+
+sass@^1.49.11:
+  version "1.49.11"
+  resolved "https://registry.npmjs.org/sass/-/sass-1.49.11.tgz#1ffeb77faeed8b806a2a1e021d7c9fd3fc322cb7"
+  integrity sha512-wvS/geXgHUGs6A/4ud5BFIWKO1nKd7wYIGimDk4q4GFkJicILActpv9ueMT4eRGSsp1BdKHuw1WwAHXbhsJELQ==
+  dependencies:
+    chokidar ">=3.0.0 <4.0.0"
+    immutable "^4.0.0"
+    source-map-js ">=0.6.2 <2.0.0"
+
 sax@^1.2.4:
   version "1.2.4"
   resolved "https://registry.npmjs.org/sax/-/sax-1.2.4.tgz"
@@ -4298,7 +4330,7 @@ slice-ansi@^4.0.0:
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
 
-source-map-js@^1.0.2:
+"source-map-js@>=0.6.2 <2.0.0", source-map-js@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npmjs.org/source-map-js/-/source-map-js-1.0.2.tgz"
   integrity sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==

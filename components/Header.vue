@@ -3,7 +3,6 @@
     <el-container>
       <el-header>
         <div class="flexRow">
-          <!-- 面包屑导航区域 -->
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }" @click="changeTitle"
               ><i class="iconfont iconshouye"></i>{{ $t('label.home') }}
@@ -21,10 +20,11 @@
               >{{ $t('label.barcode') }}
             </el-breadcrumb-item>
             <el-breadcrumb-item>
-              <el-button @click="changeLang">{{ $t(lang) }}</el-button>
+              <el-button @click="changeLang" size="small" circle>{{
+                $t(lang)
+              }}</el-button>
             </el-breadcrumb-item>
           </el-breadcrumb>
-          <!-- logo区域 -->
           <el-link
             class="barcodeLink"
             href="/barcode"
@@ -60,7 +60,6 @@ import {
   ElMessage,
   ElButton,
 } from 'element-plus/dist/index.full'
-import { merge } from 'webpack-merge'
 
 export default defineComponent({
   components: {
@@ -75,9 +74,7 @@ export default defineComponent({
     const { locale } = useI18n()
     const i18nStore = useI18nStore()
     const lang = ref('label.lang')
-    const { $http } = useNuxtApp()
     const keyWord = ref(null)
-    const child = ref(null)
     const drawer = ref(false)
     const dialogFormVisible = ref(false)
     const router = useRouter()
@@ -104,64 +101,44 @@ export default defineComponent({
       locale.value = i18nStore.locale
     }
 
-    const inputKeyUpEnter = () => {
-      if (keyWord !== '') {
-        if (routePath.value === '/table') {
-          // url的query参数根据搜索而变化，实现源码也能动态刷新
-          router.push({
-            query: merge<any>(router.currentRoute.value.query, {
-              key: encodeURIComponent(keyWord),
-            }),
-          })
-          // return child.getListByKey(encodeURIComponent(keyWord))
-        } else {
-          // getKey()
-        }
-      } else {
-        return ElMessage.info({
-          message: '请输入搜索内容！',
-          center: true,
-        })
-      }
-    }
-
-    const getKey = async () => {
-      if (keyWord !== '') {
-        // 判断搜索关键词合法性
-        const { data: res } = await $http.post(
-          `search?keyword=${encodeURIComponent(keyWord)}`
-        )
-        if (res.code !== 200) {
-          return ElMessage.error({ message: `${res.data}`, center: true })
-        } else {
-          router.push({
-            path: 'table',
-            query: {
-              // 链接携带的参数转码传输
-              key: encodeURIComponent(keyWord),
-            },
-          })
-        }
-      } else {
-        return ElMessage.info({
-          message: '请输入搜索内容！',
-          center: true,
-        })
-      }
-    }
-
     return {
       keyWord,
       drawer,
       dialogFormVisible,
+      router,
       routePath,
       lang,
       changeTitle,
       goHome,
       changeLang,
-      inputKeyUpEnter,
-      getKey,
     }
   },
 })
 </script>
+
+<style lang="scss" scoped>
+.flexRow {
+  display: flex;
+  justify-content: space-between;
+  .el-breadcrumb {
+    margin-top: 10px;
+  }
+  .barcodeLink::before {
+    font-family: 'iconfont';
+    content: '\e642';
+  }
+}
+
+.logo_container {
+  text-align: center;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  .logo_img:hover {
+    cursor: pointer;
+  }
+}
+</style>

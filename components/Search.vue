@@ -1,33 +1,103 @@
 <template>
   <div>
     <el-card v-if="routePath !== '/barcode'" class="searchCard">
-          <!-- 搜索区域 -->
-          <transition name="emerge" appear>
-            <keep-alive>
-              <el-input
-                placeholder="请输入商品名称或商品编码"
-                v-model="keyWord"
-                @keyup.enter="inputKeyUpEnter"
-                clearable
-              >
-                <el-button
-                  slot="append"
-                  icon="el-icon-search"
-                  @click="inputKeyUpEnter"
-                ></el-button>
-              </el-input>
-            </keep-alive>
-          </transition>
-        </el-card>
+      <transition name="emerge" appear>
+        <keep-alive>
+          <el-input
+            :placeholder="$t('placeHolder.search')"
+            v-model="keyWord"
+            @keyup.enter="inputKeyUpEnter"
+            clearable
+          >
+            <template #append>
+              <el-button :icon="Search" @click="inputKeyUpEnter"></el-button>
+            </template>
+          </el-input>
+        </keep-alive>
+      </transition>
+    </el-card>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import Header from './Header.vue'
+import { merge } from 'webpack-merge'
+import {
+  ElCard,
+  ElInput,
+  ElMessage,
+  ElButton,
+} from 'element-plus/dist/index.full'
+import { Search } from '@element-plus/icons-vue'
 
 export default defineComponent({
+  components: {
+    ElCard,
+    ElInput,
+    ElButton,
+  },
   setup() {
-    
+    const { keyWord, routePath } = Header
+    const { $http } = useNuxtApp()
+    const router = useRouter()
+    const inputKeyUpEnter = () => {
+      if (keyWord !== '') {
+        if (routePath.value === '/table') {
+          router.push({
+            query: merge<any>(router.currentRoute.value.query, {
+              key: encodeURIComponent(keyWord),
+            }),
+          })
+          // return child.getListByKey(encodeURIComponent(keyWord))
+        } else {
+          getKey()
+        }
+      } else {
+        return ElMessage.info({
+          message: '请输入搜索内容！',
+          center: true,
+        })
+      }
+    }
+    const getKey = async () => {
+      if (keyWord !== '') {
+        const { data: res } = await $http.post(
+          `search?keyword=${encodeURIComponent(keyWord)}`
+        )
+        if (res.code !== 200) {
+          return ElMessage.error({ message: `${res.data}`, center: true })
+        } else {
+          router.push({
+            path: 'table',
+            query: {
+              key: encodeURIComponent(keyWord),
+            },
+          })
+        }
+      } else {
+        return ElMessage.info({
+          message: '请输入搜索内容！',
+          center: true,
+        })
+      }
+    }
+    return {
+      keyWord,
+      routePath,
+      inputKeyUpEnter,
+      Search,
+    }
   },
 })
 </script>
+
+<style lang="scss" scoped>
+.searchCard {
+  margin: auto;
+  margin-bottom: 30px;
+  width: 50%;
+  background-color: rgba(255, 255, 255, 0.01);
+  border: rgba(255, 255, 255, 0.01);
+}
+</style>

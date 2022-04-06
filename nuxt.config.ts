@@ -25,7 +25,7 @@ export default defineNuxtConfig({
       { rel: 'icon', type: 'image/x-icon', href: '/assets/img/hscode.png' },
       {
         rel: 'stylesheet',
-        href: 'https://cdn.staticfile.org/element-plus/2.1.7/theme-chalk/index.min.css',
+        href: 'https://cdn.staticfile.org/element-plus/2.1.8/theme-chalk/index.min.css',
       },
       {
         rel: 'stylesheet',
@@ -35,7 +35,7 @@ export default defineNuxtConfig({
     script: [
       { src: 'https://cdn.staticfile.org/vue/3.2.31/vue.global.prod.min.js' },
       {
-        src: 'https://cdn.staticfile.org/element-plus/2.1.7/index.full.min.js',
+        src: 'https://cdn.staticfile.org/element-plus/2.1.8/index.full.min.js',
       },
       { src: 'https://cdn.staticfile.org/axios/0.26.1/axios.min.js' },
       { src: 'https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js' },
