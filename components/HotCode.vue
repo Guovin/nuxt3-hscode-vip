@@ -74,7 +74,7 @@ export default defineComponent({
   setup() {
     const { router } = Header
     const hotData = hotCode
-    let showMore = ref(false)
+    const showMore = ref(false)
     const toggle = () => {
       showMore.value = !showMore.value
     }

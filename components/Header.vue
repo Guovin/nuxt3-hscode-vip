@@ -73,11 +73,13 @@ export default defineComponent({
   setup(context) {
     const { locale } = useI18n()
     const i18nStore = useI18nStore()
-    const lang = ref('label.lang')
-    const keyWord = ref(null)
-    const drawer = ref(false)
-    const dialogFormVisible = ref(false)
     const router = useRouter()
+    const state = {
+      lang: 'label.lang',
+      keyWord: null,
+      drawer: false,
+      dialogFormVisible: false,
+    }
     const routePath = computed({
       get: () => {
         return router.currentRoute.value.path
@@ -102,12 +104,9 @@ export default defineComponent({
     }
 
     return {
-      keyWord,
-      drawer,
-      dialogFormVisible,
+      ...toRefs(state),
       router,
       routePath,
-      lang,
       changeTitle,
       goHome,
       changeLang,
