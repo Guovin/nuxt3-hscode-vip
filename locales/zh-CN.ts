@@ -7,6 +7,9 @@ export default {
     lang: '中',
     category: 'HSCode商品编码分类',
     search: 'HSCode查询',
+    hotCode: '热门HSCode商品编码',
+    fold: '收起',
+    showMore: '查看更多'
   },
   placeHolder: {
     search: '请输入商品名称或商品编码',

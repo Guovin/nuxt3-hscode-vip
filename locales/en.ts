@@ -7,6 +7,9 @@ export default {
     lang: 'EN',
     category: 'HSCode Product Code Classification',
     search: 'HSCode search',
+    hotCode: 'Popular HSCode',
+    fold: 'Fold',
+    showMore: 'More'
   },
   placeHolder: {
     search: 'Please enter the product name or product code',

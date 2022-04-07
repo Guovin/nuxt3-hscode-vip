@@ -3,6 +3,7 @@
     <Header/>
     <Search/>
     <TreeCard/>
+    <HotCode/>
     <Footer/>
   </div>
 </template>
