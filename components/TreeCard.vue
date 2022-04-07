@@ -1,25 +1,39 @@
 <template>
   <div>
-    <el-card v-if="routePath === '/'" class="treeCard">
+    <!-- <el-card v-if="routePath === '/'" class="treeCard"> -->
+    <el-card class="tree-card-container">
       <transition name="emerge" appear>
         <keep-alive>
-          <div class="tree_card">
-            <div class="cate_title">
-              <i class="iconfont iconfenleishouye"></i>HSCode商品编码分类
+          <div class="tree-card">
+            <div class="cate-title">
+              <i class="iconfont iconfenleishouye"></i
+              >{{ $t('label.category') }}
             </div>
-            <el-tree-v2 :data="treeData" lazy :props="treeProps">
+            <el-input
+              v-model="query"
+              :placeholder="$t('placeHolder.treeFilter')"
+              @input="onQueryChanged"
+              class="filter-input"
+            />
+            <el-tree-v2
+              ref="treeRef"
+              :data="treeData"
+              :props="treeProps"
+              :filter-method="filterTree"
+              :empty-text="$t('tip.noData')"
+              :height="300"
+            >
               <template class="span-ellipsis" #default="{ node, data }">
                 <span>
                   <el-button
                     type="text"
-                    size="mini"
                     v-show="node.isLeaf == true"
                     @click="() => searchPrefix(data)"
                   >
-                    HSCode查询
+                    {{ $t('label.search') }}
                   </el-button>
                 </span>
-                <span class="parentFont">{{ node.label }}</span>
+                <span class="sub-title">{{ node.label }}</span>
               </template>
             </el-tree-v2>
           </div>
@@ -30,8 +44,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { ElCard, ElTreeV2, ElButton } from 'element-plus/dist/index.full'
+import { defineComponent, ref } from 'vue'
+import {
+  ElCard,
+  ElTreeV2,
+  ElButton,
+  ElInput,
+} from 'element-plus/dist/index.full'
+import type { TreeNode } from 'element-plus/es/components/tree-v2/src/types'
 import Header from './Header.vue'
 
 export default defineComponent({
@@ -39,29 +59,43 @@ export default defineComponent({
     ElCard,
     ElTreeV2,
     ElButton,
+    ElInput,
   },
   async setup() {
-    interface Tree {
-      id: string
-      label: string
-      children?: Tree[]
-    }
     const { router, routePath } = Header
     const { $http } = useNuxtApp()
-    const treeProps = { value: 'id', label: 'label', children: 'children' }
+    const treeProps = {
+      value: 'id',
+      label: 'label',
+      children: 'children',
+    }
+    const query = ref('')
+    const treeRef = ref<InstanceType<typeof ElTreeV2>>()
     const { data: response } = await $http.post('/hscode/getAllHscodeClassify')
-    const initData = (res): Tree[] => {
-      const arr = Array.from({ length: res.data.class.length })
-      res.data.info.forEach((item) => {
-        arr.fill(item)
-      })
-      return arr.map((child) => {
-        return {
-          id: child.id,
-          label: child.main_class,
-          children: child.sub_class
+    const initTree = (response) => {
+      const data = []
+      response.data.class.forEach((item, index) => {
+        const info = {
+          id: index,
+          label: item,
+          children: response.data.info[item].map((child) => {
+            return {
+              id: child.id,
+              label: child.sub_class,
+              hscode_prefix: child.hscode_prefix,
+            }
+          }),
         }
+        data.push(info)
       })
+      return data
+    }
+    const treeData = initTree(response)
+    const onQueryChanged = (query: string) => {
+      treeRef.value!.filter(query)
+    }
+    const filterTree = (query: string, node: TreeNode) => {
+      return node.label!.includes(query)
     }
     const searchPrefix = (data) => {
       router.push({
@@ -73,8 +107,12 @@ export default defineComponent({
     }
     return {
       routePath,
+      query,
+      treeRef,
       treeProps,
       treeData,
+      onQueryChanged,
+      filterTree,
       searchPrefix,
     }
   },
@@ -89,7 +127,8 @@ export default defineComponent({
 .el-tree-node__children span {
   font-size: 12px;
 }
-.treeCard {
+
+.tree-card-container {
   margin: auto;
   margin-top: 30px;
   margin-bottom: 10px;
@@ -97,7 +136,7 @@ export default defineComponent({
   background-color: rgba(255, 255, 255, 0.01);
   border: rgba(255, 255, 255, 0.01);
 
-  .tree_card {
+  .tree-card {
     border: 1px solid #ebeef5;
     background-color: #fff;
     color: #303133;
@@ -107,8 +146,27 @@ export default defineComponent({
     overflow: hidden;
     box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15) !important;
     padding: 10px 20px 20px 20px;
-    .parentFont {
+    .cate-title {
+      font-size: 16px;
+      color: #409eff;
+      font-weight: bold;
+      margin: 0 auto 5px auto;
+      text-align: center;
+    }
+    .filter-input {
+      margin: 12px 8px;
+    }
+    @media screen and (max-width: 1350px) {
+      .span-ellipsis {
+        display: block;
+        white-space: nowrap;
+        overflow: auto;
+        text-overflow: ellipsis;
+      }
+    }
+    .sub-title {
       font-size: 15px;
+      padding-left: 8px;
     }
   }
 }
