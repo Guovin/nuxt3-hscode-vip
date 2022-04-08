@@ -33,8 +33,8 @@ export default defineNuxtConfig({
       },
       {
         rel: 'stylesheet',
-        href:'https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css'
-      }
+        href: 'https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css',
+      },
     ],
     script: [
       { src: 'https://cdn.staticfile.org/vue/3.2.31/vue.global.prod.min.js' },
@@ -54,7 +54,11 @@ export default defineNuxtConfig({
     ],
   },
 
-  css: ['@/assets/css/global.css', '@/assets/font/iconfont.css'],
+  css: [
+    '@/assets/css/global.css',
+    '@/assets/font/iconfont.css',
+    '~/assets/css/tailwind.css',
+  ],
 
   components: true,
 
@@ -62,7 +66,7 @@ export default defineNuxtConfig({
     ssrHandlers: true,
   },
 
-  buildModules: ['@pinia/nuxt','@nuxtjs/tailwindcss'],
+  buildModules: ['@pinia/nuxt', '@nuxtjs/tailwindcss'],
 
   vite: {
     plugins: [
