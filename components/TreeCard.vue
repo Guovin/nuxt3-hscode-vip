@@ -1,11 +1,17 @@
 <template>
   <div>
     <!-- <el-card v-if="routePath === '/'" class="treeCard"> -->
-    <el-card class="tree-card-container">
+    <el-card
+      class="my-10 mx-auto w-3/5 bg-white bg-opacity-1 border-white border-opacity-1 rounded"
+    >
       <transition name="emerge" appear>
         <keep-alive>
-          <div class="tree-card">
-            <div class="cate-title">
+          <div
+            class="border border-solid border-gray-200 bg-white text-black duration-300 rounded shadow p-10"
+          >
+            <div
+              class="text-base text-blue-400 font-bold mt-0 mb-1 text-center"
+            >
               <i class="iconfont iconfenleishouye"></i
               >{{ $t('label.category') }}
             </div>
@@ -13,7 +19,7 @@
               v-model="query"
               :placeholder="$t('placeHolder.treeFilter')"
               @input="onQueryChanged"
-              class="filter-input"
+              class="m-3"
             />
             <el-tree-v2
               ref="treeRef"
@@ -33,7 +39,7 @@
                     {{ $t('label.search') }}
                   </el-button>
                 </span>
-                <span class="sub-title">{{ node.label }}</span>
+                <span class="text-sm pl-4">{{ node.label }}</span>
               </template>
             </el-tree-v2>
           </div>
@@ -118,56 +124,3 @@ export default defineComponent({
   },
 })
 </script>
-
-<style lang="scss" scoped>
-.el-tree {
-  border-radius: 0.5%;
-}
-
-.el-tree-node__children span {
-  font-size: 12px;
-}
-
-.tree-card-container {
-  margin: auto;
-  margin-top: 30px;
-  margin-bottom: 10px;
-  width: 65%;
-  background-color: rgba(255, 255, 255, 0.01);
-  border: rgba(255, 255, 255, 0.01);
-
-  .tree-card {
-    border: 1px solid #ebeef5;
-    background-color: #fff;
-    color: #303133;
-    -webkit-transition: 0.3s;
-    transition: 0.3s;
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15) !important;
-    padding: 10px 20px 20px 20px;
-    .cate-title {
-      font-size: 16px;
-      color: #409eff;
-      font-weight: bold;
-      margin: 0 auto 5px auto;
-      text-align: center;
-    }
-    .filter-input {
-      margin: 12px 8px;
-    }
-    @media screen and (max-width: 1350px) {
-      .span-ellipsis {
-        display: block;
-        white-space: nowrap;
-        overflow: auto;
-        text-overflow: ellipsis;
-      }
-    }
-    .sub-title {
-      font-size: 15px;
-      padding-left: 8px;
-    }
-  }
-}
-</style>

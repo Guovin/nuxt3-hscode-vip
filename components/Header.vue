@@ -1,9 +1,9 @@
 <template>
   <div>
     <el-container>
-      <el-header>
-        <div class="flexRow">
-          <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-header class="h-20">
+        <div class="flex justify-between">
+          <el-breadcrumb class="mt-2" separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }" @click="changeTitle"
               ><i class="iconfont iconshouye"></i>{{ $t('label.home') }}
             </el-breadcrumb-item>
@@ -33,9 +33,9 @@
             >{{ $t('label.barcode') }}
           </el-link>
         </div>
-        <div class="logo_container">
+        <div>
           <img
-            class="logo_img"
+            class="cursor-pointer m-auto"
             src="../assets/img/logo.png"
             alt="HSCode.VIP"
             @click="goHome"
@@ -116,28 +116,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.flexRow {
-  display: flex;
-  justify-content: space-between;
-  .el-breadcrumb {
-    margin-top: 10px;
-  }
-  .barcodeLink::before {
-    font-family: 'iconfont';
-    content: '\e642';
-  }
-}
-
-.logo_container {
-  text-align: center;
-  -moz-user-select: none;
-  -o-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  .logo_img:hover {
-    cursor: pointer;
-  }
+.barcodeLink::before {
+  font-family: 'iconfont';
+  content: '\e642';
 }
 </style>

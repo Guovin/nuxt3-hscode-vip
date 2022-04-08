@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-footer class="footer">
+    <el-footer class="w-full text-center text-sm h-auto">
       copyright
       <a
         href="https://www.hscode.vip"
@@ -9,13 +9,16 @@
         >www.hscode.vip</a
       >
       {{ $t('footer.copyRight') }}
-      <span style="color: #317eb2" @click="drawer = true" class="statement">{{
-        $t('footer.statement')
-      }}</span>
-      <div class="note">
+      <span
+        style="color: #317eb2"
+        @click="drawer = true"
+        class="cursor-pointer whitespace-nowrap"
+        >{{ $t('footer.statement') }}</span
+      >
+      <div class="text-xs">
         {{ $t('footer.note')
         }}<span
-          class="feedback"
+          class="cursor-pointer"
           style="color: #317eb2"
           @click="dialogFormVisible = true"
         >
@@ -43,24 +46,3 @@ export default defineComponent({
   setup() {},
 })
 </script>
-
-<style lang="scss" scoped>
-.footer {
-  width: 100%;
-  text-align: center;
-  font-size: 14px;
-  // background-color: #273446;
-  height: auto !important;
-  .statement {
-    cursor: pointer;
-    white-space: nowrap;
-  }
-
-  .feedback {
-    cursor: pointer;
-  }
-  .note {
-    font-size: 10px;
-  }
-}
-</style>

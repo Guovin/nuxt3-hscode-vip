@@ -1,6 +1,9 @@
 <template>
   <div>
-    <el-card v-if="routePath !== '/barcode'" class="searchCard">
+    <el-card
+      v-if="routePath !== '/barcode'"
+      class="m-auto mb-10 w-2/4 bg-white bg-opacity-1 border-white border-opacity-1"
+    >
       <transition name="emerge" appear>
         <keep-alive>
           <el-input
@@ -91,13 +94,3 @@ export default defineComponent({
   },
 })
 </script>
-
-<style lang="scss" scoped>
-.searchCard {
-  margin: auto;
-  margin-bottom: 30px;
-  width: 50%;
-  background-color: rgba(255, 255, 255, 0.01);
-  border: rgba(255, 255, 255, 0.01);
-}
-</style>

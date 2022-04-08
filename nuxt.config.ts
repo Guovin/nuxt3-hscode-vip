@@ -31,6 +31,10 @@ export default defineNuxtConfig({
         rel: 'stylesheet',
         href: 'https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css',
       },
+      {
+        rel: 'stylesheet',
+        href:'https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css'
+      }
     ],
     script: [
       { src: 'https://cdn.staticfile.org/vue/3.2.31/vue.global.prod.min.js' },
@@ -58,7 +62,7 @@ export default defineNuxtConfig({
     ssrHandlers: true,
   },
 
-  buildModules: ['@pinia/nuxt'],
+  buildModules: ['@pinia/nuxt','@nuxtjs/tailwindcss'],
 
   vite: {
     plugins: [
