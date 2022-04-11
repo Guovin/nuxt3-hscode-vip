@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pt-10 dark:text-gray-400">
     <el-footer class="w-full text-center text-sm h-auto">
       copyright
       <a

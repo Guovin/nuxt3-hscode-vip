@@ -2,12 +2,12 @@
   <div>
     <!-- <el-card v-if="this.$route.path === '/'" class="treeCard"> -->
     <el-card
-      class="mx-auto mt-10 mb-4 w-4/6 bg-white bg-opacity-1 border-white border-opacity-1 rounded"
+      class="mx-auto w-4/6 bg-white bg-opacity-1 border-white border-opacity-1 rounded dark:bg-gray-900"
     >
       <transition name="emerge" appear>
         <keep-alive>
           <div
-            class="border border-solid border-gray-200 bg-white text-black duration-300 rounded shadow p-10"
+            class="border border-solid border-gray-200 bg-white text-black duration-300 rounded shadow p-10 dark:bg-gray-900"
           >
             <div class="text-base text-red-400 font-bold mt-0 mb-1 text-center">
               <i class="iconfont iconremen text-xl"></i
