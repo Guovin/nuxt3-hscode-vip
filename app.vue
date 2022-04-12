@@ -1,5 +1,5 @@
 <template>
-  <Html :class="`${theme === 'dark' ? 'dark' : ''}`">
+  <Html :class="`${theme === 'dark' ? 'dark' : 'light'}`">
     <Body class="dark:bg-gray-900 dark:text-gray-200">
       <div>
         <NuxtPage />
