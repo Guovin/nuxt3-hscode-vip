@@ -26,7 +26,7 @@
               :filter-method="filterTree"
               :empty-text="$t('tip.noData')"
               :height="300"
-              class="dark:bg-black-dark"
+              class="dark:bg-black-dark dark:text-gray-400"
             >
               <template class="span-ellipsis" #default="{ node, data }">
                 <span>
