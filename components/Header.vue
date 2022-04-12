@@ -1,9 +1,9 @@
 <template>
   <div>
     <el-container>
-      <el-header class="h-20">
+      <el-header class="py-2 h-auto dark:bg-gray-900">
         <div class="flex justify-between">
-          <el-breadcrumb class="mt-2" separator-class="el-icon-arrow-right">
+          <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }" @click="changeTitle"
               ><i class="iconfont iconshouye"></i>
               <span class="pl-2 dark:text-gray-200">
@@ -49,15 +49,15 @@
             >{{ $t('label.barcode') }}
           </el-link>
         </div>
-        <div>
-          <img
-            class="cursor-pointer m-auto"
-            src="../assets/img/logo.png"
-            alt="HSCode.VIP"
-            @click="goHome"
-          /><img />
-        </div>
       </el-header>
+      <div class="my-4">
+        <img
+          class="cursor-pointer m-auto"
+          src="../assets/img/logo.png"
+          alt="HSCode.VIP"
+          @click="goHome"
+        /><img />
+      </div>
     </el-container>
   </div>
 </template>

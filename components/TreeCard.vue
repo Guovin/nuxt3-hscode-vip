@@ -1,13 +1,11 @@
 <template>
   <div class="py-10">
     <!-- <el-card v-if="routePath === '/'" class="treeCard"> -->
-    <el-card
-      class="mx-auto w-3/5 bg-white bg-opacity-1 border-white border-opacity-1 rounded dark:bg-gray-900"
-    >
+    <el-card class="mx-auto w-3/5 bg-white bg-opacity-1 dark:bg-black-dark">
       <transition name="emerge" appear>
         <keep-alive>
           <div
-            class="border border-solid border-gray-200 bg-white text-black duration-300 rounded shadow p-10 dark:bg-gray-900"
+            class="border border-solid border-gray-200 bg-white text-black duration-300 rounded shadow p-10 dark:bg-black-dark dark:border-gray-50 dark:border-opacity-10"
           >
             <div
               class="text-base text-blue-400 font-bold mt-0 mb-1 text-center"
@@ -28,7 +26,7 @@
               :filter-method="filterTree"
               :empty-text="$t('tip.noData')"
               :height="300"
-              class="dark:bg-gray-900"
+              class="dark:bg-black-dark"
             >
               <template class="span-ellipsis" #default="{ node, data }">
                 <span>

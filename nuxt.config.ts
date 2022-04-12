@@ -55,7 +55,7 @@ export default defineNuxtConfig({
   },
 
   css: [
-    '@/assets/css/global.css',
+    '@/assets/css/global.scss',
     '@/assets/font/iconfont.css',
     '~/assets/css/tailwind.css',
   ],

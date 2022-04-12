@@ -1,8 +1,8 @@
 <template>
-  <div class="dark:bg-gray-900">
+  <div>
     <el-card
       v-if="routePath !== '/barcode'"
-      class="m-auto w-2/4 bg-white bg-opacity-1 border-white border-opacity-1 dark:bg-gray-900"
+      class="m-auto w-2/4 bg-white bg-opacity-1 dark:bg-black-dark"
     >
       <transition name="emerge" appear>
         <keep-alive>

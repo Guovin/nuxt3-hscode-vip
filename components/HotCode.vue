@@ -1,13 +1,11 @@
 <template>
   <div>
     <!-- <el-card v-if="this.$route.path === '/'" class="treeCard"> -->
-    <el-card
-      class="mx-auto w-4/6 bg-white bg-opacity-1 border-white border-opacity-1 rounded dark:bg-gray-900"
-    >
+    <el-card class="mx-auto w-4/6 bg-white bg-opacity-1 dark:bg-black-dark">
       <transition name="emerge" appear>
         <keep-alive>
           <div
-            class="border border-solid border-gray-200 bg-white text-black duration-300 rounded shadow p-10 dark:bg-gray-900"
+            class="border border-solid border-gray-200 bg-white text-black duration-300 rounded shadow p-10 dark:bg-black-dark dark:border-gray-50 dark:border-opacity-10"
           >
             <div class="text-base text-red-400 font-bold mt-0 mb-1 text-center">
               <i class="iconfont iconremen text-xl"></i
@@ -23,7 +21,7 @@
               >
                 <div
                   @click="hotSearch(item)"
-                  class="h-full text-center box-border border border-solid border-gray-300 shadow rounded py-5 text-gray-600 hover:bg-gray-50 hover:text-blue-500 hover:cursor-pointer"
+                  class="h-full text-center box-border border border-solid border-gray-300 shadow rounded py-5 text-gray-600 hover:bg-gray-50 hover:text-blue-500 hover:cursor-pointer dark:hover:bg-gray-900 dark:border-gray-50 dark:border-opacity-20"
                 >
                   <p>{{ item }}</p>
                 </div>
@@ -41,7 +39,7 @@
                   >
                     <div
                       @click="hotSearch(item)"
-                      class="h-full text-center box-border border border-solid border-gray-300 shadow rounded py-5 text-gray-600 hover:bg-gray-50 hover:text-blue-500 hover:cursor-pointer"
+                      class="h-full text-center box-border border border-solid border-gray-300 shadow rounded py-5 text-gray-600 hover:bg-gray-50 hover:text-blue-500 hover:cursor-pointer dark:hover:bg-gray-900 dark:border-gray-50 dark:border-opacity-20"
                     >
                       <p>{{ item }}</p>
                     </div>
