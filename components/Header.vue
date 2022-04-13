@@ -1,63 +1,60 @@
 <template>
-  <div>
+  <div class="fixed w-full bg-white z-50">
     <el-container>
-      <el-header class="py-2 h-auto dark:bg-gray-900">
-        <div class="flex justify-between">
-          <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item :to="{ path: '/' }" @click="changeTitle"
-              ><i class="iconfont iconshouye"></i>
-              <span class="pl-2 dark:text-gray-200">
-                {{ $t('label.home') }}
-              </span>
-            </el-breadcrumb-item>
-            <el-breadcrumb-item
-              v-if="routePath === '/table' || routePath === '/detail'"
-              ><i class="iconfont iconsousuo"></i>
-              <span class="pl-2 dark:text-gray-200">
-                {{ $t('label.result') }}
-              </span>
-            </el-breadcrumb-item>
-            <el-breadcrumb-item v-if="routePath === '/detail'"
-              ><i class="iconfont iconpicixiangqing"></i>
-              <span class="pl-2 dark:text-gray-200">
-                {{ $t('label.detail') }}
-              </span>
-            </el-breadcrumb-item>
-            <el-breadcrumb-item v-if="routePath === '/barcode'"
-              ><i class="iconfont iconpicixiangqing"></i>
-              <span class="pl-2 dark:text-gray-200">
-                {{ $t('label.barcode') }}
-              </span>
-            </el-breadcrumb-item>
-            <el-breadcrumb-item>
-              <el-button @click="changeLang" size="small" circle>{{
-                $t(lang)
-              }}</el-button>
-            </el-breadcrumb-item>
-            <el-breadcrumb-item>
-              <el-button @click="changeTheme" size="small" circle>
-                <i v-if="theme === 'light'" class="iconfont iconsunny"></i>
-                <i v-else class="iconfont iconmoon"></i>
-              </el-button>
-            </el-breadcrumb-item>
-          </el-breadcrumb>
-          <el-link
-            class="barcodeLink"
-            href="/barcode"
-            type="warning"
-            v-if="routePath !== '/barcode'"
-            >{{ $t('label.barcode') }}
-          </el-link>
+      <el-header class="py-4 h-auto dark:bg-gray-900">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center">
+            <div class="pr-6">
+              <img
+                class="cursor-pointer m-auto h-6"
+                src="../assets/img/logo.png"
+                alt="HSCode.VIP"
+                @click="goHome"
+              />
+            </div>
+            <el-breadcrumb separator-class="el-icon-arrow-right">
+              <el-breadcrumb-item :to="{ path: '/' }" @click="changeTitle"
+                ><i class="iconfont iconshouye"></i>
+                <span class="pl-2 dark:text-gray-200">
+                  {{ $t('label.home') }}
+                </span>
+              </el-breadcrumb-item>
+              <el-breadcrumb-item
+                ><i class="iconfont iconsousuo"></i>
+                <span class="pl-2 dark:text-gray-200">
+                  {{ $t('label.result') }}
+                </span>
+              </el-breadcrumb-item>
+              <el-breadcrumb-item
+                ><i class="iconfont iconpicixiangqing"></i>
+                <span class="pl-2 dark:text-gray-200">
+                  {{ $t('label.detail') }}
+                </span>
+              </el-breadcrumb-item>
+              <el-breadcrumb-item
+                ><i class="iconfont iconpicixiangqing"></i>
+                <span class="pl-2 dark:text-gray-200">
+                  {{ $t('label.barcode') }}
+                </span>
+              </el-breadcrumb-item>
+            </el-breadcrumb>
+          </div>
+          <div class="flex items-center">
+            <el-button @click="changeLang" size="small" circle>{{
+              $t(lang)
+            }}</el-button>
+            <el-button @click="changeTheme" size="small" circle>
+              <i v-if="theme === 'light'" class="iconfont iconsunny"></i>
+              <i v-else class="iconfont iconmoon"></i>
+            </el-button>
+            <div class="pl-6">
+              <el-link class="barcodeLink" href="/barcode" type="warning"
+                >{{ $t('label.barcode') }}
+              </el-link>
+            </div>
+          </div>
         </div>
       </el-header>
-      <div class="my-4">
-        <img
-          class="cursor-pointer m-auto"
-          src="../assets/img/logo.png"
-          alt="HSCode.VIP"
-          @click="goHome"
-        /><img />
-      </div>
     </el-container>
   </div>
 </template>

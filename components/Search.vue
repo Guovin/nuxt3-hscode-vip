@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pt-16">
     <el-card
       v-if="routePath !== '/barcode'"
       class="m-auto w-2/4 bg-white bg-opacity-1 dark:bg-black-dark"
