@@ -2,7 +2,8 @@ import { defineStore } from 'pinia'
 
 export const useThemeStore = defineStore('theme', {
   state: () => {
-    return { theme: 'light' }
+    const themeCookie = useCookie('theme')
+    return { theme: themeCookie.value || 'light' }
   },
   actions: {
     changeTheme() {
@@ -11,6 +12,8 @@ export const useThemeStore = defineStore('theme', {
       } else {
         this.theme = 'light'
       }
+      const themeCookie = useCookie('theme')
+      themeCookie.value = this.theme
     },
   },
 })
