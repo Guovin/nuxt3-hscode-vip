@@ -72,7 +72,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { hotCode } from 'public/hotCode'
+import { hotCode } from '~~/hotCode'
 import { ElCard, ElRow, ElCol } from 'element-plus/dist/index.full'
 import Header from './Header.vue'
 

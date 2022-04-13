@@ -63,7 +63,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, toRefs, inject } from 'vue'
+import { defineComponent, computed, reactive, toRefs, inject } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useI18nStore } from '~~/store/i18n'
@@ -90,12 +90,12 @@ export default defineComponent({
     const i18nStore = useI18nStore()
     const router = useRouter()
     const theme = inject('theme')
-    const state = {
+    const state = reactive({
       lang: 'label.lang',
       keyWord: null,
       drawer: false,
       dialogFormVisible: false,
-    }
+    })
     const routePath = computed({
       get: () => {
         return router.currentRoute.value.path
