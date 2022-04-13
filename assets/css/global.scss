@@ -70,6 +70,45 @@ body,
   .el-card {
     border-color: rgba(255, 255, 255, 0.2);
   }
+
+  .el-table {
+    background-color: unset;
+  }
+
+  .el-table__border-left-patch {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .el-table th.el-table__cell {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .el-table tr {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .el-table--striped
+    .el-table__body
+    tr.el-table__row--striped
+    td.el-table__cell {
+    background-color: rgba(0, 0, 0, 0.9);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .el-table--enable-row-hover .el-table__body tr:hover > td.el-table__cell {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .el-table td.el-table__cell,
+  .el-table th.el-table__cell.is-leaf {
+    border-bottom-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .el-table--border .el-table__cell {
+    border-right-color: rgba(255, 255, 255, 0.3);
+  }
 }
 
 .el-card {

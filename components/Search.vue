@@ -5,18 +5,16 @@
       class="m-auto w-2/4 bg-white bg-opacity-1 dark:bg-black-dark"
     >
       <transition name="emerge" appear>
-        <keep-alive>
-          <el-input
-            :placeholder="$t('placeHolder.search')"
-            v-model="keyWord"
-            @keyup.enter="inputKeyUpEnter"
-            clearable
-          >
-            <template #append>
-              <el-button :icon="Search" @click="inputKeyUpEnter"></el-button>
-            </template>
-          </el-input>
-        </keep-alive>
+        <el-input
+          :placeholder="$t('placeHolder.search')"
+          v-model="keyWord"
+          @keyup.enter="inputKeyUpEnter"
+          clearable
+        >
+          <template #append>
+            <el-button :icon="Search" @click="inputKeyUpEnter"></el-button>
+          </template>
+        </el-input>
       </transition>
     </el-card>
   </div>
@@ -24,7 +22,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Header from './Header.vue'
 import { merge } from 'webpack-merge'
 import {
   ElCard,
@@ -41,15 +38,16 @@ export default defineComponent({
     ElButton,
   },
   setup() {
-    const { keyWord, routePath } = Header
+    const keyWord = ref('')
     const { $http } = useNuxtApp()
     const router = useRouter()
+    const routePath = router.currentRoute.value.path
     const inputKeyUpEnter = () => {
-      if (keyWord !== '') {
-        if (routePath.value === '/table') {
+      if (keyWord.value !== '') {
+        if (routePath === '/result') {
           router.push({
             query: merge<any>(router.currentRoute.value.query, {
-              key: encodeURIComponent(keyWord),
+              key: encodeURIComponent(keyWord.value),
             }),
           })
           // return child.getListByKey(encodeURIComponent(keyWord))
@@ -64,17 +62,17 @@ export default defineComponent({
       }
     }
     const getKey = async () => {
-      if (keyWord !== '') {
+      if (keyWord.value !== '') {
         const { data: res } = await $http.post(
-          `search?keyword=${encodeURIComponent(keyWord)}`
+          `search?keyword=${encodeURIComponent(keyWord.value)}`
         )
         if (res.code !== 200) {
           return ElMessage.error({ message: `${res.data}`, center: true })
         } else {
           router.push({
-            path: 'table',
+            path: 'result',
             query: {
-              key: encodeURIComponent(keyWord),
+              key: encodeURIComponent(keyWord.value),
             },
           })
         }
