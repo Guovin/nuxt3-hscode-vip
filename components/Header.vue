@@ -62,8 +62,6 @@
 <script lang="ts">
 import { defineComponent, computed, reactive, toRefs, inject } from 'vue'
 import { useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n'
-import { useI18nStore } from '~~/store/i18n'
 import {
   ElContainer,
   ElHeader,
@@ -83,8 +81,6 @@ export default defineComponent({
     ElButton,
   },
   setup() {
-    const { locale } = useI18n()
-    const i18nStore = useI18nStore()
     const router = useRouter()
     const theme = inject('theme')
     const state = reactive({
@@ -111,10 +107,7 @@ export default defineComponent({
       }
     }
 
-    const changeLang = () => {
-      i18nStore.changeLang()
-      locale.value = i18nStore.locale
-    }
+    const changeLang = inject('changeLang')
 
     const changeTheme = inject('changeTheme')
 

@@ -43,17 +43,19 @@
       <nav class="mt-4 flex justify-end">
         <transition name="emerge" appear>
           <keep-alive>
-            <el-pagination
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              :current-page="currentPage"
-              :page-sizes="[5, 7, 10]"
-              :page-size="pageSize"
-              layout="total, sizes, prev, pager, next, jumper"
-              :total="total"
-              background
-            >
-            </el-pagination>
+            <el-config-provider :locale="locale">
+              <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage"
+                :page-sizes="[5, 7, 10]"
+                :page-size="pageSize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="total"
+                background
+              >
+              </el-pagination>
+            </el-config-provider>
           </keep-alive>
         </transition>
       </nav>
@@ -62,7 +64,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, computed } from 'vue'
+import { defineComponent, onMounted, computed, inject } from 'vue'
 import {
   ElCard,
   ElTable,
@@ -70,7 +72,9 @@ import {
   ElPagination,
   ElMessage,
   ElButton,
+  ElConfigProvider,
 } from 'element-plus/dist/index.full'
+
 import { col, dropCol } from '~~/hotCode'
 
 export default defineComponent({
@@ -81,8 +85,10 @@ export default defineComponent({
     ElPagination,
     ElMessage,
     ElButton,
+    ElConfigProvider,
   },
   setup() {
+    const lang = inject('lang')
     const { $http } = useNuxtApp()
     const router = useRouter()
     const key = router.currentRoute.value.query.key
@@ -90,6 +96,7 @@ export default defineComponent({
       getListByKey(key)
     })
     const state = reactive({
+      locale: lang,
       showCard: false,
       needSlide: false,
       key: decodeURIComponent(key as string),
