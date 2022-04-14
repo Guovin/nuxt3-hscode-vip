@@ -367,3 +367,73 @@ export const hotCode = [
   '椅垫',
   '拖把架',
 ]
+
+export const col = [
+  {
+    label: '商品编号',
+    prop: 'hscode',
+  },
+  {
+    label: '商品名称',
+    prop: 'product_name',
+  },
+  {
+    label: '商品分类',
+    prop: 'hscode_name',
+  },
+  {
+    label: '计量单位',
+    prop: 'unit',
+  },
+  {
+    label: '出口退税率',
+    prop: 'export_retax',
+  },
+  {
+    label: '监管条件',
+    prop: 'supervision_code',
+  },
+  {
+    label: '检验检疫',
+    prop: 'ciq_code',
+  },
+  {
+    label: '更多信息',
+    prop: 'element_example',
+  },
+]
+
+export const dropCol = [
+  {
+    label: '商品编号',
+    prop: 'hscode',
+  },
+  {
+    label: '商品名称',
+    prop: 'product_name',
+  },
+  {
+    label: '商品分类',
+    prop: 'hscode_name',
+  },
+  {
+    label: '计量单位',
+    prop: 'unit',
+  },
+  {
+    label: '出口退税率',
+    prop: 'export_retax',
+  },
+  {
+    label: '监管条件',
+    prop: 'supervision_code',
+  },
+  {
+    label: '检验检疫',
+    prop: 'ciq_code',
+  },
+  {
+    label: '更多信息',
+    prop: 'element_example',
+  },
+]

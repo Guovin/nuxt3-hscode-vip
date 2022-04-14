@@ -4,12 +4,7 @@
       <div v-if="needSlide">请向左滑动查看更多内容</div>
       <transition name="emerge" appear>
         <keep-alive>
-          <el-table
-            :data="keyList"
-            border
-            stripe
-            :row-key="getRowKey"
-          >
+          <el-table :data="keyList" border stripe :row-key="getRowKey">
             <el-table-column
               v-for="(item, index) in col"
               :key="index"
@@ -76,6 +71,7 @@ import {
   ElMessage,
   ElButton,
 } from 'element-plus/dist/index.full'
+import { col, dropCol } from '~~/hotCode'
 
 export default defineComponent({
   components: {
@@ -96,76 +92,10 @@ export default defineComponent({
     const state = reactive({
       showCard: false,
       needSlide: false,
-      key: '',
+      key: decodeURIComponent(key as string),
       urlKey: '',
-      col: [
-        {
-          label: '商品编号',
-          prop: 'hscode',
-        },
-        {
-          label: '商品名称',
-          prop: 'product_name',
-        },
-        {
-          label: '商品分类',
-          prop: 'hscode_name',
-        },
-        {
-          label: '计量单位',
-          prop: 'unit',
-        },
-        {
-          label: '出口退税率',
-          prop: 'export_retax',
-        },
-        {
-          label: '监管条件',
-          prop: 'supervision_code',
-        },
-        {
-          label: '检验检疫',
-          prop: 'ciq_code',
-        },
-        {
-          label: '更多信息',
-          prop: 'element_example',
-        },
-      ],
-      dropCol: [
-        {
-          label: '商品编号',
-          prop: 'hscode',
-        },
-        {
-          label: '商品名称',
-          prop: 'product_name',
-        },
-        {
-          label: '商品分类',
-          prop: 'hscode_name',
-        },
-        {
-          label: '计量单位',
-          prop: 'unit',
-        },
-        {
-          label: '出口退税率',
-          prop: 'export_retax',
-        },
-        {
-          label: '监管条件',
-          prop: 'supervision_code',
-        },
-        {
-          label: '检验检疫',
-          prop: 'ciq_code',
-        },
-        {
-          label: '更多信息',
-          prop: 'element_example',
-        },
-      ],
+      col: col,
+      dropCol: dropCol,
       currentPage: 1,
       keyList: [],
       pageSize: 10,
@@ -205,7 +135,7 @@ export default defineComponent({
     const showData = computed(() => {
       return function (val) {
         val = val + ''
-        const keys = this.key.split('')
+        const keys = state.key.split('')
         keys.forEach((item) => {
           if (val.indexOf(item) !== -1 && item !== '') {
             return (val = val.replace(
