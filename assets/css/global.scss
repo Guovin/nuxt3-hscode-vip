@@ -125,6 +125,36 @@ body,
       }
     }
   }
+
+  .el-pagination.is-background .btn-prev:disabled,
+  .el-pagination.is-background .btn-next:disabled,
+  .el-pagination.is-background .btn-next,
+  .el-pagination.is-background .btn-prev,
+  .el-pagination.is-background .el-pager li {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .el-select__popper.el-popper[role='tooltip'] {
+    background-color: rgba(0, 0, 0);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .el-select-dropdown__item {
+    color: rgba(255, 255, 255, 0.65);
+    &.hover,
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .el-popper.is-light .el-popper__arrow::before {
+    background-color: unset;
+  }
+
+  .el-select__popper.el-popper[role='tooltip'] .el-popper__arrow::before {
+    background-color: rgba(0, 0, 0);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
 }
 
 .el-card {
