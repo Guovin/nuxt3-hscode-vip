@@ -9,7 +9,7 @@
               v-for="(item, index) in col"
               :key="index"
               :prop="dropCol[index].prop"
-              :label="item.label"
+              :label="locale.name === 'zh-cn' ? item.label : item.enLabel"
               header-align="center"
               align="center"
               min-width="100"

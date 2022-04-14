@@ -371,34 +371,42 @@ export const hotCode = [
 export const col = [
   {
     label: '商品编号',
+    enLabel: 'ID',
     prop: 'hscode',
   },
   {
     label: '商品名称',
+    enLabel: 'Name',
     prop: 'product_name',
   },
   {
     label: '商品分类',
+    enLabel: 'Categories',
     prop: 'hscode_name',
   },
   {
     label: '计量单位',
+    enLabel: 'Unit',
     prop: 'unit',
   },
   {
     label: '出口退税率',
+    enLabel: 'Export Retax',
     prop: 'export_retax',
   },
   {
     label: '监管条件',
+    enLabel: 'Supervision Code',
     prop: 'supervision_code',
   },
   {
     label: '检验检疫',
+    enLabel: 'Ciq Code',
     prop: 'ciq_code',
   },
   {
     label: '更多信息',
+    enLabel: 'More',
     prop: 'element_example',
   },
 ]
