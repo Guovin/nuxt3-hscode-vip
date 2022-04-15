@@ -54,7 +54,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, computed, inject } from 'vue'
+import { onMounted, computed, inject } from 'vue'
 import {
   ElTable,
   ElTableColumn,
@@ -66,7 +66,7 @@ import {
 
 import { col, dropCol } from '~~/hotCode'
 
-export default defineComponent({
+export default {
   components: {
     ElTable,
     ElTableColumn,
@@ -75,7 +75,7 @@ export default defineComponent({
     ElButton,
     ElConfigProvider,
   },
-  setup() {
+  async setup() {
     const lang = inject('lang')
     const { $http } = useNuxtApp()
     const router = useRouter()
@@ -191,5 +191,5 @@ export default defineComponent({
       getRowKey,
     }
   },
-})
+}
 </script>

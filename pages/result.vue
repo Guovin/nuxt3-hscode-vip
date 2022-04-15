@@ -6,13 +6,31 @@
         <Search />
       </Card>
     </div>
-    <Table />
+    <Suspense>
+      <template #default>
+        <asyncTable />
+      </template>
+      <template #fallback>
+        <div>Loading...</div>
+      </template>
+    </Suspense>
     <Footer />
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
+import { defineAsyncComponent } from 'vue'
 import { scrollHandler } from '~/utils/scroll'
 
-const { show } = scrollHandler()
+export default {
+  components: {
+    asyncTable: defineAsyncComponent(() => import('~/components/Table.vue')),
+  },
+  setup() {
+    const { show } = scrollHandler()
+    return {
+      show,
+    }
+  },
+}
 </script>
