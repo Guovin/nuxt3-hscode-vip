@@ -40,7 +40,17 @@
             </el-breadcrumb>
           </div>
           <div class="h-8 w-1/3">
-            <Search v-show="showSearch" class=""></Search>
+            <transition
+              appear
+              enter-active-class="transition duration-300 ease-in-out"
+              enter-from-class="opacity-0"
+              enter-to-class="opacity-100"
+              leave-active-class="transition duration-300 ease-in-out"
+              leave-from-class="opacity-100"
+              leave-to-class="opacity-0"
+            >
+              <Search v-show="showSearch"></Search>
+            </transition>
           </div>
           <div class="flex items-center">
             <el-button @click="changeLang" size="small" circle>{{

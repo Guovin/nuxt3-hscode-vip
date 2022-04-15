@@ -1,16 +1,14 @@
 <template>
-  <transition name="emerge" appear>
-    <el-input
-      :placeholder="$t('placeHolder.search')"
-      v-model="keyWord"
-      @keyup.enter="inputKeyUpEnter"
-      clearable
-    >
-      <template #append>
-        <el-button :icon="Search" @click="inputKeyUpEnter"></el-button>
-      </template>
-    </el-input>
-  </transition>
+  <el-input
+    :placeholder="$t('placeHolder.search')"
+    v-model="keyWord"
+    @keyup.enter="inputKeyUpEnter"
+    clearable
+  >
+    <template #append>
+      <el-button :icon="Search" @click="inputKeyUpEnter"></el-button>
+    </template>
+  </el-input>
 </template>
 
 <script lang="ts">

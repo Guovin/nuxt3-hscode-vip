@@ -1,44 +1,40 @@
 <template>
   <Card class="my-10 w-3/5">
-    <transition name="emerge" appear>
-      <keep-alive>
-        <div
-          class="border border-solid border-gray-200 bg-white text-black duration-300 rounded shadow p-10 dark:bg-black-dark dark:border-gray-50 dark:border-opacity-10"
-        >
-          <div class="text-base text-blue-400 font-bold mt-0 mb-1 text-center">
-            <i class="iconfont iconfenleishouye"></i>{{ $t('label.category') }}
-          </div>
-          <el-input
-            v-model="query"
-            :placeholder="$t('placeHolder.treeFilter')"
-            @input="onQueryChanged"
-            class="m-3"
-          />
-          <el-tree-v2
-            ref="treeRef"
-            :data="treeData"
-            :props="treeProps"
-            :filter-method="filterTree"
-            :empty-text="$t('tip.noData')"
-            :height="300"
-            class="dark:bg-black-dark dark:text-gray-400"
-          >
-            <template class="span-ellipsis" #default="{ node, data }">
-              <span>
-                <el-button
-                  type="text"
-                  v-show="node.isLeaf == true"
-                  @click="() => searchPrefix(data)"
-                >
-                  {{ $t('label.search') }}
-                </el-button>
-              </span>
-              <span class="text-sm pl-4">{{ node.label }}</span>
-            </template>
-          </el-tree-v2>
-        </div>
-      </keep-alive>
-    </transition>
+    <div
+      class="border border-solid border-gray-200 bg-white text-black duration-300 rounded shadow p-10 dark:bg-black-dark dark:border-gray-50 dark:border-opacity-10"
+    >
+      <div class="text-base text-blue-400 font-bold mt-0 mb-1 text-center">
+        <i class="iconfont iconfenleishouye"></i>{{ $t('label.category') }}
+      </div>
+      <el-input
+        v-model="query"
+        :placeholder="$t('placeHolder.treeFilter')"
+        @input="onQueryChanged"
+        class="m-3"
+      />
+      <el-tree-v2
+        ref="treeRef"
+        :data="treeData"
+        :props="treeProps"
+        :filter-method="filterTree"
+        :empty-text="$t('tip.noData')"
+        :height="300"
+        class="dark:bg-black-dark dark:text-gray-400"
+      >
+        <template class="span-ellipsis" #default="{ node, data }">
+          <span>
+            <el-button
+              type="text"
+              v-show="node.isLeaf == true"
+              @click="() => searchPrefix(data)"
+            >
+              {{ $t('label.search') }}
+            </el-button>
+          </span>
+          <span class="text-sm pl-4">{{ node.label }}</span>
+        </template>
+      </el-tree-v2>
+    </div>
   </Card>
 </template>
 
