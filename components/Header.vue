@@ -1,7 +1,7 @@
 <template>
-  <div class="fixed w-full bg-white z-50">
+  <div class="fixed w-full bg-white z-50 shadow-lg">
     <el-container>
-      <el-header class="py-4 h-auto dark:bg-gray-900">
+      <el-header class="py-4 h-auto dark:bg-gray-800">
         <div class="flex justify-between items-center">
           <div class="flex items-center">
             <div class="pr-6">

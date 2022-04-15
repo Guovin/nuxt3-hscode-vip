@@ -51,7 +51,6 @@ import {
   ElInput,
 } from 'element-plus/dist/index.full'
 import type { TreeNode } from 'element-plus/es/components/tree-v2/src/types'
-import Header from './Header.vue'
 
 export default defineComponent({
   components: {
@@ -61,7 +60,7 @@ export default defineComponent({
     ElInput,
   },
   async setup() {
-    const { router, routePath } = Header
+    const router = useRouter()
     const { $http } = useNuxtApp()
     const treeProps = {
       value: 'id',
@@ -98,14 +97,13 @@ export default defineComponent({
     }
     const searchPrefix = (data) => {
       router.push({
-        path: 'table',
+        path: 'result',
         query: {
-          key: encodeURIComponent(data.prefix),
+          key: encodeURIComponent(data.hscode_prefix),
         },
       })
     }
     return {
-      routePath,
       query,
       treeRef,
       treeProps,

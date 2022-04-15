@@ -68,7 +68,6 @@
 import { defineComponent, ref } from 'vue'
 import { hotCode } from '~~/hotCode'
 import { ElCard, ElRow, ElCol } from 'element-plus/dist/index.full'
-import Header from './Header.vue'
 
 export default defineComponent({
   components: {
@@ -77,7 +76,7 @@ export default defineComponent({
     ElCol,
   },
   setup() {
-    const { router } = Header
+    const router = useRouter()
     const hotData = hotCode
     const showMore = ref(false)
     const toggle = () => {
@@ -85,7 +84,7 @@ export default defineComponent({
     }
     const hotSearch = (item) => {
       router.push({
-        path: 'table',
+        path: 'result',
         query: {
           key: encodeURIComponent(item),
         },
