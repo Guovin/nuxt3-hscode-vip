@@ -1,8 +1,14 @@
 <template>
   <div>
-    <Header/>
-    <Search/>
-    <Detail/>
-    <Footer/>
+    <Header :show-search="show" />
+    <Search />
+    <Detail />
+    <Footer />
   </div>
 </template>
+
+<script lang="ts" setup>
+import { scrollHandler } from '~/utils/scroll'
+
+const { show } = scrollHandler()
+</script>

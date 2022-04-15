@@ -12,30 +12,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, onMounted, onUnmounted } from 'vue'
+<script lang="ts" setup>
+import { scrollHandler } from '~/utils/scroll'
 
-export default defineComponent({
-  setup() {
-    const show = ref(false)
-    let scrollTop = 0
-    const scrollListener = () => {
-      scrollTop = document.documentElement.scrollTop
-      if (scrollTop >= 100) {
-        show.value = true
-      } else {
-        show.value = false
-      }
-    }
-    onMounted(() => {
-      window.addEventListener('scroll', scrollListener)
-    })
-    onUnmounted(() => {
-      window.removeEventListener('scroll', scrollListener)
-    })
-    return {
-      show,
-    }
-  },
-})
+const { show } = scrollHandler()
 </script>
