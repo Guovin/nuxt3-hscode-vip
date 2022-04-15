@@ -1,8 +1,12 @@
 <template>
   <div>
-    <Header/>
-    <Search/>
-    <Table/>
-    <Footer/>
+    <Header />
+    <div class="pt-20">
+      <Card class="w-2/4">
+        <Search />
+      </Card>
+    </div>
+    <Table />
+    <Footer />
   </div>
 </template>

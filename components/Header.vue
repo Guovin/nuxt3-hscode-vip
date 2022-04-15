@@ -39,8 +39,8 @@
               </el-breadcrumb-item>
             </el-breadcrumb>
           </div>
-          <div v-show="showSearch" class="w-1/3">
-            <SearchTop></SearchTop>
+          <div class="h-8 w-1/3">
+            <Search v-show="showSearch" class=""></Search>
           </div>
           <div class="flex items-center">
             <el-button @click="changeLang" size="small" circle>{{
@@ -73,7 +73,6 @@ import {
   ElLink,
   ElButton,
 } from 'element-plus/dist/index.full'
-import SearchTop from './SearchTop.vue'
 
 export default defineComponent({
   components: {
@@ -83,7 +82,6 @@ export default defineComponent({
     ElBreadcrumbItem,
     ElLink,
     ElButton,
-    SearchTop,
   },
   props: {
     showSearch: {

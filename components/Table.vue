@@ -1,72 +1,69 @@
 <template>
-  <div>
-    <el-card v-if="showCard" class="w-5/6 mx-auto mt-10 dark:bg-black-dark">
-      <div v-if="needSlide">请向左滑动查看更多内容</div>
+  <Card class="w-5/6 mt-10">
+    <div v-if="needSlide">请向左滑动查看更多内容</div>
+    <transition name="emerge" appear>
+      <keep-alive>
+        <el-table :data="keyList" border stripe :row-key="getRowKey">
+          <el-table-column
+            v-for="(item, index) in col"
+            :key="index"
+            :prop="dropCol[index].prop"
+            :label="locale.name === 'zh-cn' ? item.label : item.enLabel"
+            header-align="center"
+            align="center"
+            min-width="100"
+          >
+            <template #default="scope">
+              <span
+                v-if="dropCol[index].prop === 'product_name'"
+                v-html="showData(scope.row[dropCol[index].prop])"
+              >
+              </span>
+              <el-button
+                v-else-if="dropCol[index].prop === 'element_example'"
+                @click="
+                  showDetail(
+                    scope.row.hscode,
+                    scope.row.product_name,
+                    scope.row.element_example
+                  )
+                "
+                type="primary"
+                plain
+                size="default"
+                >详情
+              </el-button>
+              <div v-else>{{ scope.row[dropCol[index].prop] }}</div>
+            </template>
+          </el-table-column>
+        </el-table>
+      </keep-alive>
+    </transition>
+    <nav class="mt-4 flex justify-end">
       <transition name="emerge" appear>
         <keep-alive>
-          <el-table :data="keyList" border stripe :row-key="getRowKey">
-            <el-table-column
-              v-for="(item, index) in col"
-              :key="index"
-              :prop="dropCol[index].prop"
-              :label="locale.name === 'zh-cn' ? item.label : item.enLabel"
-              header-align="center"
-              align="center"
-              min-width="100"
+          <el-config-provider :locale="locale">
+            <el-pagination
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
+              :current-page="currentPage"
+              :page-sizes="[5, 7, 10]"
+              :page-size="pageSize"
+              layout="total, sizes, prev, pager, next, jumper"
+              :total="total"
+              background
             >
-              <template #default="scope">
-                <span
-                  v-if="dropCol[index].prop === 'product_name'"
-                  v-html="showData(scope.row[dropCol[index].prop])"
-                >
-                </span>
-                <el-button
-                  v-else-if="dropCol[index].prop === 'element_example'"
-                  @click="
-                    showDetail(
-                      scope.row.hscode,
-                      scope.row.product_name,
-                      scope.row.element_example
-                    )
-                  "
-                  type="primary"
-                  plain
-                  size="default"
-                  >详情
-                </el-button>
-                <div v-else>{{ scope.row[dropCol[index].prop] }}</div>
-              </template>
-            </el-table-column>
-          </el-table>
+            </el-pagination>
+          </el-config-provider>
         </keep-alive>
       </transition>
-      <nav class="mt-4 flex justify-end">
-        <transition name="emerge" appear>
-          <keep-alive>
-            <el-config-provider :locale="locale">
-              <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage"
-                :page-sizes="[5, 7, 10]"
-                :page-size="pageSize"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="total"
-                background
-              >
-              </el-pagination>
-            </el-config-provider>
-          </keep-alive>
-        </transition>
-      </nav>
-    </el-card>
-  </div>
+    </nav>
+  </Card>
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted, computed, inject } from 'vue'
 import {
-  ElCard,
   ElTable,
   ElTableColumn,
   ElPagination,
@@ -79,7 +76,6 @@ import { col, dropCol } from '~~/hotCode'
 
 export default defineComponent({
   components: {
-    ElCard,
     ElTable,
     ElTableColumn,
     ElPagination,
@@ -97,7 +93,6 @@ export default defineComponent({
     })
     const state = reactive({
       locale: lang,
-      showCard: false,
       needSlide: false,
       key: decodeURIComponent(key as string),
       urlKey: '',
@@ -116,7 +111,6 @@ export default defineComponent({
       if (res.code !== 200) {
         return ElMessage.error({ message: `${res.data}`, center: true })
       }
-      state.showCard = true
       if (state.currentPage === 1) {
         state.keyList = res.data.list.slice(0, state.pageSize)
       } else {

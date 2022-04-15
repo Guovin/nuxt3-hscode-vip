@@ -1,23 +1,16 @@
 <template>
-  <div class="pt-20">
-    <el-card
-      v-if="routePath !== '/barcode'"
-      class="m-auto w-2/4 bg-white bg-opacity-1 dark:bg-black-dark"
+  <transition name="emerge" appear>
+    <el-input
+      :placeholder="$t('placeHolder.search')"
+      v-model="keyWord"
+      @keyup.enter="inputKeyUpEnter"
+      clearable
     >
-      <transition name="emerge" appear>
-        <el-input
-          :placeholder="$t('placeHolder.search')"
-          v-model="keyWord"
-          @keyup.enter="inputKeyUpEnter"
-          clearable
-        >
-          <template #append>
-            <el-button :icon="Search" @click="inputKeyUpEnter"></el-button>
-          </template>
-        </el-input>
-      </transition>
-    </el-card>
-  </div>
+      <template #append>
+        <el-button :icon="Search" @click="inputKeyUpEnter"></el-button>
+      </template>
+    </el-input>
+  </transition>
 </template>
 
 <script lang="ts">
