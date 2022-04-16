@@ -54,7 +54,7 @@
 </template>
 
 <script lang="ts">
-import { onMounted, computed, inject } from 'vue'
+import { defineComponent, computed, inject } from 'vue'
 import {
   ElTable,
   ElTableColumn,
@@ -66,7 +66,7 @@ import {
 
 import { col, dropCol } from '~~/hotCode'
 
-export default {
+export default defineComponent({
   components: {
     ElTable,
     ElTableColumn,
@@ -80,9 +80,6 @@ export default {
     const { $http } = useNuxtApp()
     const router = useRouter()
     const key = router.currentRoute.value.query.key
-    onMounted(() => {
-      getListByKey(key)
-    })
     const state = reactive({
       locale: lang,
       needSlide: false,
@@ -95,14 +92,24 @@ export default {
       pageSize: 10,
       total: 0,
     })
-    const getListByKey = async (key) => {
-      const decodeKey = decodeURIComponent(key)
-      key = decodeKey
-      state.urlKey = decodeKey
-      const { data: res } = await $http.post(`search?keyword=${key}`)
-      if (res.code !== 200) {
-        return ElMessage.error({ message: `${res.data}`, center: true })
-      }
+
+    const decodeKey = decodeURIComponent(key as string)
+    state.urlKey = decodeKey
+    const { data: res } = await $http.post(`search?keyword=${decodeKey}`)
+    if (res.code !== 200) {
+      return ElMessage.error({ message: `${res.data}`, center: true })
+    }
+    if (state.currentPage === 1) {
+      state.keyList = res.data.list.slice(0, state.pageSize)
+    } else {
+      state.keyList = res.data.list.slice(
+        (state.currentPage - 1) * state.pageSize,
+        state.currentPage * state.pageSize
+      )
+    }
+    state.total = res.data.length
+
+    const tableChange = () => {
       if (state.currentPage === 1) {
         state.keyList = res.data.list.slice(0, state.pageSize)
       } else {
@@ -145,13 +152,11 @@ export default {
 
     const handleSizeChange = (newPageSize) => {
       state.pageSize = newPageSize
-      //需要转码后再执行搜索
-      getListByKey(encodeURIComponent(state.urlKey))
+      tableChange()
     }
-    // 分页当前页切换触发事件
     const handleCurrentChange = (newPage) => {
       state.currentPage = newPage
-      getListByKey(encodeURIComponent(state.urlKey))
+      tableChange()
     }
 
     const getRowKey = (row) => {
@@ -183,7 +188,6 @@ export default {
 
     return {
       ...toRefs(state),
-      getListByKey,
       showDetail,
       showData,
       handleSizeChange,
@@ -191,5 +195,5 @@ export default {
       getRowKey,
     }
   },
-}
+})
 </script>

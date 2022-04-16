@@ -11,7 +11,9 @@
         <asyncTable />
       </template>
       <template #fallback>
-        <div>Loading...</div>
+        <Card class="w-5/6 mt-10 py-40">
+          <Loading />
+        </Card>
       </template>
     </Suspense>
     <Footer />
