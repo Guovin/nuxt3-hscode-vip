@@ -14,17 +14,23 @@ export default defineComponent({
     const locale = useCookie('i18nLocale')
     const text = locale.value === 'zh-CN' ? '加载中' : 'Loading'
     let loadingInstance
+    let timer
     onMounted(() => {
-      setTimeout(() => {
-        const options = {
-          target: '.loading',
-          text: text,
-        }
-        loadingInstance = ElLoading.service(options)
-      }, 200)
+      if (!loadingInstance) {
+        timer = setTimeout(() => {
+          const options = {
+            target: '.loading',
+            text: text,
+          }
+          loadingInstance = ElLoading.service(options)
+        }, 100)
+      }
     }),
       onBeforeUnmount(() => {
-        loadingInstance.close()
+        if (loadingInstance) {
+          loadingInstance.close()
+        }
+        clearTimeout(timer)
       })
   },
 })

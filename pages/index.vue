@@ -6,14 +6,38 @@
         <Search />
       </Card>
     </div>
-    <TreeCard />
+    <Suspense>
+      <template #default>
+        <keep-alive>
+          <asyncTreeCard />
+        </keep-alive>
+      </template>
+      <template #fallback>
+        <Card class="my-10 w-3/5 h-60">
+          <Loading />
+        </Card>
+      </template>
+    </Suspense>
     <HotCode />
     <Footer />
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
+import { defineAsyncComponent } from 'vue'
 import { scrollHandler } from '~/utils/scroll'
 
-const { show } = scrollHandler()
+export default {
+  components: {
+    asyncTreeCard: defineAsyncComponent(
+      () => import('~/components/TreeCard.vue')
+    ),
+  },
+  setup() {
+    const { show } = scrollHandler()
+    return {
+      show,
+    }
+  },
+}
 </script>

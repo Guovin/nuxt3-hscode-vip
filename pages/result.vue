@@ -8,7 +8,9 @@
     </div>
     <Suspense>
       <template #default>
-        <asyncTable />
+        <keep-alive>
+          <asyncTable />
+        </keep-alive>
       </template>
       <template #fallback>
         <Card class="w-5/6 mt-10 h-60">
