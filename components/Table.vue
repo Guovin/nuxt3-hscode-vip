@@ -54,7 +54,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, inject } from 'vue'
+import { defineComponent, computed, inject, unref, toRaw } from 'vue'
 import {
   ElTable,
   ElTableColumn,
@@ -93,21 +93,38 @@ export default defineComponent({
       total: 0,
     })
 
+    const resolveResponse = (res) => {
+      if (res.code !== 200) {
+        return ElMessage.error({ message: `${res.data}`, center: true })
+      }
+      if (state.currentPage === 1) {
+        state.keyList = res.data.list.slice(0, state.pageSize)
+      } else {
+        state.keyList = res.data.list.slice(
+          (state.currentPage - 1) * state.pageSize,
+          state.currentPage * state.pageSize
+        )
+      }
+      state.total = res.data.length
+    }
+
     const decodeKey = decodeURIComponent(key as string)
     state.urlKey = decodeKey
-    const { data: res } = await $http.post(`search?keyword=${decodeKey}`)
-    if (res.code !== 200) {
-      return ElMessage.error({ message: `${res.data}`, center: true })
+    const { data: response } = await useAsyncData(key as string, () =>
+      $fetch(`https://hscode.vip/api/search?keyword=${decodeKey}`, {
+        method: 'post',
+      })
+    )
+    const res = toRaw(unref(response))
+    resolveResponse(res)
+
+    const searchChange = async (key) => {
+      state.urlKey = key
+      state.key = key
+      const { data: res } = await $http.post(`search?keyword=${key}`)
+      router.replace({ query: { key: encodeURIComponent(key) } })
+      resolveResponse(res)
     }
-    if (state.currentPage === 1) {
-      state.keyList = res.data.list.slice(0, state.pageSize)
-    } else {
-      state.keyList = res.data.list.slice(
-        (state.currentPage - 1) * state.pageSize,
-        state.currentPage * state.pageSize
-      )
-    }
-    state.total = res.data.length
 
     const tableChange = () => {
       if (state.currentPage === 1) {
@@ -193,6 +210,7 @@ export default defineComponent({
       handleSizeChange,
       handleCurrentChange,
       getRowKey,
+      searchChange,
     }
   },
 })

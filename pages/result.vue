@@ -3,13 +3,13 @@
     <Header :show-search="show" />
     <div class="pt-20">
       <Card class="w-2/4">
-        <Search />
+        <Search @search="searchHandler" />
       </Card>
     </div>
     <Suspense>
       <template #default>
         <keep-alive>
-          <asyncTable />
+          <asyncTable ref="asyncTable" />
         </keep-alive>
       </template>
       <template #fallback>
@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent, ref } from 'vue'
 import { scrollHandler } from '~/utils/scroll'
 
 export default {
@@ -32,8 +32,14 @@ export default {
   },
   setup() {
     const { show } = scrollHandler()
+    const asyncTable = ref()
+    const searchHandler = (key) => {
+      asyncTable.value.searchChange(key)
+    }
     return {
       show,
+      asyncTable,
+      searchHandler,
     }
   },
 }

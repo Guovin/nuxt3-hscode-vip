@@ -28,7 +28,8 @@ export default defineComponent({
     ElInput,
     ElButton,
   },
-  setup() {
+  emits: ['search'],
+  setup(_, context) {
     const keyWord = ref('')
     const { $http } = useNuxtApp()
     const router = useRouter()
@@ -36,12 +37,12 @@ export default defineComponent({
     const inputKeyUpEnter = () => {
       if (keyWord.value !== '') {
         if (routePath === '/result') {
-          router.push({
-            query: merge<any>(router.currentRoute.value.query, {
-              key: encodeURIComponent(keyWord.value),
-            }),
-          })
-          // return child.getListByKey(encodeURIComponent(keyWord))
+          // router.push({
+          //   query: merge<any>(router.currentRoute.value.query, {
+          //     key: encodeURIComponent(keyWord.value),
+          //   }),
+          // })
+          context.emit('search', keyWord.value)
         } else {
           getKey()
         }
