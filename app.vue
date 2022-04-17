@@ -23,6 +23,8 @@ export default defineComponent({
     const { locale } = useI18n()
     const i18nStore = useI18nStore()
     const lang = i18nStore.locale === 'en' ? ref(en) : ref(zhCn)
+    const i18nLocale = useCookie('i18nLocale')
+    i18nLocale.value = i18nStore.locale
     const changeTheme = () => {
       themeStore.changeTheme()
       theme.value = themeStore.theme
@@ -30,6 +32,7 @@ export default defineComponent({
     const changeLang = () => {
       i18nStore.changeLang()
       locale.value = i18nStore.locale
+      i18nLocale.value = i18nStore.locale
       lang.value = i18nStore.locale === 'en' ? en : zhCn
     }
     provide('theme', theme)

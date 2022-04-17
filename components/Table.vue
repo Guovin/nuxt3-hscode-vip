@@ -190,6 +190,7 @@ export default defineComponent({
       ...toRefs(state),
       showDetail,
       showData,
+      sfd,
       handleSizeChange,
       handleCurrentChange,
       getRowKey,

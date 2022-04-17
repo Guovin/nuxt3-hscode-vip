@@ -11,7 +11,7 @@
         <asyncTable />
       </template>
       <template #fallback>
-        <Card class="w-5/6 mt-10 py-40">
+        <Card class="w-5/6 mt-10 h-60">
           <Loading />
         </Card>
       </template>

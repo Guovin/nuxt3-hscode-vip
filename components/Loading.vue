@@ -1,19 +1,25 @@
 <template>
-  <div class="loading"></div>
+  <el-main class="h-full"></el-main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { ElLoading } from 'element-plus/dist/index.full'
+import { ElLoading, ElMain } from 'element-plus/dist/index.full'
 
 export default defineComponent({
+  components: {
+    ElMain,
+  },
   setup() {
-    const options = {
-      target: '.loading',
-      text: '加载中'
-    }
-    const loadingInstance = ElLoading.service(options)
-    loadingInstance.close()
+    const locale = useCookie('i18nLocale')
+    const text = locale.value === 'zh-CN' ? '加载中' : 'Loading'
+    setTimeout(() => {
+      const options = {
+        target: '.el-main',
+        text: text,
+      }
+      const loadingInstance = ElLoading.service(options)
+    }, 200)
   },
 })
 </script>
