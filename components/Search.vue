@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, unref, toRaw } from 'vue'
 import { merge } from 'webpack-merge'
 import {
   ElCard,
@@ -31,7 +31,6 @@ export default defineComponent({
   emits: ['search'],
   setup(_, context) {
     const keyWord = ref('')
-    const { $http } = useNuxtApp()
     const router = useRouter()
     const routePath = router.currentRoute.value.path
     const inputKeyUpEnter = () => {
@@ -55,9 +54,17 @@ export default defineComponent({
     }
     const getKey = async () => {
       if (keyWord.value !== '') {
-        const { data: res } = await $http.post(
-          `search?keyword=${encodeURIComponent(keyWord.value)}`
+        const { data: response } = await useAsyncData(keyWord.value, () =>
+          $fetch(
+            `https://hscode.vip/api/search?keyword=${encodeURIComponent(
+              keyWord.value
+            )}`,
+            {
+              method: 'post',
+            }
+          )
         )
+        const res = toRaw(unref(response))
         if (res.code !== 200) {
           return ElMessage.error({ message: `${res.data}`, center: true })
         } else {

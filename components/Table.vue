@@ -77,7 +77,6 @@ export default defineComponent({
   },
   async setup() {
     const lang = inject('lang')
-    const { $http } = useNuxtApp()
     const router = useRouter()
     const key = router.currentRoute.value.query.key
     const state = reactive({
@@ -121,7 +120,12 @@ export default defineComponent({
     const searchChange = async (key) => {
       state.urlKey = key
       state.key = key
-      const { data: res } = await $http.post(`search?keyword=${key}`)
+      const { data: response } = await useAsyncData(key as string, () =>
+        $fetch(`https://hscode.vip/api/search?keyword=${key}`, {
+          method: 'post',
+        })
+      )
+      const res = toRaw(unref(response))
       router.replace({ query: { key: encodeURIComponent(key) } })
       resolveResponse(res)
     }

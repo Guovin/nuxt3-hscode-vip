@@ -39,7 +39,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, unref, toRaw } from 'vue'
 import {
   ElCard,
   ElTreeV2,
@@ -57,7 +57,6 @@ export default defineComponent({
   },
   async setup() {
     const router = useRouter()
-    const { $http } = useNuxtApp()
     const treeProps = {
       value: 'id',
       label: 'label',
@@ -65,7 +64,12 @@ export default defineComponent({
     }
     const query = ref('')
     const treeRef = ref<InstanceType<typeof ElTreeV2>>()
-    const { data: response } = await $http.post('/hscode/getAllHscodeClassify')
+    const { data: res } = await useAsyncData('class', () =>
+      $fetch('https://hscode.vip/api/hscode/getAllHscodeClassify', {
+        method: 'post',
+      })
+    )
+    const response = toRaw(unref(res))
     const initTree = (response) => {
       const data = []
       response.data.class.forEach((item, index) => {

@@ -29,10 +29,6 @@ export default defineNuxtConfig({
       },
       {
         rel: 'stylesheet',
-        href: 'https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css',
-      },
-      {
-        rel: 'stylesheet',
         href: 'https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css',
       },
     ],
@@ -41,8 +37,6 @@ export default defineNuxtConfig({
       {
         src: 'https://cdn.staticfile.org/element-plus/2.1.8/index.full.min.js',
       },
-      { src: 'https://cdn.staticfile.org/axios/0.26.1/axios.min.js' },
-      { src: 'https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js' },
       {
         src: 'https://cdn.staticfile.org/jsbarcode/3.11.5/JsBarcode.all.min.js',
       },
