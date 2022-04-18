@@ -74,7 +74,7 @@
               <i v-else class="iconfont iconmoon"></i>
             </el-button>
             <div class="pl-6">
-              <el-link class="barcodeLink" href="/barcode" type="warning"
+              <el-link class="barcodeLink" href="/code" type="warning"
                 >{{ $t('label.barcode') }}
               </el-link>
             </div>
