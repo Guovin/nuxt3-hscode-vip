@@ -76,6 +76,7 @@ export default defineComponent({
     ElConfigProvider,
   },
   async setup() {
+    const { $emitter } = useNuxtApp()
     const lang = inject('lang')
     const router = useRouter()
     const key = router.currentRoute.value.query.key
@@ -113,6 +114,10 @@ export default defineComponent({
     )
     let res = toRaw(unref(response))
     resolveResponse(res)
+
+    $emitter.on('search-change', (data) => {
+      searchChange(data)
+    })
 
     const searchChange = (data) => {
       state.key = data.key

@@ -13,7 +13,6 @@
 
 <script lang="ts">
 import { defineComponent, unref, toRaw } from 'vue'
-import { merge } from 'webpack-merge'
 import {
   ElCard,
   ElInput,
@@ -30,6 +29,7 @@ export default defineComponent({
   },
   emits: ['search'],
   setup(_, context) {
+    const { $emitter } = useNuxtApp()
     const keyWord = ref('')
     const router = useRouter()
     const routePath = router.currentRoute.value.path
@@ -49,7 +49,7 @@ export default defineComponent({
           return ElMessage.error({ message: `${res.data}`, center: true })
         } else {
           if (routePath === '/result') {
-            context.emit('search', { key: keyWord.value, res: res })
+            $emitter.emit('search-change', { key: keyWord.value, res: res })
           } else {
             router.push({
               path: 'result',
