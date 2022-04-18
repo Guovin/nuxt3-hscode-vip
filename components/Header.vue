@@ -12,28 +12,41 @@
                 @click="goHome"
               />
             </div>
-            <el-breadcrumb separator-class="el-icon-arrow-right">
+            <el-breadcrumb :separator-icon="ArrowRight">
               <el-breadcrumb-item :to="{ path: '/' }" @click="changeTitle"
                 ><i class="iconfont iconshouye"></i>
-                <span class="pl-2 dark:text-gray-200">
+                <span class="pl-2">
                   {{ $t('label.home') }}
                 </span>
               </el-breadcrumb-item>
-              <el-breadcrumb-item
+              <el-breadcrumb-item v-if="routePath === '/result'"
                 ><i class="iconfont iconsousuo"></i>
-                <span class="pl-2 dark:text-gray-200">
+                <span class="pl-2">
                   {{ $t('label.result') }}
                 </span>
               </el-breadcrumb-item>
               <el-breadcrumb-item
+                v-if="routePath === '/content'"
+                @click="goBackResult"
+              >
+                <div
+                  class="transition duration-300 ease-in-out hover:text-bread-blue hover:cursor-pointer font-bold text-gray-200"
+                >
+                  <i class="iconfont iconsousuo"></i>
+                  <span class="pl-2">
+                    {{ $t('label.result') }}
+                  </span>
+                </div>
+              </el-breadcrumb-item>
+              <el-breadcrumb-item v-if="routePath === '/content'"
                 ><i class="iconfont iconpicixiangqing"></i>
-                <span class="pl-2 dark:text-gray-200">
+                <span class="pl-2">
                   {{ $t('label.detail') }}
                 </span>
               </el-breadcrumb-item>
-              <el-breadcrumb-item
+              <el-breadcrumb-item v-if="routePath === '/code'"
                 ><i class="iconfont iconpicixiangqing"></i>
-                <span class="pl-2 dark:text-gray-200">
+                <span class="pl-2">
                   {{ $t('label.barcode') }}
                 </span>
               </el-breadcrumb-item>
@@ -83,6 +96,7 @@ import {
   ElLink,
   ElButton,
 } from 'element-plus/dist/index.full'
+import { ArrowRight } from '@element-plus/icons-vue'
 
 export default defineComponent({
   components: {
@@ -103,6 +117,7 @@ export default defineComponent({
     const router = useRouter()
     const theme = inject('theme')
     const state = reactive({
+      key: '',
       lang: 'label.lang',
       keyWord: null,
       drawer: false,
@@ -114,6 +129,10 @@ export default defineComponent({
       },
       set: () => {},
     })
+
+    const goBackResult = () => {
+      router.go(-1)
+    }
 
     const changeTitle = () => {
       document.title = 'HSCode编码查询-首页'
@@ -131,10 +150,12 @@ export default defineComponent({
     const changeTheme = inject('changeTheme')
 
     return {
+      ArrowRight,
       ...toRefs(state),
       theme,
       router,
       routePath,
+      goBackResult,
       changeTitle,
       goHome,
       changeLang,

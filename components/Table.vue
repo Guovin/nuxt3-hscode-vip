@@ -79,11 +79,12 @@ export default defineComponent({
     const { $emitter } = useNuxtApp()
     const lang = inject('lang')
     const router = useRouter()
-    const key = router.currentRoute.value.query.key
+    const queryKey = router.currentRoute.value.query.key
     const state = reactive({
       locale: lang,
       needSlide: false,
-      key: decodeURIComponent(key as string),
+      key: queryKey,
+      keyWord: decodeURIComponent(queryKey as string),
       col: col,
       dropCol: dropCol,
       currentPage: 1,
@@ -107,8 +108,8 @@ export default defineComponent({
       state.total = res.data.length
     }
 
-    const { data: response } = await useAsyncData(key as string, () =>
-      $fetch(`https://hscode.vip/api/search?keyword=${key}`, {
+    const { data: response } = await useAsyncData(state.key as string, () =>
+      $fetch(`https://hscode.vip/api/search?keyword=${state.key}`, {
         method: 'post',
       })
     )
@@ -121,6 +122,7 @@ export default defineComponent({
 
     const searchChange = (data) => {
       state.key = data.key
+      state.keyWord = decodeURIComponent(data.key)
       res = data.res
       router.replace({ query: { key: encodeURIComponent(data.key) } })
       resolveResponse(data.res)
@@ -152,7 +154,7 @@ export default defineComponent({
     const showData = computed(() => {
       return function (val) {
         val = val + ''
-        const keys = state.key.split('')
+        const keys = state.keyWord.split('')
         keys.forEach((item) => {
           if (val.indexOf(item) !== -1 && item !== '') {
             return (val = val.replace(
