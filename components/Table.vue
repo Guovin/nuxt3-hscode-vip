@@ -83,7 +83,6 @@ export default defineComponent({
       locale: lang,
       needSlide: false,
       key: decodeURIComponent(key as string),
-      urlKey: '',
       col: col,
       dropCol: dropCol,
       currentPage: 1,
@@ -107,27 +106,19 @@ export default defineComponent({
       state.total = res.data.length
     }
 
-    const decodeKey = decodeURIComponent(key as string)
-    state.urlKey = decodeKey
     const { data: response } = await useAsyncData(key as string, () =>
-      $fetch(`https://hscode.vip/api/search?keyword=${decodeKey}`, {
+      $fetch(`https://hscode.vip/api/search?keyword=${key}`, {
         method: 'post',
       })
     )
-    const res = toRaw(unref(response))
+    let res = toRaw(unref(response))
     resolveResponse(res)
 
-    const searchChange = async (key) => {
-      state.urlKey = key
-      state.key = key
-      const { data: response } = await useAsyncData(key as string, () =>
-        $fetch(`https://hscode.vip/api/search?keyword=${key}`, {
-          method: 'post',
-        })
-      )
-      const res = toRaw(unref(response))
-      router.replace({ query: { key: encodeURIComponent(key) } })
-      resolveResponse(res)
+    const searchChange = (data) => {
+      state.key = data.key
+      res = data.res
+      router.replace({ query: { key: encodeURIComponent(data.key) } })
+      resolveResponse(data.res)
     }
 
     const tableChange = () => {

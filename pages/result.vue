@@ -33,8 +33,8 @@ export default {
   setup() {
     const { show } = scrollHandler()
     const asyncTable = ref()
-    const searchHandler = (key) => {
-      asyncTable.value.searchChange(key)
+    const searchHandler = (data) => {
+      asyncTable.value.searchChange(data)
     }
     return {
       show,

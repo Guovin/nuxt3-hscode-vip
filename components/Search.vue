@@ -34,46 +34,30 @@ export default defineComponent({
     const router = useRouter()
     const routePath = router.currentRoute.value.path
     const inputKeyUpEnter = () => {
-      if (keyWord.value !== '') {
-        if (routePath === '/result') {
-          // router.push({
-          //   query: merge<any>(router.currentRoute.value.query, {
-          //     key: encodeURIComponent(keyWord.value),
-          //   }),
-          // })
-          context.emit('search', keyWord.value)
-        } else {
-          getKey()
-        }
-      } else {
-        return ElMessage.info({
-          message: '请输入搜索内容！',
-          center: true,
-        })
-      }
+      getKey()
     }
     const getKey = async () => {
-      if (keyWord.value !== '') {
+      if (keyWord.value) {
+        const encodeKey = encodeURIComponent(keyWord.value)
         const { data: response } = await useAsyncData(keyWord.value, () =>
-          $fetch(
-            `https://hscode.vip/api/search?keyword=${encodeURIComponent(
-              keyWord.value
-            )}`,
-            {
-              method: 'post',
-            }
-          )
+          $fetch(`https://hscode.vip/api/search?keyword=${encodeKey}`, {
+            method: 'post',
+          })
         )
         const res = toRaw(unref(response))
         if (res.code !== 200) {
           return ElMessage.error({ message: `${res.data}`, center: true })
         } else {
-          router.push({
-            path: 'result',
-            query: {
-              key: encodeURIComponent(keyWord.value),
-            },
-          })
+          if (routePath === '/result') {
+            context.emit('search', { key: keyWord.value, res: res })
+          } else {
+            router.push({
+              path: 'result',
+              query: {
+                key: encodeKey,
+              },
+            })
+          }
         }
       } else {
         return ElMessage.info({
