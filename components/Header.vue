@@ -62,7 +62,7 @@
               leave-from-class="opacity-100"
               leave-to-class="opacity-0"
             >
-              <Search v-show="showSearch"></Search>
+              <Search v-if="showSearch"></Search>
             </transition>
           </div>
           <div class="flex items-center">
