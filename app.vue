@@ -3,6 +3,7 @@
     <Body class="dark:bg-black-dark dark:text-gray-200">
       <div>
         <NuxtPage />
+        <el-backtop class="dark:bg-gray-800 dark:hover:bg-gray-700"></el-backtop>
       </div>
     </Body>
   </Html>
@@ -15,8 +16,12 @@ import { useI18n } from 'vue-i18n'
 import { useI18nStore } from '~~/store/i18n'
 import zhCn from 'element-plus/lib/locale/lang/zh-cn'
 import en from 'element-plus/lib/locale/lang/en'
+import { ElBacktop } from 'element-plus/dist/index.full'
 
 export default defineComponent({
+  components: {
+    ElBacktop,
+  },
   setup() {
     const themeStore = useThemeStore()
     const theme = ref(themeStore.theme)
