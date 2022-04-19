@@ -6,40 +6,42 @@
       <div class="text-base text-blue-400 font-bold mt-0 mb-1 text-center">
         <i class="iconfont iconfenleishouye"></i>{{ $t('label.category') }}
       </div>
-      <el-input
-        v-model="query"
-        :placeholder="$t('placeHolder.treeFilter')"
-        @input="onQueryChanged"
-        class="m-3"
-      />
-      <el-tree-v2
-        ref="treeRef"
-        :data="treeData"
-        :props="treeProps"
-        :filter-method="filterTree"
-        :empty-text="$t('tip.noData')"
-        :height="300"
-        class="dark:bg-black-dark dark:text-gray-400"
-      >
-        <template class="span-ellipsis" #default="{ node, data }">
-          <span>
-            <el-button
-              type="text"
-              v-show="node.isLeaf == true"
-              @click="() => searchPrefix(data)"
-            >
-              {{ $t('label.search') }}
-            </el-button>
-          </span>
-          <span class="text-sm pl-4">{{ node.label }}</span>
-        </template>
-      </el-tree-v2>
+      <div v-loading="loading">
+        <el-input
+          v-model="query"
+          :placeholder="$t('placeHolder.treeFilter')"
+          @input="onQueryChanged"
+          class="m-3 pr-5"
+        />
+        <el-tree-v2
+          ref="treeRef"
+          :data="treeData"
+          :props="treeProps"
+          :filter-method="filterTree"
+          :empty-text="$t('tip.noData')"
+          :height="300"
+          class="dark:bg-black-dark dark:text-gray-400"
+        >
+          <template class="span-ellipsis" #default="{ node, data }">
+            <span>
+              <el-button
+                type="text"
+                v-show="node.isLeaf == true"
+                @click="() => searchByTree(data)"
+              >
+                {{ $t('label.search') }}
+              </el-button>
+            </span>
+            <span class="text-sm pl-4">{{ node.label }}</span>
+          </template>
+        </el-tree-v2>
+      </div>
     </div>
   </Card>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, unref, toRaw } from 'vue'
+import { defineComponent, ref, unref, toRaw, watch } from 'vue'
 import {
   ElCard,
   ElTreeV2,
@@ -56,20 +58,26 @@ export default defineComponent({
     ElInput,
   },
   async setup() {
+    const { $emitter } = useNuxtApp()
     const router = useRouter()
     const treeProps = {
       value: 'id',
       label: 'label',
       children: 'children',
     }
-    const query = ref('')
-    const treeRef = ref<InstanceType<typeof ElTreeV2>>()
-    const { data: res } = await useAsyncData('class', () =>
+    const response = ref(null)
+    const state = reactive({
+      loading: true,
+      query: '',
+      treeRef: <InstanceType<typeof ElTreeV2>>null,
+      treeData: [],
+    })
+    const { data } = await useLazyAsyncData('class', () =>
       $fetch('https://hscode.vip/api/hscode/getAllHscodeClassify', {
         method: 'post',
       })
     )
-    const response = toRaw(unref(res))
+
     const initTree = (response) => {
       const data = []
       response.data.class.forEach((item, index) => {
@@ -86,16 +94,31 @@ export default defineComponent({
         }
         data.push(info)
       })
+      state.loading = false
       return data
     }
-    const treeData = initTree(response)
+
+    watch(data, (newData) => {
+      resolveData(newData)
+    })
+
+    const resolveData = (value) => {
+      response.value = toRaw(unref(value))
+      if (response.value) {
+        state.treeData = initTree(response.value)
+      }
+    }
+
+    resolveData(data)
+
     const onQueryChanged = (query: string) => {
-      treeRef.value!.filter(query)
+      state.treeRef!.filter(query)
     }
     const filterTree = (query: string, node: TreeNode) => {
       return node.label!.includes(query)
     }
-    const searchPrefix = (data) => {
+    const searchByTree = (data) => {
+      $emitter.emit('loading', true)
       router.push({
         path: 'result',
         query: {
@@ -104,13 +127,11 @@ export default defineComponent({
       })
     }
     return {
-      query,
-      treeRef,
+      ...toRefs(state),
       treeProps,
-      treeData,
       onQueryChanged,
       filterTree,
-      searchPrefix,
+      searchByTree,
     }
   },
 })

@@ -1,5 +1,5 @@
 <template>
-  <Card class="w-5/6 mt-10">
+  <Card class="w-5/6 mt-10" v-loading="loading">
     <div v-if="needSlide">请向左滑动查看更多内容</div>
     <el-table :data="keyList" border stripe :row-key="getRowKey">
       <el-table-column
@@ -54,7 +54,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, inject, unref, toRaw } from 'vue'
+import { defineComponent, computed, inject, unref, toRaw, watch } from 'vue'
 import {
   ElTable,
   ElTableColumn,
@@ -81,6 +81,7 @@ export default defineComponent({
     const router = useRouter()
     const queryKey = router.currentRoute.value.query.key
     const state = reactive({
+      res: null,
       locale: lang,
       needSlide: false,
       key: queryKey,
@@ -91,6 +92,7 @@ export default defineComponent({
       keyList: [],
       pageSize: 10,
       total: 0,
+      loading: true,
     })
 
     const resolveResponse = (res) => {
@@ -106,15 +108,29 @@ export default defineComponent({
         )
       }
       state.total = res.data.length
+      state.loading = false
     }
 
-    const { data: response } = await useAsyncData(state.key as string, () =>
+    const { data } = await useLazyAsyncData('table', () =>
       $fetch(`https://hscode.vip/api/search?keyword=${state.key}`, {
         method: 'post',
       })
     )
-    let res = toRaw(unref(response))
-    resolveResponse(res)
+
+    watch(
+      data,
+      (newData) => {
+        state.res = toRaw(unref(newData))
+        if (state.res) {
+          resolveResponse(state.res)
+        }
+      },
+      { immediate: true }
+    )
+
+    $emitter.on('loading', (flag: boolean) => {
+      state.loading = flag
+    })
 
     $emitter.on('search-change', (data) => {
       searchChange(data)
@@ -123,21 +139,20 @@ export default defineComponent({
     const searchChange = (data) => {
       state.key = data.key
       state.keyWord = decodeURIComponent(data.key)
-      res = data.res
       router.replace({ query: { key: encodeURIComponent(data.key) } })
       resolveResponse(data.res)
     }
 
     const tableChange = () => {
       if (state.currentPage === 1) {
-        state.keyList = res.data.list.slice(0, state.pageSize)
+        state.keyList = state.res.data.list.slice(0, state.pageSize)
       } else {
-        state.keyList = res.data.list.slice(
+        state.keyList = state.res.data.list.slice(
           (state.currentPage - 1) * state.pageSize,
           state.currentPage * state.pageSize
         )
       }
-      state.total = res.data.length
+      state.total = state.res.data.length
     }
 
     const showDetail = (hscode, title, example) => {

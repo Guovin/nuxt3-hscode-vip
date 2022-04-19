@@ -15,7 +15,7 @@
           :span="4"
         >
           <div
-            @click="hotSearch(item)"
+            @click="searchByHot(item)"
             class="h-full text-center box-border border border-solid border-gray-300 shadow rounded py-5 text-gray-600 hover:bg-gray-50 hover:text-blue-500 hover:cursor-pointer dark:hover:bg-gray-900 dark:border-gray-50 dark:border-opacity-20 dark:text-gray-400 dark:hover:text-blue-500"
           >
             <p>{{ item }}</p>
@@ -37,7 +37,7 @@
             :span="4"
           >
             <div
-              @click="hotSearch(item)"
+              @click="searchByHot(item)"
               class="h-full text-center box-border border border-solid border-gray-300 shadow rounded py-5 text-gray-600 hover:bg-gray-50 hover:text-blue-500 hover:cursor-pointer dark:hover:bg-gray-900 dark:border-gray-50 dark:border-opacity-20 dark:text-gray-400 dark:hover:text-blue-500"
             >
               <p>{{ item }}</p>
@@ -78,10 +78,12 @@ export default defineComponent({
     const router = useRouter()
     const hotData = hotCode
     const showMore = ref(false)
+    const { $emitter } = useNuxtApp()
     const toggle = () => {
       showMore.value = !showMore.value
     }
-    const hotSearch = (item) => {
+    const searchByHot = (item) => {
+      $emitter.emit('loading', true)
       router.push({
         path: 'result',
         query: {
@@ -93,7 +95,7 @@ export default defineComponent({
       hotData,
       showMore,
       toggle,
-      hotSearch,
+      searchByHot,
     }
   },
 })

@@ -38,13 +38,15 @@ export default defineComponent({
     }
     const getKey = async () => {
       if (keyWord.value) {
+        $emitter.emit('loading', true)
         const encodeKey = encodeURIComponent(keyWord.value)
-        const { data: response } = await useAsyncData(keyWord.value, () =>
-          $fetch(`https://hscode.vip/api/search?keyword=${encodeKey}`, {
+        const { data } = await useFetch(
+          `https://hscode.vip/api/search?keyword=${encodeKey}`,
+          {
             method: 'post',
-          })
+          }
         )
-        const res = toRaw(unref(response))
+        const res = toRaw(unref(data))
         if (res.code !== 200) {
           return ElMessage.error({ message: `${res.data}`, center: true })
         } else {
