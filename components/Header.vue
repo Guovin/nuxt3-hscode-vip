@@ -30,7 +30,7 @@
                 @click="goBackResult"
               >
                 <div
-                  class="transition duration-300 ease-in-out hover:text-bread-blue hover:cursor-pointer font-bold text-gray-200"
+                  class="transition duration-300 ease-in-out hover:text-bread-blue hover:cursor-pointer font-bold dark:text-gray-200 dark:hover:text-bread-blue"
                 >
                   <i class="iconfont iconsousuo"></i>
                   <span class="pl-2">

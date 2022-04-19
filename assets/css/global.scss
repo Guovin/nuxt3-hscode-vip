@@ -159,6 +159,17 @@ body,
   .el-loading-mask {
     background-color: #0d1117;
   }
+
+  .el-breadcrumb__inner.is-link {
+    color: rgba(255, 255, 255, 0.8);
+    &:hover {
+      color: #409eff;
+    }
+  }
+
+  .el-breadcrumb__item:last-child .el-breadcrumb__inner {
+    color: rgba(255, 255, 255, 0.6);
+  }
 }
 
 .el-card {
