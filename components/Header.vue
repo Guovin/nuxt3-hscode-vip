@@ -5,12 +5,13 @@
         <div class="flex justify-between items-center">
           <div class="flex items-center">
             <div class="pr-6">
-              <img
-                class="cursor-pointer m-auto h-6"
-                src="../assets/img/logo.png"
-                alt="HSCode.VIP"
-                @click="goHome"
-              />
+              <NuxtLink to="/">
+                <img
+                  class="cursor-pointer m-auto h-6"
+                  src="../assets/img/logo.png"
+                  alt="HSCode.VIP"
+                />
+              </NuxtLink>
             </div>
             <el-breadcrumb :separator-icon="ArrowRight">
               <el-breadcrumb-item :to="{ path: '/' }" @click="changeTitle"
@@ -138,13 +139,6 @@ export default defineComponent({
       document.title = 'HSCode编码查询-首页'
     }
 
-    const goHome = () => {
-      if (routePath.value !== '/') {
-        document.title = 'HSCode编码查询-首页'
-        return router.push('/')
-      }
-    }
-
     const changeLang = inject('changeLang')
 
     const changeTheme = inject('changeTheme')
@@ -157,7 +151,6 @@ export default defineComponent({
       routePath,
       goBackResult,
       changeTitle,
-      goHome,
       changeLang,
       changeTheme,
     }
