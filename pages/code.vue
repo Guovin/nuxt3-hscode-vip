@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Header/>
-    <Barcode/>
-    <Footer/>
+    <NuxtLayout>
+      <Barcode />
+    </NuxtLayout>
   </div>
 </template>

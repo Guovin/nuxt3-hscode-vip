@@ -1,14 +1,7 @@
 <template>
   <div>
-    <Header :show-search="show" />
-    <Search />
-    <Detail />
-    <Footer />
+    <NuxtLayout name="default">
+      <Detail />
+    </NuxtLayout>
   </div>
 </template>
-
-<script lang="ts" setup>
-import { scrollHandler } from '~/utils/scroll'
-
-const { show } = scrollHandler()
-</script>
