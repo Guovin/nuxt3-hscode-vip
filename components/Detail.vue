@@ -7,34 +7,33 @@
       :data="baseInfo"
     />
     <DetailCard
-      :app="false"
       iconfont-name="iconfont iconjiliang-xian"
       title="label.unit"
       :data="unitInfo"
     />
     <DetailCard
-      :app="false"
       iconfont-name="iconfont iconexchangerate"
       title="label.ordinary"
       :data="ordinaryInfo"
     />
     <DetailCard
-      :app="false"
       iconfont-name="iconfont iconjiandu"
       title="label.regulatory"
       :data="regulatoryInfo"
+      :mode="false"
     />
     <DetailCard
-      :app="false"
       iconfont-name="iconfont iconjianyanjianyi"
       title="label.ciq"
       :data="ciqInfo"
+      :mode="false"
     />
     <DetailCard
-      :app="false"
       iconfont-name="iconfont iconxinshenqing"
       title="label.element"
-      :data="elementInfo"
+      :data="elementList"
+      :mode="false"
+      :element="true"
     />
   </div>
 </template>
@@ -56,17 +55,12 @@ export default defineComponent({
       data: null,
       title: '',
       elementList: [],
-      codeName: [],
-      codeDetail: [],
-      ciqName: [],
-      ciqDetail: [],
       example: '',
       baseInfo: [],
       unitInfo: [],
       ordinaryInfo: [],
       regulatoryInfo: [],
       ciqInfo: [],
-      elementInfo: [],
     })
 
     const router = useRouter()
@@ -77,24 +71,6 @@ export default defineComponent({
 
     const resolveData = (data) => {
       const info = data.info
-      const codeList = info.regulatory_code_name
-      const ciqList = info.ciq_code_name
-      if (codeList && codeList.length > 0) {
-        codeList.forEach((item) => {
-          let name = item.split(':')
-          state.codeName.push(name[0])
-          state.codeDetail.push(name[1])
-        })
-      }
-
-      if (ciqList && ciqList.length > 0) {
-        ciqList.forEach((item) => {
-          let name = item.split(':')
-          state.ciqName.push(name[0])
-          state.ciqDetail.push(name[1])
-        })
-      }
-
       const element = info.element_require
       if (element && element.length > 0) {
         const list = element.split(';')
@@ -133,9 +109,8 @@ export default defineComponent({
         { title: 'content.exportRetax', content: info.export_retax },
         { title: 'content.addTaxRate', content: info.add_tax_rate },
       ]
-      state.regulatoryInfo = []
-      state.ciqInfo = []
-      state.elementInfo = []
+      state.regulatoryInfo = info.regulatory_code_name
+      state.ciqInfo = info.ciq_code_name
     }
 
     const { data } = await useLazyAsyncData('detail', () =>

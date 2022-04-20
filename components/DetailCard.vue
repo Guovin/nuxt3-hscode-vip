@@ -8,10 +8,24 @@
             <span>{{ $t(title) }}</span>
           </div>
           <div>
-            <div v-for="(item, index) in data" :key="index">
-              <span>{{ $t(item.title) }}</span>
-              <span>{{ item.content }}</span>
-            </div>
+            <template v-if="mode">
+              <div v-for="(item, index) in data" :key="index">
+                <span>{{ $t(item.title) }}</span>
+                <span>{{ item.content }}</span>
+              </div>
+            </template>
+            <template v-else>
+              <div v-for="(item, index) in data" :key="index">
+                <template v-if="!element">
+                  <span>{{ item.split(':')[0] }}</span>
+                  <span>{{ item.split(':')[1] }}</span>
+                </template>
+                <template v-else>
+                  <span>{{ index }}</span>
+                  <span>{{ item }}</span>
+                </template>
+              </div>
+            </template>
           </div>
         </Card>
       </el-col>
@@ -58,6 +72,14 @@ export default defineComponent({
     data: {
       type: Array,
       default: [],
+    },
+    mode: {
+      type: Boolean,
+      default: true,
+    },
+    element: {
+      type: Boolean,
+      default: false,
     },
   },
   setup() {
