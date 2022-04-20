@@ -9,11 +9,18 @@ export default {
     search: 'HSCode search',
     hotCode: 'Popular HSCode',
     fold: 'Fold',
-    showMore: 'More'
+    showMore: 'More',
+    app: "HSCode.VIP's WeChat mini programs - please scan code",
+    baseInfo: 'Basic Information',
+    unit: 'Unit of measurement',
+    ordinary: 'Tax rate rmation',
+    regulatory: 'Monitoring condition',
+    ciq: 'Inspection quarantine category',
+    element: 'Declared elements',
   },
   placeHolder: {
     search: 'Please enter the product name or product code',
-    treeFilter: 'Please enter keyword'
+    treeFilter: 'Please enter keyword',
   },
   footer: {
     copyRight: 'Copyright Hscode encoding network',
@@ -24,5 +31,19 @@ export default {
   },
   tip: {
     noData: 'No Data',
+  },
+  content: {
+    name: 'Name',
+    hscode: 'HSCode',
+    category: 'Categories',
+    lawUnitName: 'Legal metering unit name',
+    lawUnit: 'Legal metering unit',
+    lawUnitName2: 'Legal second measurement unit name',
+    lawUnit2: 'Legal second measurement unit',
+    ordinaryTax: 'General tax rate',
+    discountTax: 'Preferential tax rate',
+    exportTax: 'Export tax rate',
+    exportRetax: 'Export tax rebate rate',
+    addTaxRate: 'Consumption tax rate',
   },
 }

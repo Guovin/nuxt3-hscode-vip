@@ -9,11 +9,18 @@ export default {
     search: 'HSCode查询',
     hotCode: '热门HSCode商品编码',
     fold: '收起',
-    showMore: '查看更多'
+    showMore: '查看更多',
+    app: 'HSCode.VIP微信小程序-请扫码使用',
+    baseInfo: '基本信息',
+    unit: '计量单位',
+    ordinary: '税率信息',
+    regulatory: '监管条件',
+    ciq: '检验检疫类别',
+    element: '申报要素',
   },
   placeHolder: {
     search: '请输入商品名称或商品编码',
-    treeFilter: '请输入关键字'
+    treeFilter: '请输入关键字',
   },
   footer: {
     copyRight: '版权归 HSCode编码网',
@@ -24,5 +31,19 @@ export default {
   },
   tip: {
     noData: '无数据',
+  },
+  content: {
+    name: '商品名称',
+    hscode: '商品编码',
+    category: '商品分类',
+    lawUnitName: '法定计量单位名称',
+    lawUnit: '法定计量单位',
+    lawUnitName2: '法定第二计量单位名称',
+    lawUnit2: '法定第二计量单位',
+    ordinaryTax: '普通税率',
+    discountTax: '优惠税率',
+    exportTax: '出口税率',
+    exportRetax: '出口退税率',
+    addTaxRate: '消费税率',
   },
 }
