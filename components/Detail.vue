@@ -5,16 +5,19 @@
       iconfont-name="iconfont iconjibenxinxi"
       title="label.baseInfo"
       :data="baseInfo"
+      :loading="loading"
     />
     <DetailCard
       iconfont-name="iconfont iconjiliang-xian"
       title="label.unit"
       :data="unitInfo"
+      :loading="loading"
     />
     <DetailCard
       iconfont-name="iconfont iconexchangerate"
       title="label.ordinary"
       :data="ordinaryInfo"
+      :loading="loading"
     />
     <DetailCard
       iconfont-name="iconfont iconjiandu"
@@ -22,6 +25,7 @@
       :data="regulatoryInfo"
       :mode="false"
       :sub-title="regulatory_code"
+      :loading="loading"
     />
     <DetailCard
       iconfont-name="iconfont iconjianyanjianyi"
@@ -29,6 +33,7 @@
       :data="ciqInfo"
       :mode="false"
       :sub-title="ciq_code"
+      :loading="loading"
     />
     <DetailCard
       iconfont-name="iconfont iconxinshenqing"
@@ -36,6 +41,7 @@
       :data="elementList"
       :mode="false"
       :element="true"
+      :loading="loading"
     />
   </div>
 </template>
@@ -65,6 +71,7 @@ export default defineComponent({
       ciqInfo: [],
       ciq_code: '',
       regulatory_code: '',
+      loading: true,
     })
 
     const router = useRouter()
@@ -117,6 +124,7 @@ export default defineComponent({
       state.ciqInfo = info.ciq_code_name
       state.ciq_code = info.ciq_code
       state.regulatory_code = info.regulatory_code
+      state.loading = false
     }
 
     const { data } = await useLazyAsyncData('detail', () =>
@@ -124,14 +132,15 @@ export default defineComponent({
         method: 'post',
       })
     )
+    console.log(data)
 
     watch(
       data,
       (newData) => {
-        const rawData = toRaw(unref(newData)).data
-        if (rawData) {
+        const rawData = toRaw(unref(newData))
+        if (rawData && rawData.data) {
           try {
-            resolveData(rawData)
+            resolveData(rawData.data)
           } catch (err) {
             throw new Error(err)
           }
