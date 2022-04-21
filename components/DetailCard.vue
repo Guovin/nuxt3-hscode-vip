@@ -2,14 +2,17 @@
   <div
     :class="`transition duration-300 ease-in-out ${
       app ? 'w-full' : 'w-2/4 mx-auto'
-    } my-6`"
+    } my-8`"
   >
     <el-row>
       <el-col :span="app ? 12 : 24" :offset="app ? 6 : 0">
         <Card class="h-full">
-          <div class="dark:text-gray-400">
+          <div class="dark:text-gray-400 text-sm border-b-2 pb-2 border-gray-200 dark:border-opacity-20">
             <i :class="iconfontName"></i>
             <span class="pl-2">{{ $t(title) }}</span>
+            <span v-if="subTitle" class="text-xs dark:text-gray-400 pl-2">({{
+              subTitle
+            }})</span>
           </div>
           <div class="pt-2">
             <template v-if="mode">
@@ -18,10 +21,13 @@
                 :key="index"
                 class="flex justify-between py-1"
               >
-                <span class="font-bold text-gray-700 dark:text-gray-500">{{
-                  $t(item.title)
+                <span
+                  class="text-sm font-bold text-gray-600 dark:text-gray-500"
+                  >{{ $t(item.title) }}</span
+                >
+                <span class="text-sm dark:text-gray-400">{{
+                  item.content
                 }}</span>
-                <span class="dark:text-gray-400">{{ item.content }}</span>
               </div>
             </template>
             <template v-else>
@@ -31,14 +37,20 @@
                 class="flex justify-between py-1"
               >
                 <template v-if="!element">
-                  <span class="font-bold text-gray-700 dark:text-gray-500">{{
-                    item.split(':')[0]
+                  <span
+                    class="text-sm font-bold text-gray-600 dark:text-gray-500"
+                    >{{ item.split(':')[0] }}</span
+                  >
+                  <span class="text-sm dark:text-gray-400">{{
+                    item.split(':')[1]
                   }}</span>
-                  <span class="dark:text-gray-400">{{ item.split(':')[1] }}</span>
                 </template>
                 <template v-else>
-                  <span class="font-bold text-gray-700 dark:text-gray-500">{{ index }}</span>
-                  <span class="dark:text-gray-400">{{ item }}</span>
+                  <span
+                    class="text-sm font-bold text-gray-600 dark:text-gray-500"
+                    >{{ index }}</span
+                  >
+                  <span class="text-sm dark:text-gray-400">{{ item }}</span>
                 </template>
               </div>
             </template>
@@ -46,15 +58,15 @@
         </Card>
       </el-col>
       <el-col v-if="app" :span="4" :offset="1">
-        <Card class="text-center mx-auto">
+        <Card class="text-center mx-auto dark:text-gray-400">
           <div>
             <i class="iconfont iconsaoma"></i>
-            <span class="text-xs">{{ $t('label.app') }}</span>
+            <span class="text-xs pl-2">{{ $t('label.app') }}</span>
           </div>
           <img
             src="~/assets/img/code.jpg"
             alt="小程序码"
-            class="w-2/3 h-2/3 mx-auto my-3"
+            class="w-3/6 h-3/6 mx-auto my-3"
           />
         </Card>
       </el-col>
@@ -96,6 +108,10 @@ export default defineComponent({
     element: {
       type: Boolean,
       default: false,
+    },
+    subTitle: {
+      type: String,
+      default: '',
     },
   },
   setup() {

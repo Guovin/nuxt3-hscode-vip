@@ -21,12 +21,14 @@
       title="label.regulatory"
       :data="regulatoryInfo"
       :mode="false"
+      :sub-title="regulatory_code"
     />
     <DetailCard
       iconfont-name="iconfont iconjianyanjianyi"
       title="label.ciq"
       :data="ciqInfo"
       :mode="false"
+      :sub-title="ciq_code"
     />
     <DetailCard
       iconfont-name="iconfont iconxinshenqing"
@@ -61,6 +63,8 @@ export default defineComponent({
       ordinaryInfo: [],
       regulatoryInfo: [],
       ciqInfo: [],
+      ciq_code: '',
+      regulatory_code: '',
     })
 
     const router = useRouter()
@@ -111,6 +115,8 @@ export default defineComponent({
       ]
       state.regulatoryInfo = info.regulatory_code_name
       state.ciqInfo = info.ciq_code_name
+      state.ciq_code = info.ciq_code
+      state.regulatory_code = info.regulatory_code
     }
 
     const { data } = await useLazyAsyncData('detail', () =>
