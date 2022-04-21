@@ -10,6 +10,7 @@ export default {
     hotCode: 'Popular HSCode',
     fold: 'Fold',
     showMore: 'More',
+    detailBtn: 'Detail',
     app: "HSCode.VIP's WeChat mini programs - please scan code",
     baseInfo: 'Basic Information',
     unit: 'Unit of measurement',

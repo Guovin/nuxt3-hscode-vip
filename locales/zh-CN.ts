@@ -10,6 +10,7 @@ export default {
     hotCode: '热门HSCode商品编码',
     fold: '收起',
     showMore: '查看更多',
+    detailBtn: '详情',
     app: 'HSCode.VIP微信小程序-请扫码使用',
     baseInfo: '基本信息',
     unit: '计量单位',
