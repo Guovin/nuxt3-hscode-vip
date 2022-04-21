@@ -47,6 +47,7 @@ export default defineComponent({
           }
         )
         const res = toRaw(unref(data))
+        $emitter.emit('loading', false)
         if (res.code !== 200) {
           return ElMessage.error({ message: `${res.data}`, center: true })
         } else {
