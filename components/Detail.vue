@@ -132,7 +132,6 @@ export default defineComponent({
         method: 'post',
       })
     )
-    console.log(data)
 
     watch(
       data,
