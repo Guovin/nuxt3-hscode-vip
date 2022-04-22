@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NuxtLayout>
+    <NuxtLayout name="code">
       <Barcode />
     </NuxtLayout>
   </div>

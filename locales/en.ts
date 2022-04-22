@@ -22,13 +22,13 @@ export default {
     width: 'Width:',
     height: 'Height:',
     color: 'Color:',
-    double: 'Double row:',
+    double: 'Double row',
     font: 'Font',
     size: 'Size:',
     span: 'Spacing:',
     layout: 'Layout',
     border: 'Border',
-    submit: 'Submit',
+    confirm: 'Confirm',
     save: 'Save',
     print: 'Print',
   },
@@ -47,6 +47,9 @@ export default {
   },
   tip: {
     noData: 'No Data',
+    saveDefault:
+      'Save the first bar code by default, if you need to export, please use the print function',
+    saveBarcode: 'Please save the image to save',
   },
   content: {
     name: 'Name',

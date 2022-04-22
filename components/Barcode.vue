@@ -1,114 +1,125 @@
 <template>
-  <div class="barcode">
-    <div id="title">{{ $t('label.barcode') }}</div>
-    <div class="row">
-      <div class="format">
-        <span class="title">{{ $t('label.format') }}</span>
-        <el-cascader
-          v-model="value"
-          :show-all-levels="false"
-          :options="barcodeOptions"
-          :props="{ expandTrigger: 'hover' }"
+  <div class="pt-28">
+    <Card class="w-5/6">
+      <div class="text-center text-sm text-yellow-500">
+        <i class="iconfont icontiaoxingma1"></i>
+        {{ $t('label.barcode') }}
+      </div>
+      <div
+        class="flex items-center justify-between text-sm mt-4 dark:text-gray-400"
+      >
+        <div class="flex justify-between items-center pr-4 w-45">
+          <span class="pr-2 whitespace-nowrap">{{ $t('label.format') }}</span>
+          <el-cascader
+            v-model="value"
+            :show-all-levels="false"
+            :options="barcodeOptions"
+            :props="{ expandTrigger: 'hover' }"
+          >
+          </el-cascader>
+        </div>
+        <div class="flex justify-between items-center pr-4 w-32">
+          <span class="pr-2 whitespace-nowrap">{{ $t('label.width') }}</span>
+          <el-input v-model="width" @blur="widthChange"></el-input>
+        </div>
+        <div class="flex justify-between items-center pr-4 w-32">
+          <span class="pr-2 whitespace-nowrap">{{ $t('label.height') }}</span>
+          <el-input v-model="height" @blur="heightChange"></el-input>
+        </div>
+        <div class="flex justify-between items-center pr-4">
+          <span class="pr-2 whitespace-nowrap">{{ $t('label.color') }}</span>
+          <el-color-picker
+            v-model="color"
+            @change="colorChange"
+          ></el-color-picker>
+          <div v-show="pcStatus === false">
+            <el-checkbox v-model="doublePrint" @change="doubleChange">{{
+              $t('label.double')
+            }}</el-checkbox>
+          </div>
+        </div>
+        <div class="flex justify-between items-center pr-4">
+          <span v-show="pcStatus === true" class="pr-2 whitespace-nowrap">{{
+            $t('label.font')
+          }}</span>
+          <div class="flex justify-between items-center w-32 pr-4">
+            <span class="pr-2 whitespace-nowrap">{{ $t('label.size') }}</span>
+            <el-input v-model="fontSize" @blur="fontChange"></el-input>
+          </div>
+          <div class="flex justify-between items-center w-32">
+            <span class="pr-2 whitespace-nowrap">{{ $t('label.span') }}</span>
+            <el-input v-model="textMargin" @blur="textChange"></el-input>
+          </div>
+        </div>
+        <div
+          class="flex justify-between items-center"
+          v-show="pcStatus === true"
         >
-        </el-cascader>
-      </div>
-      <div class="width">
-        <span class="title">{{ $t('label.width') }}</span>
-        <el-input v-model="width" @blur="widthChange"></el-input>
-      </div>
-      <div class="width">
-        <span class="title">{{ $t('label.height') }}</span>
-        <el-input v-model="height" @blur="heightChange"></el-input>
-      </div>
-      <div class="color">
-        <span class="title">{{ $t('label.color') }}</span>
-        <el-color-picker
-          v-model="color"
-          @change="colorChange"
-        ></el-color-picker>
-        <div class="printDouble" v-show="pcStatus === false">
-          <el-checkbox v-model="doublePrint" @change="doubleChange">{{
-            $t('label.double')
-          }}</el-checkbox>
+          <span>{{ $t('label.layout') }}</span>
+          <div class="flex justify-between items-center pr-4 w-32">
+            <span class="pr-2 whitespace-nowrap">{{ $t('label.span') }}</span>
+            <el-input v-model="barcodeBottom" @blur="bottomChange"></el-input>
+          </div>
+          <div class="flex justify-between items-center pr-4">
+            <el-checkbox v-model="doublePrint" @change="doubleChange">{{
+              $t('label.double')
+            }}</el-checkbox>
+          </div>
+          <div class="flex justify-between items-center">
+            <el-checkbox v-model="borderPrint" @change="doubleChange">{{
+              $t('label.border')
+            }}</el-checkbox>
+          </div>
         </div>
       </div>
-      <div class="border-container">
-        <span v-show="pcStatus === true" class="tip-text font-text">{{
-          $t('label.font')
-        }}</span>
-        <div class="fontSize">
-          <span class="title">{{ $t('label.size') }}</span>
-          <el-input v-model="fontSize" @blur="fontChange"></el-input>
-        </div>
-        <div class="textMargin">
-          <span class="title">{{ $t('label.barcode') }}</span>
-          <el-input v-model="textMargin" @blur="textChange"></el-input>
-        </div>
+      <div class="mt-4">
+        <el-input
+          type="textarea"
+          :autosize="{ minRows: 4, maxRows: 12 }"
+          :placeholder="$t('placeHolder.barcode')"
+          v-model="text"
+          @keyup.enter="createBarCode"
+        >
+        </el-input>
       </div>
-      <div class="border-container" v-show="pcStatus === true">
-        <span class="tip-text layout-text">{{ $t('label.layout') }}</span>
-        <div class="printMargin">
-          <span class="title">{{ $t('label.span') }}</span>
-          <el-input v-model="barcodeBottom" @blur="bottomChange"></el-input>
-        </div>
-        <div class="printDouble">
-          <el-checkbox v-model="doublePrint" @change="doubleChange">{{
-            $t('label.double')
-          }}</el-checkbox>
-        </div>
-        <div class="printBorder">
-          <el-checkbox v-model="borderPrint" @change="doubleChange">{{
-            $t('label.border')
-          }}</el-checkbox>
-        </div>
-      </div>
-    </div>
-    <div class="text">
-      <el-input
-        type="textarea"
-        :autosize="{ minRows: 4, maxRows: 12 }"
-        :placeholder="$t('placeHolder.barcode')"
-        v-model="text"
-      >
-      </el-input>
-    </div>
-    <div class="button">
-      <el-button
-        type="primary"
-        @click="createBarCode"
-        class="buttonYes"
-        icon="el-icon-circle-check"
-        >{{ $t('label.submit') }}</el-button
-      >
-      <el-tooltip
-        v-if="saveStatus || status"
-        class="item"
-        effect="dark"
-        :content="saveTip"
-        placement="top"
-      >
+      <div class="mt-4 flex justify-end">
         <el-button
-          type="success"
-          @click="saveBarCode"
+          type="primary"
+          @click="createBarCode"
           class="buttonYes"
-          icon="el-icon-download"
-          >{{ $t('label.save') }}
+          :icon="Check"
+          >{{ $t('label.confirm') }}</el-button
+        >
+        <el-tooltip
+          v-if="saveStatus || status"
+          class="item"
+          effect="dark"
+          :content="$t(saveTip)"
+          placement="top"
+        >
+          <el-button
+            type="success"
+            @click="saveBarCode"
+            class="buttonYes"
+            :icon="Download"
+            >{{ $t('label.save') }}
+          </el-button>
+        </el-tooltip>
+        <el-button
+          type="warning"
+          @click="printBarCode"
+          class="buttonYes"
+          v-if="status"
+          :icon="Printer"
+          >{{ $t('label.print') }}
         </el-button>
-      </el-tooltip>
-      <el-button
-        type="warning"
-        @click="printBarCode"
-        class="buttonYes"
-        v-if="status"
-        icon="el-icon-printer"
-        >{{ $t('label.print') }}
-      </el-button>
-    </div>
-    <div class="canvas-show-div" v-show="status || saveStatus"></div>
-    <div class="canvas" v-show="false">
-      <img id="code" class="code" />
-    </div>
-    <iframe id="iframe" name="iframeName" style="display: none"> </iframe>
+      </div>
+      <div class="canvas-show-div mt-4" v-show="status || saveStatus"></div>
+      <div class="canvas" v-show="false">
+        <img id="code" class="code" />
+      </div>
+      <iframe id="iframe" name="iframeName" class="hidden"> </iframe>
+    </Card>
   </div>
 </template>
 
@@ -125,6 +136,8 @@ import {
   ElTooltip,
   ElMessage,
 } from 'element-plus/dist/index.full'
+
+import { Check, Download, Printer } from '@element-plus/icons-vue'
 
 export default defineComponent({
   components: {
@@ -154,7 +167,7 @@ export default defineComponent({
       nowBottom: 50,
       doublePrint: true,
       borderPrint: false,
-      saveTip: '',
+      saveTip: 'tip.saveDefault',
     })
 
     const barCode = (id, text) => {
@@ -389,7 +402,7 @@ export default defineComponent({
       if (isPC()) {
         saveFile(state.imgSrc[0], 'hscodeVip-barCode')
       } else {
-        state.saveTip = '请长按图片进行保存'
+        state.saveTip = 'tip.saveBarcode'
       }
     }
 
@@ -419,6 +432,9 @@ export default defineComponent({
       createBarCode,
       saveBarCode,
       printBarCode,
+      Check,
+      Download,
+      Printer,
     }
   },
 })
