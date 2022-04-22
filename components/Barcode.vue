@@ -38,10 +38,14 @@
             }}</el-checkbox>
           </div>
         </div>
-        <div class="flex justify-between items-center pr-4">
-          <span v-show="pcStatus === true" class="pr-2 whitespace-nowrap">{{
-            $t('label.font')
-          }}</span>
+        <div
+          class="flex justify-between items-center border rounded-md py-1 px-2 dark:border-opacity-30"
+        >
+          <span
+            v-show="pcStatus === true"
+            class="pr-2 whitespace-nowrap text-xs text-gray-400 dark:text-gray-500 relative -top-2 -left-1"
+            >{{ $t('label.font') }}</span
+          >
           <div class="flex justify-between items-center w-32 pr-4">
             <span class="pr-2 whitespace-nowrap">{{ $t('label.size') }}</span>
             <el-input v-model="fontSize" @blur="fontChange"></el-input>
@@ -52,10 +56,12 @@
           </div>
         </div>
         <div
-          class="flex justify-between items-center"
+          class="flex justify-between items-center border rounded-md py-1 px-2 dark:border-opacity-30"
           v-show="pcStatus === true"
         >
-          <span>{{ $t('label.layout') }}</span>
+          <span class="text-xs text-gray-400 dark:text-gray-500 relative -top-2 -left-1">{{
+            $t('label.layout')
+          }}</span>
           <div class="flex justify-between items-center pr-4 w-32">
             <span class="pr-2 whitespace-nowrap">{{ $t('label.span') }}</span>
             <el-input v-model="barcodeBottom" @blur="bottomChange"></el-input>
@@ -78,7 +84,6 @@
           :autosize="{ minRows: 4, maxRows: 12 }"
           :placeholder="$t('placeHolder.barcode')"
           v-model="text"
-          @keyup.enter="createBarCode"
         >
         </el-input>
       </div>
@@ -337,12 +342,10 @@ export default defineComponent({
         state.barcodeBottom = 50
       }
     }
-    // 双排打印勾选事件
     const doubleChange = () => {
       // 重新生成打印内容
       createPrint()
     }
-    // 判断PC端
     const isPC = () => {
       if (process.client) {
         var userAgentInfo = navigator.userAgent
@@ -364,7 +367,6 @@ export default defineComponent({
         return flag
       }
     }
-    // 保存图片
     const saveFile = (data, filename) => {
       try {
         const save_link = document.createElementNS(
