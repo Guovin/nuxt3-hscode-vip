@@ -90,6 +90,7 @@
       <div class="mt-4 flex justify-end">
         <el-button
           type="primary"
+          plain
           @click="createBarCode"
           class="buttonYes"
           :icon="Check"
