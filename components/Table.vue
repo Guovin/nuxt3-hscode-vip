@@ -232,3 +232,43 @@ export default defineComponent({
   },
 })
 </script>
+
+<style lang="scss" scoped>
+::v-deep .el-table__header th {
+  &::before {
+    font-family: 'iconfont';
+    display: inline-block;
+    font-size: 18px;
+    position: relative;
+    top: 3px;
+  }
+  &:nth-child(1)::before {
+    content: '\e656';
+  }
+  &:nth-child(2)::before {
+    content: '\e617';
+  }
+  &:nth-child(3)::before {
+    content: '\e60e';
+  }
+  &:nth-child(4)::before {
+    content: '\e631';
+  }
+  &:nth-child(5)::before {
+    content: '\e679';
+  }
+  &:nth-child(6)::before {
+    content: '\e721';
+  }
+  &:nth-child(7)::before {
+    content: '\e618';
+  }
+  &:nth-child(8)::before {
+    content: '\e69a';
+  }
+}
+::v-deep .el-table__header .cell {
+  width: auto !important;
+  padding: 0 3px !important;
+}
+</style>
