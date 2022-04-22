@@ -1,5 +1,4 @@
-import { defineNuxtConfig } from 'nuxt3'
-import { resolve } from 'pathe'
+import { defineNuxtConfig } from 'nuxt'
 import IconsResolver from 'unplugin-icons/resolver'
 import Components from 'unplugin-vue-components/vite'
 
