@@ -55,15 +55,15 @@ body,
     border-color: rgba(255, 255, 255, 0.2);
   }
 
-  .el-color-picker__trigger{
+  .el-color-picker__trigger {
     border-color: rgba(255, 255, 255, 0.2);
   }
 
-  .el-color-picker__color{
+  .el-color-picker__color {
     border-color: rgba(255, 255, 255, 0.3);
   }
 
-  .el-color-picker .el-color-picker__icon{
+  .el-color-picker .el-color-picker__icon {
     color: #ededed;
   }
 
@@ -143,10 +143,10 @@ body,
       }
     }
   }
-  
-  .el-button--primary.is-plain{
+
+  .el-button--primary.is-plain {
     background-color: rgba(255, 255, 255, 0.15);
-    &:hover{
+    &:hover {
       background-color: #53a8ff;
     }
   }
