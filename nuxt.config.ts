@@ -60,6 +60,8 @@ export default defineNuxtConfig({
     ssrHandlers: true,
   },
 
+  ssr: false,
+
   buildModules: ['@pinia/nuxt', '@nuxtjs/tailwindcss'],
 
   vite: {
