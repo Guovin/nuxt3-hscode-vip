@@ -13,11 +13,11 @@
           @input="onQueryChanged"
           class="m-3 pr-5"
         />
-        <el-tree-v2
+        <el-tree
           ref="treeRef"
           :data="treeData"
           :props="treeProps"
-          :filter-method="filterTree"
+          :filter-node-method="filterTree"
           :empty-text="$t('tip.noData')"
           :height="300"
           class="dark:bg-black-dark dark:text-gray-400"
@@ -34,28 +34,31 @@
             </span>
             <span class="text-sm pl-4">{{ node.label }}</span>
           </template>
-        </el-tree-v2>
+        </el-tree>
       </div>
     </div>
   </Card>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, unref, toRaw, watch } from 'vue'
+import { defineComponent, ref, unref, toRaw } from 'vue'
 import {
   ElCard,
-  ElTreeV2,
+  ElTree,
   ElButton,
   ElInput,
+  ElSkeleton,
+  ElSkeletonItem,
 } from 'element-plus/dist/index.full'
-import type { TreeNode } from 'element-plus/es/components/tree-v2/src/types'
 
 export default defineComponent({
   components: {
     ElCard,
-    ElTreeV2,
+    ElTree,
     ElButton,
     ElInput,
+    ElSkeleton,
+    ElSkeletonItem,
   },
   async setup() {
     const { $emitter } = useNuxtApp()
@@ -69,9 +72,14 @@ export default defineComponent({
     const state = reactive({
       loading: true,
       query: '',
-      treeRef: <InstanceType<typeof ElTreeV2>>null,
+      treeRef: <InstanceType<typeof ElTree>>null,
       treeData: [],
     })
+    interface Tree {
+      id: number
+      label: string
+      children?: Tree[]
+    }
     const { data } = await useLazyAsyncData('class', () =>
       $fetch('https://hscode.vip/api/hscode/getAllHscodeClassify', {
         method: 'post',
@@ -93,14 +101,10 @@ export default defineComponent({
           }),
         }
         data.push(info)
+        state.loading = false
       })
-      state.loading = false
       return data
     }
-
-    watch(data, (newData) => {
-      resolveData(newData)
-    })
 
     const resolveData = (value) => {
       response.value = toRaw(unref(value))
@@ -109,13 +113,21 @@ export default defineComponent({
       }
     }
 
-    resolveData(data)
+    watch(
+      data,
+      (newData) => {
+        resolveData(newData)
+      },
+      { immediate: true }
+    )
 
     const onQueryChanged = (query: string) => {
       state.treeRef!.filter(query)
     }
-    const filterTree = (query: string, node: TreeNode) => {
-      return node.label!.includes(query)
+
+    const filterTree = (value: string, data: Tree) => {
+      if (!value) return true
+      return data.label.includes(value)
     }
     const searchByTree = (data) => {
       $emitter.emit('loading', true)
