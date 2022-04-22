@@ -111,7 +111,7 @@ export default defineComponent({
       state.loading = false
     }
 
-    const { data } = await useLazyAsyncData('table', () =>
+    const { data } = await useLazyAsyncData(state.key as string, () =>
       $fetch(`https://hscode.vip/api/search?keyword=${state.key}`, {
         method: 'post',
       })

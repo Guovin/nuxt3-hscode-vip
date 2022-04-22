@@ -127,7 +127,7 @@ export default defineComponent({
       state.loading = false
     }
 
-    const { data } = await useLazyAsyncData('detail', () =>
+    const { data } = await useLazyAsyncData(state.query.hscode, () =>
       $fetch(`https://hscode.vip/api/hscode?hscode=${state.query.hscode}`, {
         method: 'post',
       })
