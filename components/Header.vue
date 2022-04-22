@@ -46,7 +46,7 @@
                 </span>
               </el-breadcrumb-item>
               <el-breadcrumb-item v-if="routePath === '/code'"
-                ><i class="iconfont iconpicixiangqing"></i>
+                ><i class="iconfont icontiaoxingma1"></i>
                 <span class="pl-2">
                   {{ $t('label.barcode') }}
                 </span>
@@ -75,7 +75,8 @@
               <i v-else class="iconfont iconmoon"></i>
             </el-button>
             <div class="pl-6">
-              <el-link class="barcodeLink" href="/code" type="warning"
+              <i class="iconfont icontiaoxingma1 text-yellow-500 pr-1"></i>
+              <el-link href="/code" type="warning"
                 >{{ $t('label.barcode') }}
               </el-link>
             </div>
@@ -157,10 +158,3 @@ export default defineComponent({
   },
 })
 </script>
-
-<style lang="scss" scoped>
-.barcodeLink::before {
-  font-family: 'iconfont';
-  content: '\e642';
-}
-</style>
