@@ -234,7 +234,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-::v-deep .el-table__header th {
+:deep(.el-table__header th) {
   &::before {
     font-family: 'iconfont';
     display: inline-block;
@@ -267,7 +267,7 @@ export default defineComponent({
     content: '\e69a';
   }
 }
-::v-deep .el-table__header .cell {
+:deep(.el-table__header .cell) {
   width: auto !important;
   padding: 0 3px !important;
 }
