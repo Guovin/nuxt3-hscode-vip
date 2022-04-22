@@ -143,6 +143,13 @@ body,
       }
     }
   }
+  
+  .el-button--primary.is-plain{
+    background-color: rgba(255, 255, 255, 0.15);
+    &:hover{
+      background-color: #53a8ff;
+    }
+  }
 
   .el-pagination.is-background .btn-prev:disabled,
   .el-pagination.is-background .btn-next:disabled,
