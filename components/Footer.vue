@@ -31,18 +31,48 @@
         target="blank"
         >{{ $t('footer.siteId') }}</a
       >
+      <el-drawer
+        v-model="drawer"
+        :title="$t('footer.statement')"
+        direction="btt"
+      >
+        <div>
+          {{ $t('footer.statementContent1') }}
+        </div>
+        <div>
+          {{ $t('footer.statementContent2') }}
+        </div>
+        <div>
+          {{ $t('footer.statementContent3') }}
+        </div>
+        <div>
+          {{ $t('footer.statementContent4') }}
+        </div>
+        <div>
+          {{ $t('footer.statementContent5') }}
+        </div>
+        <div>
+          {{ $t('footer.statementContent6') }}
+        </div>
+      </el-drawer>
     </el-footer>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { ElFooter } from 'element-plus/dist/index.full'
+import { ElFooter, ElDrawer } from 'element-plus/dist/index.full'
 
 export default defineComponent({
   components: {
     ElFooter,
+    ElDrawer,
   },
-  setup() {},
+  setup() {
+    const drawer = ref(false)
+    return {
+      drawer,
+    }
+  },
 })
 </script>

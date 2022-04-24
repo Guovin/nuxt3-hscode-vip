@@ -65,7 +65,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { hotCode } from '~~/hotCode'
+import { hotCode } from '~~/defaultState'
 import { ElCard, ElRow, ElCol } from 'element-plus/dist/index.full'
 
 export default defineComponent({
