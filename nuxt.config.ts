@@ -2,6 +2,8 @@ import { defineNuxtConfig } from 'nuxt'
 import IconsResolver from 'unplugin-icons/resolver'
 import Components from 'unplugin-vue-components/vite'
 
+const lifecycle = process.env.npm_lifecycle_event;
+
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
   meta: {
@@ -59,9 +61,13 @@ export default defineNuxtConfig({
     ssrHandlers: true,
   },
 
-  ssr: false,
+  ssr: true,
 
   buildModules: ['@pinia/nuxt', '@nuxtjs/tailwindcss'],
+
+  build: {
+    transpile: lifecycle === "build" ? ["element-plus"] : [],
+  },
 
   vite: {
     plugins: [
