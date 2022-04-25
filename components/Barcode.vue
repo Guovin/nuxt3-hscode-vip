@@ -20,11 +20,21 @@
         </div>
         <div class="flex justify-between items-center pr-4 w-32">
           <span class="pr-2 whitespace-nowrap">{{ $t('label.width') }}</span>
-          <el-input v-model="width" @blur="widthChange"></el-input>
+          <el-input
+            type="number"
+            v-model="width"
+            :min="0"
+            @blur="widthChange"
+          ></el-input>
         </div>
         <div class="flex justify-between items-center pr-4 w-32">
           <span class="pr-2 whitespace-nowrap">{{ $t('label.height') }}</span>
-          <el-input v-model="height" @blur="heightChange"></el-input>
+          <el-input
+            type="number"
+            v-model="height"
+            :min="0"
+            @blur="heightChange"
+          ></el-input>
         </div>
         <div class="flex justify-between items-center pr-4">
           <span class="pr-2 whitespace-nowrap">{{ $t('label.color') }}</span>
@@ -48,23 +58,39 @@
           >
           <div class="flex justify-between items-center w-32 pr-4">
             <span class="pr-2 whitespace-nowrap">{{ $t('label.size') }}</span>
-            <el-input v-model="fontSize" @blur="fontChange"></el-input>
+            <el-input
+              type="number"
+              v-model="fontSize"
+              :min="0"
+              @blur="fontChange"
+            ></el-input>
           </div>
           <div class="flex justify-between items-center w-32">
             <span class="pr-2 whitespace-nowrap">{{ $t('label.span') }}</span>
-            <el-input v-model="textMargin" @blur="textChange"></el-input>
+            <el-input
+              type="number"
+              v-model="textMargin"
+              :min="0"
+              @blur="textChange"
+            ></el-input>
           </div>
         </div>
         <div
           class="flex justify-between items-center border rounded-md py-1 px-2 dark:border-opacity-30"
           v-show="pcStatus === true"
         >
-          <span class="text-xs text-gray-400 dark:text-gray-500 relative -top-2 -left-1">{{
-            $t('label.layout')
-          }}</span>
+          <span
+            class="text-xs text-gray-400 dark:text-gray-500 relative -top-2 -left-1"
+            >{{ $t('label.layout') }}</span
+          >
           <div class="flex justify-between items-center pr-4 w-32">
             <span class="pr-2 whitespace-nowrap">{{ $t('label.span') }}</span>
-            <el-input v-model="barcodeBottom" @blur="bottomChange"></el-input>
+            <el-input
+              type="number"
+              v-model="barcodeBottom"
+              :min="0"
+              @blur="bottomChange"
+            ></el-input>
           </div>
           <div class="flex justify-between items-center pr-4">
             <el-checkbox v-model="doublePrint" @change="doubleChange">{{
@@ -81,7 +107,8 @@
       <div class="mt-4">
         <el-input
           type="textarea"
-          :autosize="{ minRows: 4, maxRows: 12 }"
+          autofocus
+          :autosize="{ minRows: 12 }"
           :placeholder="$t('placeHolder.barcode')"
           v-model="text"
         >
@@ -314,22 +341,22 @@ export default defineComponent({
       window.frames['iframeName'].print()
     }
     const widthChange = () => {
-      if (state.width == '') {
+      if (state.width == 0 || state.width < 0) {
         state.width = 2
       }
     }
     const heightChange = () => {
-      if (state.height == '') {
+      if (state.height == 0 || state.height < 0) {
         state.height = 80
       }
     }
     const fontChange = () => {
-      if (state.fontSize == '') {
+      if (state.fontSize == 0 || state.fontSize < 0) {
         state.fontSize = 20
       }
     }
     const textChange = () => {
-      if (state.textMargin == '') {
+      if (state.textMargin == '' || state.textMargin < 0) {
         state.textMargin = 2
       }
     }
@@ -339,12 +366,11 @@ export default defineComponent({
       }
     }
     const bottomChange = () => {
-      if (state.barcodeBottom == '') {
+      if (state.barcodeBottom == '' || state.barcodeBottom < 0) {
         state.barcodeBottom = 50
       }
     }
     const doubleChange = () => {
-      // 重新生成打印内容
       createPrint()
     }
     const isPC = () => {
