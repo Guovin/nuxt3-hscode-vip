@@ -64,7 +64,7 @@ import {
   ElConfigProvider,
 } from 'element-plus/dist/index.full'
 
-import { col, dropCol } from '~~/hotCode'
+import { col, dropCol } from '~~/defaultState'
 
 export default defineComponent({
   components: {
