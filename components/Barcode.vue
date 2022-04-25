@@ -132,6 +132,7 @@
         >
           <el-button
             type="success"
+            plain
             @click="saveBarCode"
             class="buttonYes"
             :icon="Download"
@@ -140,6 +141,7 @@
         </el-tooltip>
         <el-button
           type="warning"
+          plain
           @click="printBarCode"
           class="buttonYes"
           v-if="status"
