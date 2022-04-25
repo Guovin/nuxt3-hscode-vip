@@ -54,7 +54,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, inject, unref, toRaw, watch } from 'vue'
+import {
+  defineComponent,
+  computed,
+  inject,
+  unref,
+  toRaw,
+  watch,
+  nextTick,
+} from 'vue'
 import {
   ElTable,
   ElTableColumn,
@@ -63,7 +71,7 @@ import {
   ElButton,
   ElConfigProvider,
 } from 'element-plus/dist/index.full'
-
+import { Sortable } from 'sortablejs'
 import { col, dropCol } from '~~/defaultState'
 
 export default defineComponent({
@@ -109,6 +117,14 @@ export default defineComponent({
       }
       state.total = res.data.length
       state.loading = false
+      nextTick(() => {
+        if (process.client) {
+          columnDrop()
+          if (!('ontouchstart' in document.documentElement)) {
+            rowDrop()
+          }
+        }
+      })
     }
 
     const { data } = await useLazyAsyncData(state.key as string, () =>
@@ -197,28 +213,28 @@ export default defineComponent({
       return row.hscode
     }
 
-    // const rowDrop = () => {
-    //   const tbody = document.querySelector('.el-table__body-wrapper tbody')
-    //   Sortable.create(tbody, {
-    //     onEnd({ newIndex, oldIndex }) {
-    //       const currRow = keyList.splice(oldIndex, 1)[0]
-    //       keyList.splice(newIndex, 0, currRow)
-    //     }
-    //   })
-    // }
+    const rowDrop = () => {
+      const tbody = document.querySelector('.el-table__body-wrapper tbody')
+      Sortable.create(tbody, {
+        onEnd({ newIndex, oldIndex }) {
+          const currRow = state.keyList.splice(oldIndex, 1)[0]
+          state.keyList.splice(newIndex, 0, currRow)
+        },
+      })
+    }
 
-    // const columnDrop = () => {
-    //   const wrapperTr = document.querySelector('.el-table__header-wrapper tr')
-    //   sortable = Sortable.create(wrapperTr, {
-    //     animation: 180,
-    //     delay: 0,
-    //     onEnd: evt => {
-    //       const oldItem = dropCol[evt.oldIndex]
-    //       dropCol.splice(evt.oldIndex, 1)
-    //       dropCol.splice(evt.newIndex, 0, oldItem)
-    //     }
-    //   })
-    // }
+    const columnDrop = () => {
+      const wrapperTr = document.querySelector('.el-table__header-wrapper tr')
+      Sortable.create(wrapperTr, {
+        animation: 180,
+        delay: 0,
+        onEnd: (evt) => {
+          const oldItem = state.dropCol[evt.oldIndex]
+          state.dropCol.splice(evt.oldIndex, 1)
+          state.dropCol.splice(evt.newIndex, 0, oldItem)
+        },
+      })
+    }
 
     return {
       ...toRefs(state),
