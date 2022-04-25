@@ -206,6 +206,10 @@ body,
     background-size: 400% 100%;
     animation: el-skeleton-loading 1.4s ease infinite;
   }
+
+  .el-drawer {
+    background-color: #0d1117;
+  }
 }
 
 .el-card {
@@ -217,6 +221,10 @@ body,
 
 .el-input__wrapper {
   width: 100%;
+}
+
+.el-drawer__header {
+  color: #409eff;
 }
 
 @media screen and (max-width: 480px) {

@@ -36,23 +36,25 @@
         :title="$t('footer.statement')"
         direction="btt"
       >
-        <div>
-          {{ $t('footer.statementContent1') }}
-        </div>
-        <div>
-          {{ $t('footer.statementContent2') }}
-        </div>
-        <div>
-          {{ $t('footer.statementContent3') }}
-        </div>
-        <div>
-          {{ $t('footer.statementContent4') }}
-        </div>
-        <div>
-          {{ $t('footer.statementContent5') }}
-        </div>
-        <div>
-          {{ $t('footer.statementContent6') }}
+        <div class="text-justify text-gray-600 px-16 dark:text-gray-300">
+          <p>
+            {{ $t('footer.statementContent1') }}
+          </p>
+          <p>
+            {{ $t('footer.statementContent2') }}
+          </p>
+          <p>
+            {{ $t('footer.statementContent3') }}
+          </p>
+          <p>
+            {{ $t('footer.statementContent4') }}
+          </p>
+          <p>
+            {{ $t('footer.statementContent5') }}
+          </p>
+          <p>
+            {{ $t('footer.statementContent6') }}
+          </p>
         </div>
       </el-drawer>
     </el-footer>
