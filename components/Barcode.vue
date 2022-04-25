@@ -49,7 +49,7 @@
           </div>
         </div>
         <div
-          class="flex justify-between items-center border rounded-md py-1 px-2 dark:border-opacity-30"
+          class="flex justify-between items-center border rounded-md py-1 px-2 dark:border-gray-500"
         >
           <span
             v-show="pcStatus === true"
@@ -76,7 +76,7 @@
           </div>
         </div>
         <div
-          class="flex justify-between items-center border rounded-md py-1 px-2 dark:border-opacity-30"
+          class="flex justify-between items-center border rounded-md py-1 px-2 dark:border-gray-500"
           v-show="pcStatus === true"
         >
           <span
