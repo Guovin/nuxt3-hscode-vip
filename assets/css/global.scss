@@ -210,6 +210,16 @@ body,
   .el-drawer {
     background-color: #0d1117;
   }
+
+  .el-input-number__decrease {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .el-input-number__increase {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+  }
 }
 
 .el-card {
