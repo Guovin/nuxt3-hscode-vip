@@ -1,14 +1,14 @@
 <template>
   <div class="pt-28">
-    <Card class="w-5/6">
+    <Card class="w-11/12">
       <div class="text-center text-sm text-yellow-500">
         <i class="iconfont icontiaoxingma1"></i>
         {{ $t('label.barcode') }}
       </div>
       <div
-        class="flex items-center justify-between text-sm mt-4 dark:text-gray-400"
+        class="flex flex-wrap items-center justify-between text-sm mt-4 dark:text-gray-400"
       >
-        <div class="flex justify-between items-center pr-4 w-45">
+        <div class="flex justify-between items-center pr-4 my-2">
           <span class="pr-2 whitespace-nowrap">{{ $t('label.format') }}</span>
           <el-cascader
             v-model="value"
@@ -18,25 +18,23 @@
           >
           </el-cascader>
         </div>
-        <div class="flex justify-between items-center pr-4 w-32">
+        <div class="flex justify-between items-center pr-4 my-2">
           <span class="pr-2 whitespace-nowrap">{{ $t('label.width') }}</span>
-          <el-input
-            type="number"
+          <el-input-number
             v-model="width"
             :min="0"
             @blur="widthChange"
-          ></el-input>
+          ></el-input-number>
         </div>
-        <div class="flex justify-between items-center pr-4 w-32">
+        <div class="flex justify-between items-center pr-4 my-2">
           <span class="pr-2 whitespace-nowrap">{{ $t('label.height') }}</span>
-          <el-input
-            type="number"
+          <el-input-number
             v-model="height"
             :min="0"
             @blur="heightChange"
-          ></el-input>
+          ></el-input-number>
         </div>
-        <div class="flex justify-between items-center pr-4">
+        <div class="flex justify-between items-center pr-4 my-2">
           <span class="pr-2 whitespace-nowrap">{{ $t('label.color') }}</span>
           <el-color-picker
             v-model="color"
@@ -49,48 +47,45 @@
           </div>
         </div>
         <div
-          class="flex justify-between items-center border rounded-md py-1 px-2 dark:border-gray-500"
+          class="flex justify-between items-center border rounded-md my-2 py-2 px-2 dark:border-gray-500"
         >
           <span
             v-show="pcStatus === true"
-            class="pr-2 whitespace-nowrap text-xs text-gray-400 dark:text-gray-500 relative -top-2 -left-1"
+            class="pr-2 whitespace-nowrap text-xs text-gray-400 dark:text-gray-500 relative -top-3 -left-1"
             >{{ $t('label.font') }}</span
           >
-          <div class="flex justify-between items-center w-32 pr-4">
+          <div class="flex justify-between items-center pr-4">
             <span class="pr-2 whitespace-nowrap">{{ $t('label.size') }}</span>
-            <el-input
-              type="number"
+            <el-input-number
               v-model="fontSize"
               :min="0"
               @blur="fontChange"
-            ></el-input>
+            ></el-input-number>
           </div>
-          <div class="flex justify-between items-center w-32">
+          <div class="flex justify-between items-center">
             <span class="pr-2 whitespace-nowrap">{{ $t('label.span') }}</span>
-            <el-input
-              type="number"
+            <el-input-number
               v-model="textMargin"
               :min="0"
               @blur="textChange"
-            ></el-input>
+            ></el-input-number>
           </div>
         </div>
         <div
-          class="flex justify-between items-center border rounded-md py-1 px-2 dark:border-gray-500"
+          class="flex justify-between items-center border rounded-md my-2 py-2 px-2 dark:border-gray-500"
           v-show="pcStatus === true"
         >
           <span
-            class="text-xs text-gray-400 dark:text-gray-500 relative -top-2 -left-1"
+            class="text-xs text-gray-400 dark:text-gray-500 relative -top-3 -left-1"
             >{{ $t('label.layout') }}</span
           >
-          <div class="flex justify-between items-center pr-4 w-32">
+          <div class="flex justify-between items-center pr-4">
             <span class="pr-2 whitespace-nowrap">{{ $t('label.span') }}</span>
-            <el-input
-              type="number"
+            <el-input-number
               v-model="barcodeBottom"
               :min="0"
               @blur="bottomChange"
-            ></el-input>
+            ></el-input-number>
           </div>
           <div class="flex justify-between items-center pr-4">
             <el-checkbox v-model="doublePrint" @change="doubleChange">{{
@@ -164,6 +159,7 @@ import { options } from '~/barcode'
 import JsBarcode from 'jsbarcode'
 import {
   ElCascader,
+  ElInputNumber,
   ElInput,
   ElColorPicker,
   ElCheckbox,
@@ -177,6 +173,7 @@ import { Check, Download, Printer } from '@element-plus/icons-vue'
 export default defineComponent({
   components: {
     ElCascader,
+    ElInputNumber,
     ElInput,
     ElColorPicker,
     ElCheckbox,
@@ -358,7 +355,7 @@ export default defineComponent({
       }
     }
     const textChange = () => {
-      if (state.textMargin == '' || state.textMargin < 0) {
+      if (state.textMargin < 0) {
         state.textMargin = 2
       }
     }
@@ -368,7 +365,7 @@ export default defineComponent({
       }
     }
     const bottomChange = () => {
-      if (state.barcodeBottom == '' || state.barcodeBottom < 0) {
+      if (state.barcodeBottom < 0) {
         state.barcodeBottom = 50
       }
     }
