@@ -3,8 +3,8 @@
     <div
       class="border border-solid border-gray-200 bg-white text-black duration-300 rounded shadow p-10 dark:bg-black-dark dark:border-gray-50 dark:border-opacity-10"
     >
-      <div class="text-base text-red-400 font-bold mt-0 mb-1 text-center">
-        <i class="iconfont iconremen text-xl"></i>{{ $t('label.hotCode') }}
+      <div class="text-base text-red-400 font-bold text-center mb-2">
+        <i class="iconfont iconremen text-xl pr-1"></i>{{ $t('label.hotCode') }}
       </div>
       <el-row class="flex flex-wrap" :gutter="8">
         <el-col
@@ -54,7 +54,9 @@
           >
             {{ showMore ? $t('label.fold') : $t('label.showMore') }}
             <i
-              :class="showMore ? 'el-icon-arrow-up' : 'el-icon-arrow-down'"
+              :class="
+                showMore ? 'iconfont iconxiangshang' : 'iconfont iconxiangxia'
+              "
             ></i>
           </div>
         </el-col>

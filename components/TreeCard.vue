@@ -3,8 +3,8 @@
     <div
       class="border border-solid border-gray-200 bg-white text-black duration-300 rounded shadow p-10 dark:bg-black-dark dark:border-gray-50 dark:border-opacity-10"
     >
-      <div class="text-base text-blue-400 font-bold mt-0 mb-1 text-center">
-        <i class="iconfont iconfenleishouye"></i>{{ $t('label.category') }}
+      <div class="text-base text-blue-400 font-bold text-center mb-2">
+        <i class="iconfont iconfenleishouye pr-1"></i>{{ $t('label.category') }}
       </div>
       <div v-loading="loading">
         <el-input
