@@ -445,3 +445,19 @@ export const dropCol = [
     prop: 'element_example',
   },
 ]
+
+export const zhMeta = {
+  title: 'HSCode编码查询',
+  index: '首页',
+  result: '查询结果',
+  content: '编码详情',
+  code: '条形码生成器',
+}
+
+export const enMeta = {
+  title: 'HSCode.VIP',
+  index: 'Home',
+  result: 'Result',
+  content: 'Detail',
+  code: 'Barcode',
+}

@@ -2,12 +2,11 @@ import { defineNuxtConfig } from 'nuxt'
 import IconsResolver from 'unplugin-icons/resolver'
 import Components from 'unplugin-vue-components/vite'
 
-const lifecycle = process.env.npm_lifecycle_event;
+const lifecycle = process.env.npm_lifecycle_event
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
   meta: {
-    title: 'HSCode编码查询-首页',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -61,12 +60,12 @@ export default defineNuxtConfig({
     ssrHandlers: true,
   },
 
-  ssr: true,
+  ssr: false,
 
   buildModules: ['@pinia/nuxt', '@nuxtjs/tailwindcss'],
 
   build: {
-    transpile: lifecycle === "build" ? ["element-plus"] : [],
+    transpile: lifecycle === 'build' ? ['element-plus'] : [],
   },
 
   vite: {

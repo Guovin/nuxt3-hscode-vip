@@ -14,7 +14,7 @@
               </NuxtLink>
             </div>
             <el-breadcrumb :separator-icon="ArrowRight">
-              <el-breadcrumb-item :to="{ path: '/' }" @click="changeTitle"
+              <el-breadcrumb-item :to="{ path: '/' }"
                 ><i class="iconfont iconshouye"></i>
                 <span class="pl-2">
                   {{ $t('label.home') }}
@@ -136,10 +136,6 @@ export default defineComponent({
       router.go(-1)
     }
 
-    const changeTitle = () => {
-      document.title = 'HSCode编码查询-首页'
-    }
-
     const changeLang = inject('changeLang')
 
     const changeTheme = inject('changeTheme')
@@ -151,7 +147,6 @@ export default defineComponent({
       router,
       routePath,
       goBackResult,
-      changeTitle,
       changeLang,
       changeTheme,
     }
