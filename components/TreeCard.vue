@@ -22,7 +22,7 @@
           :height="300"
           class="dark:bg-black-dark dark:text-gray-400"
         >
-          <template class="span-ellipsis" #default="{ node, data }">
+          <template #default="{ node, data }">
             <span>
               <el-button
                 type="text"
