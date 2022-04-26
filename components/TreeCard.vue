@@ -8,9 +8,9 @@
       </div>
       <div v-loading="loading">
         <el-input
-          v-model="query"
+          v-model="filterText"
           :placeholder="$t('placeHolder.treeFilter')"
-          @input="onQueryChanged"
+          @input="onFilterChanged"
           class="m-3 pr-5"
         />
         <el-tree
@@ -69,9 +69,9 @@ export default defineComponent({
       children: 'children',
     }
     const response = ref(null)
+    const filterText = ref('')
     const state = reactive({
       loading: true,
-      query: '',
       treeRef: <InstanceType<typeof ElTree>>null,
       treeData: [],
     })
@@ -121,8 +121,16 @@ export default defineComponent({
       { immediate: true }
     )
 
-    const onQueryChanged = (query: string) => {
-      state.treeRef!.filter(query)
+    watch(filterText, (newText) => {
+      if (newText === '') {
+        for (let i = 0; i < state.treeRef.store._getAllNodes().length; i++) {
+          state.treeRef.store._getAllNodes()[i].expanded = false
+        }
+      }
+    })
+
+    const onFilterChanged = (text: string) => {
+      state.treeRef!.filter(text)
     }
 
     const filterTree = (value: string, data: Tree) => {
@@ -140,8 +148,9 @@ export default defineComponent({
     }
     return {
       ...toRefs(state),
+      filterText,
       treeProps,
-      onQueryChanged,
+      onFilterChanged,
       filterTree,
       searchByTree,
     }
