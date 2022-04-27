@@ -62,7 +62,7 @@
                     <template v-else>
                       <span
                         class="text-sm font-bold text-gray-600 dark:text-gray-500"
-                        >{{ index }}</span
+                        >{{ index + 1 }}</span
                       >
                       <span class="text-sm dark:text-gray-400">{{ item }}</span>
                     </template>
