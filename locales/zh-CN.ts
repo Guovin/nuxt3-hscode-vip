@@ -31,11 +31,18 @@ export default {
     confirm: '确定',
     save: '保存',
     print: '打印',
+    feedbackTitle: '反馈建议',
+    email: '您的邮箱地址',
+    feedBackContent: '反馈内容',
+    cancel: '取消',
+    send: '发送',
   },
   placeHolder: {
     search: '请输入商品名称或商品编码',
     treeFilter: '请输入关键字',
     barcode: '请输入条形码数据,若有多条,请换行输入',
+    email: '请输入您的邮箱地址',
+    content: '请输入内容',
   },
   footer: {
     copyRight: '版权归 HSCode编码网',
@@ -60,6 +67,7 @@ export default {
     noData: '无数据',
     saveDefault: '默认保存第一张条形码，若需要全部导出请使用打印功能',
     saveBarcode: '请长按图片进行保存',
+    noFeedbackLog: '无反馈记录',
   },
   content: {
     name: '商品名称',

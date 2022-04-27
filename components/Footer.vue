@@ -20,7 +20,7 @@
         }}<span
           class="cursor-pointer"
           style="color: #317eb2"
-          @click="dialogFormVisible = true"
+          @click="fbDialogVisiable"
         >
           {{ $t('footer.feedBack') }}
         </span>
@@ -57,6 +57,10 @@
           </p>
         </div>
       </el-drawer>
+      <FeedBack
+        :visiable="feedBackVisiable"
+        @fbDialogVisiable="fbDialogVisiable"
+      />
     </el-footer>
   </div>
 </template>
@@ -72,8 +76,14 @@ export default defineComponent({
   },
   setup() {
     const drawer = ref(false)
+    const feedBackVisiable = ref(false)
+    const fbDialogVisiable = () => {
+      feedBackVisiable.value = !feedBackVisiable.value
+    }
     return {
       drawer,
+      feedBackVisiable,
+      fbDialogVisiable,
     }
   },
 })

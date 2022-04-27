@@ -31,12 +31,19 @@ export default {
     confirm: 'Confirm',
     save: 'Save',
     print: 'Print',
+    feedbackTitle: 'Feedback',
+    email: 'Your e-mail address',
+    feedBackContent: 'Feedback content',
+    cancel: 'Cancel',
+    send: 'Send',
   },
   placeHolder: {
     search: 'Please enter the product name or product code',
     treeFilter: 'Please enter keyword',
     barcode:
       'Please enter the barcode data. If there are multiple, please go online.',
+    email: 'Please enter your e-mail address',
+    content: 'Please enter the content',
   },
   footer: {
     copyRight: 'Copyright Hscode encoding network',
@@ -62,6 +69,7 @@ export default {
     saveDefault:
       'Save the first bar code by default, if you need to export, please use the print function',
     saveBarcode: 'Please save the image to save',
+    noFeedbackLog: 'No feedback record',
   },
   content: {
     name: 'Name',
