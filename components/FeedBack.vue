@@ -74,7 +74,7 @@
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button type="danger" plain @click="closeFeedBack">{{
+        <el-button type="danger" plain @click="closeFeedBack(formRef)">{{
           $t('label.cancel')
         }}</el-button>
         <el-button type="primary" plain @click="feedBack(formRef)">{{
@@ -86,7 +86,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, unref, toRaw, nextTick } from 'vue'
+import {
+  defineComponent,
+  reactive,
+  unref,
+  toRaw,
+  nextTick,
+  computed,
+} from 'vue'
 import {
   ElDialog,
   ElForm,
@@ -118,6 +125,7 @@ export default defineComponent({
   },
   emits: ['fbDialogVisiable'],
   setup(_, context) {
+    const globalI18n = useState('globalI18n')
     const feedBackStore = useFeedBackStore()
     const log = ref([])
     const state = reactive({
@@ -132,15 +140,35 @@ export default defineComponent({
       if (regEmail.test(value)) {
         return cb()
       }
-      cb(new Error('请输入正确的邮箱地址'))
+      cb(
+        new Error(
+          globalI18n.value === 'en'
+            ? 'Please input the correct email address'
+            : '请输入正确的邮箱地址'
+        )
+      )
     }
     const rules = reactive<FormRules>({
       email: [
-        { required: true, message: '请输入您的邮箱地址', trigger: 'blur' },
+        {
+          required: true,
+          message:
+            globalI18n.value === 'en'
+              ? 'Please enter your e-mail address'
+              : '请输入您的邮箱地址',
+          trigger: 'blur',
+        },
         { validator: checkEmail, trigger: 'blur' },
       ],
       massage: [
-        { required: true, message: '请输入反馈的内容', trigger: 'blur' },
+        {
+          required: true,
+          message:
+            globalI18n.value === 'en'
+              ? 'Please enter the feedback content'
+              : '请输入反馈的内容',
+          trigger: 'blur',
+        },
       ],
     })
     const history = ref(null)
@@ -156,9 +184,9 @@ export default defineComponent({
       formEl.resetFields()
     }
 
-    const closeFeedBack = () => {
+    const closeFeedBack = (ref) => {
       context.emit('fbDialogVisiable')
-      resetForm(formRef)
+      resetForm(ref)
     }
 
     const getLog = () => {
@@ -183,7 +211,11 @@ export default defineComponent({
         })
         const response = toRaw(unref(res))
         if (response.code !== 200) {
-          return ElMessage.error({ message: '发送失败！', center: true })
+          return ElMessage.error({
+            message:
+              globalI18n.value === 'en' ? 'Failed to send!' : '发送失败！',
+            center: true,
+          })
         } else {
           const time = new Date().toLocaleString()
           const email = state.form.email
@@ -195,7 +227,10 @@ export default defineComponent({
           }
           feedBackStore.changeFeedBack(log)
           ElMessage.success({
-            message: '发送成功，请耐心等待回复！',
+            message:
+              globalI18n.value === 'en'
+                ? 'Send successfully, please wait patiently for reply!'
+                : '发送成功，请耐心等待回复！',
             center: true,
           })
           getLog()

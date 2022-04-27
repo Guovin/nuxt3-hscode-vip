@@ -31,6 +31,8 @@ export default defineComponent({
     const { locale } = useI18n()
     const i18nStore = useI18nStore()
     const lang = i18nStore.locale === 'en' ? ref(en) : ref(zhCn)
+    const globalI18n = useState('globalI18n')
+    globalI18n.value = i18nStore.locale
 
     const changeHead = () => {
       const meta = i18nStore.locale === 'zh-CN' ? zhMeta : enMeta
@@ -54,6 +56,7 @@ export default defineComponent({
       changeHead()
       locale.value = i18nStore.locale
       lang.value = i18nStore.locale === 'en' ? en : zhCn
+      globalI18n.value = i18nStore.locale
     }
 
     provide('theme', theme)
