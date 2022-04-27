@@ -7,38 +7,60 @@
       @opened="openDialog"
     >
       <div
-        class="border-t border-b border-solid border-gray-200 max-h-48 overflow-y-auto"
+        class="border-t border-b border-solid border-gray-200 max-h-60 overflow-y-auto dark:bg-black-dark dark:border-gray-800"
         ref="history"
       >
-        <div v-if="nothingTip" class="text-center text-gray-400 text-xs py-5">
-          <span class="tip_content">{{ $t('tip.noFeedbackLog') }}</span>
+        <div
+          v-if="nothingTip"
+          class="text-center text-gray-400 text-xs py-5 dark:text-gray-500"
+        >
+          <div class="flex justify-center">
+            <div
+              class="w-14 h-px bg-gray-200 relative top-2 dark:bg-gray-700"
+            ></div>
+            <div class="px-2">{{ $t('tip.noFeedbackLog') }}</div>
+            <div
+              class="w-14 h-px bg-gray-200 relative top-2 dark:bg-gray-700"
+            ></div>
+          </div>
         </div>
         <div
-          class="sent_message pb-4 text-right mr-4"
-          v-for="(message, index) in cookie"
+          v-else
+          class="first:pt-4 pb-4 text-right mr-4"
+          v-for="(item, index) in log"
           :key="index"
         >
-          <div class="text-xs text-gray-400">{{ message.split(',')[0] }}</div>
-          <i class="iconfont iconchenggong"></i>
+          <div class="text-xs text-gray-400">{{ item.email }}</div>
+          <i
+            class="iconfont iconchenggong text-green-500 pr-1 relative top-1"
+          ></i>
           <div
-            class="bg-gray-200 rounded text-center inline-block px-3 py-1 max-w-6xl"
+            class="bg-gray-200 rounded text-center inline-block px-3 py-1 max-w-6xl dark:bg-gray-800"
           >
-            <p class="text-gray-900 text-justify inline-block m-auto">
-              {{ message.split('=')[1] }}
+            <p
+              class="text-gray-900 text-justify inline-block m-auto dark:text-gray-300"
+            >
+              {{ item.message }}
             </p>
             <div class="text-xs text-gray-400 text-right mt-1">
-              {{ message.split(',')[1].split('=')[0] }}
+              {{ item.time }}
             </div>
           </div>
         </div>
       </div>
-      <el-form :model="form" :rules="rules" ref="formRef" label-position="top" class="mt-6">
-        <el-form-item :label="$t('label.email')" prop="name">
+      <el-form
+        :model="form"
+        :rules="rules"
+        ref="formRef"
+        label-position="top"
+        class="mt-6"
+      >
+        <el-form-item :label="$t('label.email')" prop="email">
           <el-col :span="11">
             <el-input
-              v-model="form.name"
+              v-model="form.email"
               :placeholder="$t('placeHolder.email')"
-              prefix-icon="el-icon-message"
+              :prefix-icon="Message"
             ></el-input>
           </el-col>
         </el-form-item>
@@ -52,8 +74,10 @@
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="closeFeedBack">{{ $t('label.cancel') }}</el-button>
-        <el-button type="primary" @click="feedBack">{{
+        <el-button type="danger" plain @click="closeFeedBack">{{
+          $t('label.cancel')
+        }}</el-button>
+        <el-button type="primary" plain @click="feedBack(formRef)">{{
           $t('label.send')
         }}</el-button>
       </template>
@@ -62,7 +86,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, unref, toRaw } from 'vue'
+import { defineComponent, reactive, unref, toRaw, nextTick } from 'vue'
 import {
   ElDialog,
   ElForm,
@@ -74,6 +98,8 @@ import {
   FormInstance,
   FormRules,
 } from 'element-plus/dist/index.full'
+import { Message } from '@element-plus/icons-vue'
+import { useFeedBackStore } from '~~/store/feedBack'
 
 export default defineComponent({
   components: {
@@ -92,11 +118,12 @@ export default defineComponent({
   },
   emits: ['fbDialogVisiable'],
   setup(_, context) {
+    const feedBackStore = useFeedBackStore()
+    const log = ref([])
     const state = reactive({
       nothingTip: true,
-      cookie: [],
       form: {
-        name: '',
+        email: '',
         massage: '',
       },
     })
@@ -108,7 +135,7 @@ export default defineComponent({
       cb(new Error('请输入正确的邮箱地址'))
     }
     const rules = reactive<FormRules>({
-      name: [
+      email: [
         { required: true, message: '请输入您的邮箱地址', trigger: 'blur' },
         { validator: checkEmail, trigger: 'blur' },
       ],
@@ -119,9 +146,9 @@ export default defineComponent({
     const history = ref(null)
     const formRef = ref<FormInstance>()
     const openDialog = () => {
-      if (process.client) {
-        history.scrollTop = history.scrollHeight
-      }
+      nextTick(() => {
+        history.value.scrollTop = history.value.scrollHeight
+      })
     }
 
     const resetForm = (formEl: FormInstance | undefined) => {
@@ -134,89 +161,71 @@ export default defineComponent({
       resetForm(formRef)
     }
 
-    const getCookie = () => {
-      if (process.client) {
-        const cookie = document.cookie.split(';')
-        cookie.forEach((item) => {
-          if (item.indexOf('@') != -1 && state.cookie.indexOf(item) == -1) {
-            return state.cookie.push(item)
-          }
-        })
-        if (state.cookie.length != 0) {
-          state.nothingTip = false
-          state.form.name = state.cookie[state.cookie.length - 1]
-            .split(',')[0]
-            .trim()
-        }
+    const getLog = () => {
+      log.value = feedBackStore.log
+      if (log.value.length != 0) {
+        state.nothingTip = false
+        state.form.email = log.value[log.value.length - 1].email
+      } else {
+        state.nothingTip = true
       }
     }
 
-    const feedBack = () => {
-      ;async (formEl: FormInstance | undefined) => {
-        if (!formEl) return false
-        await formEl.validate(async (valid) => {
-          if (!valid) return false
-          const { data: res } = await useFetch('/feedBack/massage', {
-            params: state.form,
-            method: 'post',
-          })
-          const response = toRaw(unref(res))
-          if (response.code !== 200) {
-            return ElMessage.error({ message: '发送失败！', center: true })
-          } else {
-            const newDate = new Date()
-            const name = `${state.form.name},${newDate.toLocaleString()}`
-            const message = state.form.massage
-            if (process.client) {
-              document.cookie = `${name}=` + message
-            }
-            getCookie()
-            ElMessage.success({
-              message: '发送成功，请耐心等待回复！',
-              center: true,
-            })
-            state.form.massage = ''
-            formEl.clearValidate()
-          }
+    getLog()
+
+    const feedBack = async (formEl: FormInstance | undefined) => {
+      if (!formEl) return false
+      await formEl.validate(async (valid) => {
+        if (!valid) return false
+        const { data: res } = await useFetch('/feedBack/massage', {
+          params: state.form,
+          method: 'post',
         })
-      }
+        const response = toRaw(unref(res))
+        if (response.code !== 200) {
+          return ElMessage.error({ message: '发送失败！', center: true })
+        } else {
+          const time = new Date().toLocaleString()
+          const email = state.form.email
+          const message = state.form.massage
+          const log = {
+            time: time,
+            email: email,
+            message: message,
+          }
+          feedBackStore.changeFeedBack(log)
+          ElMessage.success({
+            message: '发送成功，请耐心等待回复！',
+            center: true,
+          })
+          getLog()
+          state.form.massage = ''
+          formEl.clearValidate()
+          openDialog()
+        }
+      })
     }
 
     return {
+      log,
       ...toRefs(state),
+      formRef,
       rules,
+      history,
       openDialog,
       closeFeedBack,
       feedBack,
+      Message,
     }
   },
 })
 </script>
 
 <style lang="scss" scoped>
-.tip_content::before {
-  content: '';
-  width: 70px;
-  height: 1px;
-  background-color: #dee1e6;
-  display: inline-block;
-  position: relative;
-  top: -5px;
-  left: -8px;
+:deep(.el-dialog__title) {
+  font-size: 16px;
 }
-
-.tip_content::after {
-  content: '';
-  width: 70px;
-  height: 1px;
-  background-color: #dee1e6;
-  display: inline-block;
-  position: relative;
-  top: -5px;
-  left: 8px;
-}
-
-.sent_message:nth-child(1) {
-  padding-top: 15px;
+:deep(.el-dialog__body) {
+  padding-top: 0;
 }
 </style>
