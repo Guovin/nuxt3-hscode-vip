@@ -2,7 +2,7 @@
   <div>
     <el-dialog
       :title="$t('label.feedbackTitle')"
-      v-model="visiable"
+      v-model="dialogVisiable"
       :close-on-click-modal="false"
       @opened="openDialog"
     >
@@ -124,7 +124,7 @@ export default defineComponent({
     },
   },
   emits: ['fbDialogVisiable'],
-  setup(_, context) {
+  setup(props, context) {
     const globalI18n = useState('globalI18n')
     const feedBackStore = useFeedBackStore()
     const log = ref([])
@@ -134,6 +134,12 @@ export default defineComponent({
         email: '',
         massage: '',
       },
+    })
+    const dialogVisiable = computed({
+      get() {
+        return props.visiable
+      },
+      set() {},
     })
     const checkEmail = (rule, value, cb) => {
       const regEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/
@@ -242,6 +248,7 @@ export default defineComponent({
     }
 
     return {
+      dialogVisiable,
       log,
       ...toRefs(state),
       formRef,
