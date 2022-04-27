@@ -35,10 +35,14 @@
                     :key="index"
                     class="flex justify-between py-1"
                   >
-                    <span
-                      class="text-sm font-bold text-gray-600 dark:text-gray-500"
-                      >{{ $t(item.title) }}</span
-                    >
+                    <div class="text-sm font-bold">
+                      <span class="text-gray-700 dark:text-gray-400 pr-1"
+                        >{{ index + 1 }}.</span
+                      >
+                      <span class="text-gray-600 dark:text-gray-500">{{
+                        $t(item.title)
+                      }}</span>
+                    </div>
                     <span class="text-sm dark:text-gray-400">{{
                       item.content
                     }}</span>
