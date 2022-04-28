@@ -29,7 +29,7 @@
             type="primary"
             plain
             size="default"
-            >详情
+            >{{ $t('label.detailBtn') }}
           </el-button>
           <div v-else>{{ scope.row[dropCol[index].prop] }}</div>
         </template>
