@@ -47,7 +47,7 @@
           </div>
         </div>
         <div
-          class="flex justify-between items-center border rounded-lg my-2 py-2 px-2 dark:border-gray-500"
+          class="flex justify-between items-center border rounded-lg my-2 py-2 px-2 dark:border-gray-600"
         >
           <span
             v-show="pcStatus === true"
@@ -72,7 +72,7 @@
           </div>
         </div>
         <div
-          class="flex justify-between items-center border rounded-lg my-2 py-2 px-2 dark:border-gray-500"
+          class="flex justify-between items-center border rounded-lg my-2 py-2 px-2 dark:border-gray-600"
           v-show="pcStatus === true"
         >
           <span
