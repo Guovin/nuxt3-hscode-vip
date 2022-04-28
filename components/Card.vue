@@ -1,5 +1,5 @@
 <template>
-  <el-card class="mx-auto bg-white bg-opacity-1 dark:bg-black-dark">
+  <el-card class="mx-auto bg-white bg-opacity-1 rounded-xl dark:bg-black-dark">
     <slot />
   </el-card>
 </template>

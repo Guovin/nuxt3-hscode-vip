@@ -101,21 +101,21 @@ body,
   }
 
   .el-table {
-    background-color: unset;
+    background-color: rgba(255, 255, 255, 0.45) !important;
     th.el-table__cell {
       background-color: rgba(255, 255, 255, 0.1);
       color: rgba(255, 255, 255, 0.8);
     }
     tr {
-      background-color: rgba(0, 0, 0, 0.9);
+      background-color: rgba(0, 0, 0, 0.92);
       color: rgba(255, 255, 255, 0.65);
     }
     .el-table__border-left-patch {
-      background-color: rgba(255, 255, 255, 0.15);
+      background-color: rgba(255, 255, 255, 0.1);
     }
     td.el-table__cell,
     th.el-table__cell.is-leaf {
-      border-bottom-color: rgba(255, 255, 255, 0.15);
+      border-bottom-color: rgba(255, 255, 255, 0.1);
     }
   }
 
@@ -123,12 +123,12 @@ body,
     .el-table__body
     tr.el-table__row--striped
     td.el-table__cell {
-    background-color: rgba(0, 0, 0, 0.9);
-    border-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
   }
 
   .el-table--enable-row-hover .el-table__body tr:hover > td.el-table__cell {
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgba(255, 255, 255, 0.05);
   }
 
   .el-table--border {
@@ -136,7 +136,7 @@ body,
       background-color: unset;
     }
     .el-table__cell {
-      border-right-color: rgba(255, 255, 255, 0.15);
+      border-right-color: rgba(255, 255, 255, 0.1);
     }
     &::after {
       background-color: unset;
@@ -146,7 +146,7 @@ body,
         background-color: unset;
       }
       &::after {
-        background-color: rgba(255, 255, 255, 0.15);
+        background-color: rgba(255, 255, 255, 0.1);
       }
       tr:first-child td:first-child,
       tr:first-child th:first-child {
@@ -272,6 +272,15 @@ body,
 
 .el-drawer__header {
   color: #409eff !important;
+}
+
+.el-dialog {
+  border-radius: 0.75rem !important;
+}
+
+.el-table {
+  border-radius: 0.75rem;
+  background-color: rgba(0, 0, 0, 0.45) !important;
 }
 
 @media screen and (max-width: 480px) {
