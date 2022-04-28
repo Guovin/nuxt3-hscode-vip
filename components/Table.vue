@@ -1,7 +1,7 @@
 <template>
   <Card class="w-5/6 mt-10" v-loading="loading">
     <div v-if="needSlide">请向左滑动查看更多内容</div>
-    <el-table :data="keyList" border stripe :row-key="getRowKey">
+    <el-table :data="keyList" border :row-key="getRowKey">
       <el-table-column
         v-for="(item, index) in col"
         :key="index"
