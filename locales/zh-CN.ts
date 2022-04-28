@@ -38,7 +38,7 @@ export default {
     send: '发送',
   },
   placeHolder: {
-    search: '请输入商品名称或商品编码',
+    search: '请输入商品名称或编码',
     treeFilter: '请输入关键字',
     barcode: '请输入条形码数据,若有多条,请换行输入',
     email: '请输入您的邮箱地址',

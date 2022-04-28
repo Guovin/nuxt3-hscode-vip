@@ -38,7 +38,7 @@ export default {
     send: 'Send',
   },
   placeHolder: {
-    search: 'Please enter the product name or product code',
+    search: 'Please enter the product name or code',
     treeFilter: 'Please enter keyword',
     barcode:
       'Please enter the barcode data. If there are multiple, please go online.',
