@@ -4,22 +4,20 @@
       copyright
       <a
         href="https://www.hscode.vip"
-        style="color: #317eb2; text-decoration: none"
+        class="text-bread-blue no-underline"
         target="blank"
         >www.hscode.vip</a
       >
       {{ $t('footer.copyRight') }}
       <span
-        style="color: #317eb2"
         @click="drawer = true"
-        class="cursor-pointer whitespace-nowrap"
+        class="text-bread-blue cursor-pointer whitespace-nowrap"
         >{{ $t('footer.statement') }}</span
       >
-      <div class="text-xs">
+      <div>
         {{ $t('footer.note')
         }}<span
-          class="cursor-pointer"
-          style="color: #317eb2"
+          class="text-bread-blue cursor-pointer"
           @click="fbDialogVisiable"
         >
           {{ $t('footer.feedBack') }}
@@ -27,7 +25,7 @@
       </div>
       <a
         href="https://beian.miit.gov.cn/"
-        style="color: #317eb2; text-decoration: none"
+        class="text-bread-blue no-underline"
         target="blank"
         >{{ $t('footer.siteId') }}</a
       >
