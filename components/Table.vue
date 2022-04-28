@@ -1,5 +1,5 @@
 <template>
-  <Card class="w-5/6 mt-10" v-loading="loading">
+  <Card class="w-11/12 lg:w-5/6 mt-10" v-loading="loading">
     <div v-if="needSlide">请向左滑动查看更多内容</div>
     <el-table :data="keyList" border :row-key="getRowKey">
       <el-table-column

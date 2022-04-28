@@ -1,5 +1,5 @@
 <template>
-  <Card class="my-10 w-3/5">
+  <Card class="my-10 w-11/12 w-min-max xl:w-3/5">
     <div
       class="border border-solid border-gray-200 bg-white text-black duration-300 rounded-xl shadow p-10 dark:bg-black-dark dark:border-gray-50 dark:border-opacity-10"
     >
@@ -11,7 +11,7 @@
           v-model="filterText"
           :placeholder="$t('placeHolder.treeFilter')"
           @input="onFilterChanged"
-          class="m-3 pr-5"
+          class="m-3 pr-5 min-w-max"
         />
         <el-tree
           ref="treeRef"

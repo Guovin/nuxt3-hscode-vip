@@ -1,6 +1,6 @@
 <template>
   <div class="pt-10 text-gray-700 dark:text-gray-400">
-    <el-footer class="w-full text-center text-sm h-auto">
+    <el-footer class="w-full text-center text-xs sm:text-sm h-auto">
       copyright
       <a
         href="https://www.hscode.vip"

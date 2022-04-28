@@ -2,7 +2,7 @@
   <div v-loading.fullscreen.lock="loading">
     <Header :show-search="show" />
     <div class="pt-20">
-      <Card class="w-2/4">
+      <Card class="w-5/6 min-w-max sm:w-2/4">
         <Search />
       </Card>
     </div>
