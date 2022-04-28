@@ -67,10 +67,19 @@
             </transition>
           </div>
           <div class="flex items-center">
-            <el-button @click="changeLang" size="small" circle>{{
-              $t(lang)
-            }}</el-button>
-            <el-button @click="changeTheme" size="small" circle>
+            <el-button
+              @click="changeLang"
+              :color="theme === 'dark' ? '#0d1117' : ''"
+              size="small"
+              circle
+              >{{ $t(lang) }}</el-button
+            >
+            <el-button
+              @click="changeTheme"
+              :color="theme === 'dark' ? '#0d1117' : ''"
+              size="small"
+              circle
+            >
               <i v-if="theme === 'light'" class="iconfont iconsunny"></i>
               <i v-else class="iconfont iconmoon"></i>
             </el-button>
