@@ -6,7 +6,7 @@
         {{ $t('label.barcode') }}
       </div>
       <div
-        class="flex flex-wrap items-center justify-between text-sm mt-4 dark:text-gray-400"
+        class="flex flex-wrap items-center justify-between text-sm mt-4 text-gray-500 dark:text-gray-400"
       >
         <div class="flex justify-between items-center pr-4 my-2">
           <span class="pr-2 whitespace-nowrap">{{ $t('label.format') }}</span>
