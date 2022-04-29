@@ -98,7 +98,7 @@
         <el-input
           type="textarea"
           autofocus
-          :autosize="pcStatus === true ? { minRows: 12 } : { minRows: 6 }"
+          :autosize="{ minRows: pcStatus ? 12 : 6 }"
           :placeholder="$t('placeHolder.barcode')"
           v-model="text"
         >
