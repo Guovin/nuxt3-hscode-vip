@@ -70,6 +70,7 @@ export default {
       'Save the first bar code by default, if you need to export, please use the print function',
     saveBarcode: 'Please save the image to save',
     noFeedbackLog: 'No feedback record',
+    slide: 'Swipe left and right to view more content',
   },
   content: {
     name: 'Name',

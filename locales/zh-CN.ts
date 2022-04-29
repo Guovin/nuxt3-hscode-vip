@@ -68,6 +68,7 @@ export default {
     saveDefault: '默认保存第一张条形码，若需要全部导出请使用打印功能',
     saveBarcode: '请长按图片进行保存',
     noFeedbackLog: '无反馈记录',
+    slide: '左右滑动查看更多内容',
   },
   content: {
     name: '商品名称',

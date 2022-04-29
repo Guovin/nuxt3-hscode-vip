@@ -1,6 +1,6 @@
 <template>
-  <Card class="w-11/12 lg:w-5/6 mt-10" v-loading="loading">
-    <div v-if="needSlide">请向左滑动查看更多内容</div>
+  <Card class="w-11/12 lg:w-5/6 mt-6 sm:mt-10" v-loading="loading">
+    <div class="block lg:hidden text-center text-sm text-gray-400 mb-1">{{ $t('tip.slide') }}</div>
     <el-table :data="keyList" border :row-key="getRowKey">
       <el-table-column
         v-for="(item, index) in col"
@@ -91,7 +91,6 @@ export default defineComponent({
     const state = reactive({
       res: null,
       locale: lang,
-      needSlide: false,
       key: queryKey,
       keyWord: decodeURIComponent(queryKey as string),
       col: col,
