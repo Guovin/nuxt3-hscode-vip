@@ -7,7 +7,7 @@ COPY . /hscode
 WORKDIR /hscode
 EXPOSE 9169
 #此为cnpm淘宝镜像
-RUN npm config set registry https://registry.npm.taobao.org
-RUN npm install
-RUN npm run build
-CMD ["npm", "start"]
+RUN yarn config set registry https://registry.npm.taobao.org
+RUN yarn install
+RUN yarn build
+CMD ["yarn", "start"]
