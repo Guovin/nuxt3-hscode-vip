@@ -8,7 +8,7 @@
               <NuxtLink to="/">
                 <img
                   class="cursor-pointer m-auto sm:h-6"
-                  src="../assets/img/logo.png"
+                  src="~/assets/img/logo.png"
                   alt="HSCode.VIP"
                 />
               </NuxtLink>
