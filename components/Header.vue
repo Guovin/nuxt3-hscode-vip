@@ -13,7 +13,7 @@
                 />
               </NuxtLink>
             </div>
-            <div class="hidden sm:block">
+            <div class="hidden lg:block">
               <el-breadcrumb :separator-icon="ArrowRight">
                 <el-breadcrumb-item :to="{ path: '/' }">
                   <i class="iconfont iconshouye"></i>

@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-28">
+  <div class="pt-20 sm:pt-28">
     <Card class="w-11/12">
       <div class="text-center text-sm text-yellow-500">
         <i class="iconfont icontiaoxingma1"></i>
@@ -40,21 +40,15 @@
             v-model="color"
             @change="colorChange"
           ></el-color-picker>
-          <div v-show="pcStatus === false">
-            <el-checkbox v-model="doublePrint" @change="doubleChange">{{
-              $t('label.double')
-            }}</el-checkbox>
-          </div>
         </div>
         <div
-          class="flex justify-between items-center border rounded-lg my-2 py-2 px-2 dark:border-gray-600"
+          class="sm:flex sm:justify-between sm:items-center border rounded-lg my-2 py-2 px-2 dark:border-gray-600"
         >
           <span
-            v-show="pcStatus === true"
-            class="pr-2 whitespace-nowrap text-xs text-gray-400 dark:text-gray-500 relative -top-3 -left-1"
+            class="pr-2 whitespace-nowrap text-xs text-gray-400 dark:text-gray-500 relative -top-1 sm:-top-3 -left-1"
             >{{ $t('label.font') }}</span
           >
-          <div class="flex justify-between items-center pr-4">
+          <div class="flex justify-between items-center py-2 sm:py-0 sm:pr-4">
             <span class="pr-2 whitespace-nowrap">{{ $t('label.size') }}</span>
             <el-input-number
               v-model="fontSize"
@@ -72,11 +66,10 @@
           </div>
         </div>
         <div
-          class="flex justify-between items-center border rounded-lg my-2 py-2 px-2 dark:border-gray-600"
-          v-show="pcStatus === true"
+          class="sm:flex sm:justify-between sm:items-center border rounded-lg my-2 py-2 px-2 dark:border-gray-600"
         >
           <span
-            class="text-xs text-gray-400 dark:text-gray-500 relative -top-3 -left-1"
+            class="text-xs text-gray-400 dark:text-gray-500 relative -top-1 sm:-top-3 -left-1"
             >{{ $t('label.layout') }}</span
           >
           <div class="flex justify-between items-center pr-4">
@@ -87,15 +80,17 @@
               @blur="bottomChange"
             ></el-input-number>
           </div>
-          <div class="flex justify-between items-center pr-4">
-            <el-checkbox v-model="doublePrint" @change="doubleChange">{{
-              $t('label.double')
-            }}</el-checkbox>
-          </div>
-          <div class="flex justify-between items-center">
-            <el-checkbox v-model="borderPrint" @change="doubleChange">{{
-              $t('label.border')
-            }}</el-checkbox>
+          <div class="flex pt-4 sm:pt-0">
+            <div class="pr-4">
+              <el-checkbox v-model="doublePrint" @change="doubleChange">{{
+                $t('label.double')
+              }}</el-checkbox>
+            </div>
+            <div>
+              <el-checkbox v-model="borderPrint" @change="doubleChange">{{
+                $t('label.border')
+              }}</el-checkbox>
+            </div>
           </div>
         </div>
       </div>
@@ -103,7 +98,7 @@
         <el-input
           type="textarea"
           autofocus
-          :autosize="{ minRows: 12 }"
+          :autosize="pcStatus === true ? { minRows: 12 } : { minRows: 6 }"
           :placeholder="$t('placeHolder.barcode')"
           v-model="text"
         >

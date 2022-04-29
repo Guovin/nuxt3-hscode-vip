@@ -271,6 +271,7 @@ body,
 }
 
 .el-drawer__header {
+  margin-bottom: 0 !important;
   color: #409eff !important;
 }
 
@@ -283,8 +284,12 @@ body,
   background-color: rgba(0, 0, 0, 0.45) !important;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 640px) {
   .el-message {
     min-width: 70% !important;
+  }
+
+  .el-dialog {
+    width: 95% !important;
   }
 }

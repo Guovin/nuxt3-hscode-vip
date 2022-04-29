@@ -1,7 +1,7 @@
 <template>
-  <Card class="my-10 w-11/12 w-min-max xl:w-3/5">
+  <Card class="my-6 sm:my-10 w-11/12 w-min-max xl:w-3/5">
     <div
-      class="border border-solid border-gray-200 bg-white text-black duration-300 rounded-xl shadow p-10 dark:bg-black-dark dark:border-gray-50 dark:border-opacity-10"
+      class="border border-solid border-gray-200 bg-white text-black duration-300 rounded-xl shadow p-2 sm:p-10 dark:bg-black-dark dark:border-gray-50 dark:border-opacity-10"
     >
       <div class="text-base text-blue-400 font-bold text-center mb-2">
         <i class="iconfont iconfenleishouye pr-1"></i>{{ $t('label.category') }}
@@ -32,7 +32,7 @@
                 {{ $t('label.search') }}
               </el-button>
             </span>
-            <span class="text-sm pl-4">{{ node.label }}</span>
+            <span class="text-sm pl-4 truncate">{{ node.label }}</span>
           </template>
         </el-tree>
       </div>

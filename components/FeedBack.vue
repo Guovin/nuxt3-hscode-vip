@@ -56,7 +56,7 @@
         class="mt-6"
       >
         <el-form-item :label="$t('label.email')" prop="email">
-          <el-col :span="11">
+          <el-col :span="24">
             <el-input
               v-model="form.email"
               :placeholder="$t('placeHolder.email')"
