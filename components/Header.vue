@@ -86,12 +86,14 @@
               <i v-else class="iconfont iconmoon"></i>
             </el-button>
             <div class="pl-2 sm:pl-6">
-              <i class="iconfont icontiaoxingma1 text-yellow-500 pr-1"></i>
-              <span class="hidden sm:inline">
-                <el-link href="/code" type="warning">
-                  {{ $t('label.barcode') }}
-                </el-link>
-              </span>
+              <NuxtLink to="/code">
+                <i class="iconfont icontiaoxingma1 text-yellow-500 pr-1"></i>
+                <span class="hidden sm:inline">
+                  <el-link type="warning">
+                    {{ $t('label.barcode') }}
+                  </el-link>
+                </span>
+              </NuxtLink>
             </div>
           </div>
         </div>
