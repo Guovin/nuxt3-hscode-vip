@@ -1,6 +1,8 @@
 <template>
   <Card class="w-11/12 lg:w-5/6 mt-6 sm:mt-10" v-loading="loading">
-    <div class="block lg:hidden text-center text-sm text-gray-400 mb-1">{{ $t('tip.slide') }}</div>
+    <div class="block lg:hidden text-center text-sm text-gray-400 mb-1">
+      {{ $t('tip.slide') }}
+    </div>
     <el-table :data="keyList" border :row-key="getRowKey">
       <el-table-column
         v-for="(item, index) in col"
@@ -35,7 +37,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <nav class="mt-4 flex justify-end">
+    <nav class="hidden mt-4 sm:flex sm:justify-end">
       <el-config-provider :locale="locale">
         <el-pagination
           @size-change="handleSizeChange"
