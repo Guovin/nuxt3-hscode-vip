@@ -5,8 +5,7 @@ ENV HOST 0.0.0.0
 RUN mkdir -p /hscode
 COPY . /hscode
 WORKDIR /hscode
-# RUN yarn config set registry https://registry.npm.taobao.org
-RUN yarn install
-RUN yarn build
+RUN npm install --pure-lockfile --non-interactive --production=true --registry=https://registry.npm.taobao.org
+RUN npm run build
 EXPOSE 9169
-CMD ["yarn", "start"]
+CMD ["npm", "run", "start"]
