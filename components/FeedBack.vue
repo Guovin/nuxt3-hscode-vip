@@ -55,10 +55,10 @@
         label-position="top"
         class="mt-6"
       >
-        <el-form-item :label="$t('label.email')" prop="email">
+        <el-form-item :label="$t('label.email')" prop="name">
           <el-col :span="24">
             <el-input
-              v-model="form.email"
+              v-model="form.name"
               :placeholder="$t('placeHolder.email')"
               :prefix-icon="Message"
             ></el-input>
@@ -89,6 +89,7 @@
 import {
   defineComponent,
   reactive,
+  toRefs,
   unref,
   toRaw,
   nextTick,
@@ -131,7 +132,7 @@ export default defineComponent({
     const state = reactive({
       nothingTip: true,
       form: {
-        email: '',
+        name: '',
         massage: '',
       },
     })
@@ -155,7 +156,7 @@ export default defineComponent({
       )
     }
     const rules = reactive<FormRules>({
-      email: [
+      name: [
         {
           required: true,
           message:
@@ -199,7 +200,7 @@ export default defineComponent({
       log.value = feedBackStore.log
       if (log.value.length != 0) {
         state.nothingTip = false
-        state.form.email = log.value[log.value.length - 1].email
+        state.form.name = log.value[log.value.length - 1].email
       } else {
         state.nothingTip = true
       }
@@ -211,7 +212,7 @@ export default defineComponent({
       if (!formEl) return false
       await formEl.validate(async (valid) => {
         if (!valid) return false
-        const { data: res } = await useFetch('/feedBack/massage', {
+        const { data: res } = await useFetch('https://hscode.vip/api/feedBack/massage', {
           params: state.form,
           method: 'post',
         })
@@ -224,7 +225,7 @@ export default defineComponent({
           })
         } else {
           const time = new Date().toLocaleString()
-          const email = state.form.email
+          const email = state.form.name
           const message = state.form.massage
           const log = {
             time: time,
