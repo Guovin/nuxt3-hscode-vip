@@ -6,9 +6,8 @@ RUN mkdir -p /hscode
 COPY . /hscode
 WORKDIR /hscode
 RUN yarn config set registry https://registry.npm.taobao.org
+RUN npx nuxi upgrade --force
 RUN yarn --prod
-RUN yarn add nuxt@^3.0.0-rc.1
-RUN yarn add unplugin-icons@^0.14.1
 RUN yarn build
 EXPOSE 9169
 CMD ["yarn", "start"]
