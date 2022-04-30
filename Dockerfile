@@ -6,7 +6,6 @@ RUN mkdir -p /hscode
 COPY . /hscode
 WORKDIR /hscode
 # RUN yarn config set registry https://registry.npm.taobao.org
-RUN npx nuxi upgrade --force
 RUN yarn install
 RUN yarn build
 EXPOSE 9169
