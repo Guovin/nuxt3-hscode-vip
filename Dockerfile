@@ -1,12 +1,13 @@
-FROM node:16.11.0-alpine
+FROM node:16.14.2
 MAINTAINER hscode.vip
 ENV NODE_ENV=production
 ENV HOST 0.0.0.0
 RUN mkdir -p /hscode
 COPY . /hscode
 WORKDIR /hscode
-RUN npm config set registry https://registry.npm.taobao.org
-RUN npm install && npm cache clean --force
-RUN npm run build
+RUN yarn config set registry https://registry.npm.taobao.org
+RUN npx nuxi upgrade --force
+RUN yarn install
+RUN yarn build
 EXPOSE 9169
-ENTRYPOINT ["node", ".output/server/index.mjs"]
+CMD ["yarn", "start"]
