@@ -6,7 +6,7 @@ RUN mkdir -p /hscode
 COPY . /hscode
 WORKDIR /hscode
 RUN npm config set registry https://registry.npm.taobao.org
-RUN npm install
+RUN npm ci && npm cache clean --force
 RUN npm run build
 EXPOSE 9169
-CMD ["npm", "run", "start"]
+ENTRYPOINT ["node", ".output/server/index.mjs"]
